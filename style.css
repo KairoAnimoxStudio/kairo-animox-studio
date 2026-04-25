@@ -313,3 +313,92 @@ footer {
 .game-theme {
   background: linear-gradient(135deg, rgba(34,197,94,0.18), rgba(0,229,255,0.08));
 }
+/* Better page width */
+section {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+/* Professional media grid */
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 360px));
+  gap: 28px;
+  justify-content: start;
+}
+
+/* Stop huge images */
+.media-card {
+  max-width: 360px;
+}
+
+.media-card img {
+  width: 100%;
+  height: 205px;
+  object-fit: cover;
+}
+
+/* New icon navbar */
+.app-nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.app-nav a {
+  min-width: 92px;
+  padding: 10px 12px 14px;
+  border-radius: 16px;
+  text-align: center;
+  color: #dbeafe;
+  text-decoration: none;
+  position: relative;
+}
+
+.app-nav a span {
+  display: block;
+  font-size: 25px;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.app-nav a b {
+  font-size: 14px;
+}
+
+.app-nav a:hover,
+.app-nav a.active {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.app-nav a.active::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 3px;
+  height: 4px;
+  border-radius: 999px;
+  background: #00e5ff;
+  box-shadow: 0 0 18px rgba(0, 229, 255, 0.9);
+}
+
+@media (max-width: 800px) {
+  .app-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .app-nav a {
+    min-width: 78px;
+  }
+
+  .media-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .media-card {
+    max-width: 100%;
+  }
+}
