@@ -32,7 +32,13 @@ header {
   font-weight: 900;
   letter-spacing: 1px;
 }
-
+.site-logo-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  object-fit: cover;
+  box-shadow: 0 0 25px rgba(0, 229, 255, 0.35);
+}
 .logo-icon {
   width: 46px;
   height: 46px;
