@@ -1,75 +1,129 @@
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Segoe UI', Arial, sans-serif;
   background: #0b1a2f;
   color: white;
 }
 
-/* HEADER */
 header {
+  background: #112a4a;
+  padding: 20px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 40px;
-  background: #112a4a;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+header h1 {
+  margin: 0;
 }
 
 nav a {
-  margin-left: 20px;
   color: white;
   text-decoration: none;
-  transition: 0.3s;
+  margin-left: 20px;
+  font-weight: 600;
 }
 
 nav a:hover {
   color: #00e5ff;
 }
 
-/* HERO */
 .hero {
   text-align: center;
-  padding: 120px 20px;
+  padding: 110px 25px;
 }
 
 .hero h2 {
-  font-size: 40px;
+  font-size: 42px;
+  margin-bottom: 15px;
 }
 
-.hero p {
-  color: #ccc;
+.hero p,
+.page-title p {
+  color: #cfd8e3;
 }
 
-/* SECTIONS */
+.page-title {
+  text-align: center;
+  padding: 70px 25px 30px;
+}
+
 section {
-  padding: 60px 40px;
+  padding: 40px;
 }
 
-/* CARD */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
 .card {
-  background: #e0e0e0;
-  color: black;
-  padding: 20px;
-  border-radius: 10px;
-  transition: 0.3s;
+  background: #e5e7eb;
+  color: #111827;
+  padding: 25px;
+  border-radius: 14px;
+  transition: 0.25s;
 }
 
 .card:hover {
-  transform: scale(1.05);
+  transform: translateY(-5px);
 }
 
-/* VIDEO */
-iframe {
-  margin-top: 20px;
+.button-row {
+  margin-top: 30px;
+}
+
+.btn {
+  display: inline-block;
+  background: #00e5ff;
+  color: #06111f;
+  text-decoration: none;
+  padding: 12px 22px;
+  margin: 8px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.btn:hover {
+  background: white;
+}
+
+.video-box iframe {
   width: 100%;
-  max-width: 600px;
-  height: 315px;
+  max-width: 720px;
+  height: 400px;
+  border: none;
+  border-radius: 14px;
 }
 
-/* FOOTER */
 footer {
   text-align: center;
-  padding: 20px;
+  padding: 25px;
   background: #112a4a;
-  margin-top: 40px;
+  margin-top: 50px;
+}
+
+@media (max-width: 700px) {
+  header {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  nav a {
+    display: inline-block;
+    margin: 8px;
+  }
+
+  .hero h2 {
+    font-size: 30px;
+  }
+
+  section {
+    padding: 25px;
+  }
+
+  .video-box iframe {
+    height: 250px;
+  }
 }
