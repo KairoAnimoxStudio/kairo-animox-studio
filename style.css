@@ -72,7 +72,24 @@ nav a:hover {
   position: relative;
   overflow: hidden;
 }
+.hero-split {
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 40px;
+  text-align: left;
+}
 
+.hero-character img {
+  width: 100%;
+  max-width: 420px;
+  filter: drop-shadow(0 0 35px rgba(0, 229, 255, 0.35));
+}
+
+@media (max-width: 850px) {
+  .hero-split {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
 .hero::before {
   content: "";
   position: absolute;
