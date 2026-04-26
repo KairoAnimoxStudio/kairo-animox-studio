@@ -787,3 +787,127 @@ section {
     height: 240px;
   }
 }
+/* KaiPlay professional game launcher cards */
+.game-showcase-list {
+  display: grid;
+  gap: 34px;
+}
+
+.game-showcase-card {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 36px;
+  align-items: center;
+  padding: 34px;
+  border-radius: 34px;
+  background:
+    linear-gradient(135deg, rgba(15, 33, 58, 0.92), rgba(7, 18, 34, 0.96)),
+    radial-gradient(circle at top right, rgba(124, 58, 237, 0.22), transparent 35%);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
+  position: relative;
+  overflow: hidden;
+}
+
+.game-showcase-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 85% 25%, rgba(0, 229, 255, 0.12), transparent 30%),
+    radial-gradient(circle at 20% 90%, rgba(124, 58, 237, 0.16), transparent 30%);
+  pointer-events: none;
+}
+
+.game-cover,
+.game-details {
+  position: relative;
+  z-index: 1;
+}
+
+.game-cover img {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.16);
+  box-shadow: 0 18px 55px rgba(0,0,0,0.5);
+}
+
+.game-details h3 {
+  font-size: 46px;
+  margin: 18px 0 14px;
+  line-height: 1.05;
+}
+
+.game-details p {
+  color: #aebddb;
+  font-size: 21px;
+  line-height: 1.55;
+  max-width: 620px;
+}
+
+.game-badge {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 999px;
+  color: #9aa7ff;
+  background: rgba(124,58,237,0.14);
+  border: 1px solid rgba(124,58,237,0.35);
+  font-weight: 900;
+}
+
+.game-tags {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 26px 0;
+}
+
+.game-tags span {
+  padding: 10px 18px;
+  border-radius: 999px;
+  color: #b9c8ff;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  font-weight: 800;
+}
+
+.game-actions {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.game-status {
+  color: #aebddb;
+  font-weight: 800;
+}
+
+.game-showcase-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0, 229, 255, 0.55);
+  box-shadow: 0 0 40px rgba(0, 229, 255, 0.16), 0 28px 80px rgba(0,0,0,0.45);
+  transition: 0.25s;
+}
+
+@media (max-width: 850px) {
+  .game-showcase-card {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+
+  .game-cover img {
+    height: 260px;
+  }
+
+  .game-details h3 {
+    font-size: 34px;
+  }
+
+  .game-details p {
+    font-size: 17px;
+  }
+}
