@@ -657,3 +657,51 @@ section {
     height: 240px;
   }
 }
+.app-nav {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.app-nav a {
+  min-width: 92px;
+  padding: 12px 12px 14px;
+  border-radius: 18px;
+  text-align: center;
+  color: #dbeafe;
+  text-decoration: none;
+  position: relative;
+  transition: 0.25s;
+}
+
+.app-nav a img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 7px;
+  filter: drop-shadow(0 0 8px rgba(0,229,255,0.2));
+}
+
+.app-nav a b {
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.app-nav a:hover,
+.app-nav a.active {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.10);
+}
+
+.app-nav a.active::after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: #00e5ff;
+  box-shadow: 0 0 18px rgba(0, 229, 255, 0.95);
+}
