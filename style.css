@@ -705,3 +705,85 @@ section {
   background: #00e5ff;
   box-shadow: 0 0 18px rgba(0, 229, 255, 0.95);
 }
+.page-spotlight {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 80px 35px;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.comic-page {
+  background:
+    radial-gradient(circle at top left, rgba(124,58,237,0.18), transparent 35%),
+    radial-gradient(circle at top right, rgba(0,229,255,0.12), transparent 35%);
+}
+
+.game-page {
+  background:
+    radial-gradient(circle at top left, rgba(34,197,94,0.16), transparent 35%),
+    radial-gradient(circle at top right, rgba(0,229,255,0.12), transparent 35%);
+}
+
+.news-page {
+  background:
+    radial-gradient(circle at top left, rgba(245,158,11,0.16), transparent 35%),
+    radial-gradient(circle at top right, rgba(0,229,255,0.10), transparent 35%);
+}
+
+.spotlight-text h2 {
+  font-size: 56px;
+  margin: 16px 0;
+  line-height: 1.05;
+}
+
+.spotlight-text p {
+  color: #cbd5e1;
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 580px;
+}
+
+.spotlight-poster img {
+  width: 100%;
+  height: 390px;
+  object-fit: cover;
+  border-radius: 28px;
+  box-shadow: 0 25px 70px rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.14);
+}
+
+.news-panel {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 28px;
+  padding: 35px;
+  box-shadow: 0 25px 70px rgba(0,0,0,0.45);
+}
+
+.news-panel h3 {
+  font-size: 32px;
+  margin: 0 0 12px;
+}
+
+.news-panel p {
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+@media (max-width: 850px) {
+  .page-spotlight {
+    grid-template-columns: 1fr;
+    padding: 55px 22px;
+  }
+
+  .spotlight-text h2 {
+    font-size: 38px;
+  }
+
+  .spotlight-poster img {
+    height: 240px;
+  }
+}
