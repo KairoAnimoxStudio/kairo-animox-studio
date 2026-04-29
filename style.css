@@ -911,3 +911,128 @@ section {
     font-size: 17px;
   }
 }
+.center {
+  text-align: center;
+}
+
+.home-showcase {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 80px 35px 40px;
+}
+
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: 28px;
+  margin-top: 38px;
+}
+
+.home-card {
+  min-height: 340px;
+  border-radius: 30px;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none;
+  color: white;
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 25px 70px rgba(0,0,0,0.38);
+  transition: 0.25s;
+}
+
+.home-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(0,229,255,0.55);
+  box-shadow: 0 0 40px rgba(0,229,255,0.18), 0 25px 70px rgba(0,0,0,0.45);
+}
+
+.home-card img {
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.62);
+  transition: 0.25s;
+}
+
+.home-card:hover img {
+  transform: scale(1.06);
+  filter: brightness(0.72);
+}
+
+.home-card-info {
+  position: absolute;
+  left: 26px;
+  right: 26px;
+  bottom: 26px;
+  z-index: 1;
+}
+
+.home-card-info span {
+  color: #67e8f9;
+  font-weight: 900;
+}
+
+.home-card-info h3 {
+  font-size: 30px;
+  margin: 10px 0;
+}
+
+.home-card-info p {
+  color: #dbeafe;
+  max-width: 460px;
+  line-height: 1.5;
+}
+
+.latest-section {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 50px 35px 90px;
+}
+
+.featured-banner {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 35px;
+  align-items: center;
+  padding: 32px;
+  border-radius: 34px;
+  background:
+    linear-gradient(135deg, rgba(15,33,58,0.92), rgba(7,18,34,0.96)),
+    radial-gradient(circle at top right, rgba(0,229,255,0.16), transparent 35%);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 25px 70px rgba(0,0,0,0.42);
+}
+
+.featured-banner img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+.featured-banner h3 {
+  font-size: 38px;
+  margin: 14px 0;
+}
+
+.featured-banner p {
+  color: #cbd5e1;
+  line-height: 1.6;
+  font-size: 17px;
+}
+
+@media (max-width: 850px) {
+  .home-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-banner {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-banner h3 {
+    font-size: 30px;
+  }
+}
