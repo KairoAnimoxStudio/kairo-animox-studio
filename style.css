@@ -1036,3 +1036,219 @@ section {
     font-size: 30px;
   }
 }
+/* ===== PRO GAMING PORTAL HOME ===== */
+
+.portal-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(0, 229, 255, 0.16), transparent 28%),
+    radial-gradient(circle at 85% 20%, rgba(124, 58, 237, 0.20), transparent 32%),
+    #050b14;
+}
+
+.portal-hero {
+  max-width: 1220px;
+  min-height: 440px;
+  margin: 0 auto;
+  padding: 70px 35px;
+  border-radius: 0 0 34px 34px;
+  background:
+    linear-gradient(90deg, rgba(5,11,20,0.95) 0%, rgba(5,11,20,0.65) 45%, rgba(5,11,20,0.15) 100%),
+    url("images/characters/main-character.png"),
+    linear-gradient(135deg, #061626, #15113a);
+  background-repeat: no-repeat;
+  background-size: auto 430px, cover;
+  background-position: right 120px bottom, center;
+  border: 1px solid rgba(0,229,255,0.14);
+  box-shadow: 0 30px 90px rgba(0,0,0,0.48);
+}
+
+.hero-copy {
+  max-width: 560px;
+}
+
+.mini-title {
+  color: #00e5ff;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.portal-hero h1 {
+  font-size: 62px;
+  line-height: 0.95;
+  margin: 10px 0 18px;
+}
+
+.portal-hero h1 span {
+  color: #8b5cf6;
+}
+
+.hero-desc {
+  color: #cbd5e1;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  margin-top: 28px;
+}
+
+.social-row {
+  margin-top: 28px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.social-row a {
+  color: #67e8f9;
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.portal-grid {
+  max-width: 1220px;
+  margin: 26px auto 0;
+  padding: 0 35px 70px;
+  display: grid;
+  grid-template-columns: 1.1fr 1.1fr 1fr 0.9fr;
+  gap: 18px;
+}
+
+.portal-panel {
+  background:
+    linear-gradient(180deg, rgba(15,33,58,0.95), rgba(10,22,40,0.95));
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.34);
+  transition: 0.25s;
+  overflow: hidden;
+}
+
+.portal-panel:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0,229,255,0.42);
+  box-shadow: 0 0 35px rgba(0,229,255,0.14), 0 20px 60px rgba(0,0,0,0.45);
+}
+
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.panel-head h2 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.panel-head a {
+  color: white;
+  font-size: 12px;
+  text-decoration: none;
+  background: rgba(255,255,255,0.08);
+  padding: 8px 12px;
+  border-radius: 999px;
+}
+
+.comic-strip,
+.game-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.game-strip {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.comic-strip img,
+.game-strip img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.video-preview {
+  position: relative;
+}
+
+.video-preview img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.play-circle {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.35);
+  box-shadow: 0 0 25px rgba(0,229,255,0.35);
+}
+
+.portal-panel h3 {
+  margin: 16px 0 6px;
+  font-size: 18px;
+}
+
+.portal-panel p {
+  margin: 0;
+  color: #94a3b8;
+  line-height: 1.45;
+}
+
+.update-item {
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.update-item b {
+  display: block;
+  color: white;
+  margin-bottom: 4px;
+}
+
+.update-item span {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+@media (max-width: 1100px) {
+  .portal-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .portal-hero {
+    background-size: auto 360px, cover;
+    background-position: right 20px bottom, center;
+  }
+}
+
+@media (max-width: 760px) {
+  .portal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .portal-hero {
+    padding: 55px 22px 330px;
+    background-size: auto 310px, cover;
+    background-position: center bottom, center;
+  }
+
+  .portal-hero h1 {
+    font-size: 42px;
+  }
+}
