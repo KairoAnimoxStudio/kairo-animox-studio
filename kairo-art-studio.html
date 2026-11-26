@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KAIRO ART STUDIO | Digital Painting, Comic & 2D Animation</title>
+  <link rel="stylesheet" href="studio.css">
+</head>
+<body>
+
+<div id="kas-root" class="kas-shell" data-workspace="illustration">
+
+  <!-- TOP BAR -->
+  <header class="kas-topbar">
+    <div class="kas-brand-group">
+      <a class="kas-back-link" href="kaiapps.html">← KaiApps</a>
+      <div class="kas-brand">
+        <img src="images/logo/kairo-logo.png" alt="Kairo Art Studio Logo">
+        <span>KAIRO ART STUDIO</span>
+      </div>
+      <div class="kas-menu-actions">
+        <button type="button" class="kas-btn sm" id="btn-open-kas">Open .kas</button>
+        <button type="button" class="kas-btn sm" id="btn-import-img">Import Image</button>
+        <button type="button" class="kas-btn sm" id="btn-toggle-timeline">Timeline</button>
+        <button type="button" class="kas-btn sm" id="btn-open-settings">Settings</button>
+      </div>
+    </div>
+
+    <div class="kas-workspace-switch" role="group" aria-label="Workspace Modes">
+      <button type="button" class="kas-ws-btn active" data-workspace-btn="illustration">Illustration</button>
+      <button type="button" class="kas-ws-btn" data-workspace-btn="animation">Animation</button>
+      <button type="button" class="kas-ws-btn" data-workspace-btn="comic">Comic</button>
+      <button type="button" class="kas-ws-btn" data-workspace-btn="minimal">Minimal</button>
+    </div>
+
+    <div class="kas-top-right">
+      <button type="button" class="kas-btn sm" id="btn-undo" title="Undo (Ctrl+Z)">Undo</button>
+      <button type="button" class="kas-btn sm" id="btn-redo" title="Redo (Ctrl+Y)">Redo</button>
+      <button type="button" class="kas-btn sm" id="btn-save-kas" title="Save Native .kas Project (Ctrl+S)">Save .kas</button>
+      <button type="button" class="kas-btn sm primary" id="btn-open-export">Export</button>
+    </div>
+  </header>
+
+  <!-- DOCUMENT TABS & VIEW CONTROLS -->
+  <div class="kas-docbar">
+    <div id="doc-tabs" class="doc-tabs"></div>
+
+    <div class="quick-view-bar">
+      <button type="button" class="kas-btn sm" id="btn-toggle-grid">Grid</button>
+      <button type="button" class="kas-btn sm" id="btn-toggle-symmetry">Symmetry</button>
+      <button type="button" class="kas-btn sm" id="btn-rot-left" title="Rotate -15°">Rot -15°</button>
+      <button type="button" class="kas-btn sm" id="btn-rot-right" title="Rotate +15°">Rot +15°</button>
+      <button type="button" class="kas-btn sm" id="btn-flip-h" title="Flip Canvas Horizontally">Flip H</button>
+      <button type="button" class="kas-btn sm" id="btn-flip-v" title="Flip Canvas Vertically">Flip V</button>
+      <button type="button" class="kas-btn sm" id="btn-fit-canvas" title="Fit Canvas (Ctrl+0)">Fit</button>
+      <button type="button" class="kas-btn sm" id="btn-actual-size">100%</button>
+      <button type="button" class="kas-btn sm" id="btn-reset-view">Reset View</button>
+    </div>
+  </div>
+
+  <!-- MAIN WORKSPACE -->
+  <div class="kas-main">
+
+    <!-- LEFT TOOL RAIL -->
+    <aside id="left-tools" class="kas-left-tools" aria-label="Drawing Tools">
+      <button type="button" class="tool-btn active" data-tool="brush" title="Brush (B)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 3a3 3 0 0 1 3 3L9 18l-4 1 1-4Z"/><path d="M5 19c-1.5 0-2 1-2 2 2 0 3.5-.5 4-2"/></svg>
+        <span>Brush</span>
+      </button>
+      <button type="button" class="tool-btn" data-tool="pencil" title="Pencil (P)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.8 2.8 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+        <span>Pencil</span>
+      </button>
+      <button type="button" class="tool-btn" data-tool="eraser" title="Eraser (E)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7"/><path d="m5 11 9 9"/></svg>
+        <span>Eraser</span>
+      </button>
+      <button type="button" class="tool-btn" data-tool="fill" title="Bucket Fill (G)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m19 11-8-8-8.6 8.6a2 2 0 0 0 0 2.8l5.2 5.2c.8.8 2 .8 2.8 0L19 11Z"/><path d="M20 14s2 2.2 2 3.5a2 2 0 0 1-4 0c0-1.3 2-3.5 2-3.5Z"/></svg>
+        <span>Fill</span>
+      </button>
+      <button type="button" class="tool-btn" data-tool="eyedropper" title="Eyedropper (I)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m2 22 1-1h3l9-9"/><path d="M3 21v-3l9-9"/><path d="m15 6 3.4-3.4a2.1 2.1 0 1 1 3 3L18 9l.4.4a2.1 2.1 0 1 1-3 3l-3.8-3.8a2.1 2.1 0 1 1 3-3l.4.4Z"/></svg>
+        <span>Pick</span>
+      </button>
+
+      <div class="tool-sep"></div>
+
+      <button type="button" class="tool-btn" data-tool="selection" title="Selection Marquee (M)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 2"><rect x="4" y="4" width="16" height="16" rx="1"/></svg>
+        <span>Select</span>
+      </button>
+      <button type="button" class="tool-btn" data-tool="move" title="Move Layer (V)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20"/></svg>
+        <span>Move</span>
+      </button>
+      <button type="button" class="tool-btn" data-tool="gradient" title="Gradient">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 17 17 7"/></svg>
+        <span>Grad</span>
+      </button>
+      <button type="button" class="tool-btn" data-tool="shape" title="Shapes (U)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="10" height="10" rx="1"/><circle cx="15" cy="9" r="5"/></svg>
+        <span>Shape</span>
+      </button>
+      <button type="button" class="tool-btn" data-tool="text" title="Text Tool (T)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
+        <span>Text</span>
+      </button>
+      <button type="button" class="tool-btn" data-tool="comic" title="Comic Panels & Speech Bubbles (C)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span>Comic</span>
+      </button>
+
+      <div class="tool-sep"></div>
+
+      <button type="button" class="tool-btn" data-tool="hand" title="Hand Pan (H / Space+Drag)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 11V6a2 2 0 0 0-4 0v5M14 10V4a2 2 0 0 0-4 0v6M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.9-5.9-2.5L3.3 15.8a2 2 0 0 1 2.9-2.7L8 15"/></svg>
+        <span>Hand</span>
+      </button>
+      <button type="button" class="tool-btn" data-tool="zoom" title="Zoom Tool (Z)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg>
+        <span>Zoom</span>
+      </button>
+    </aside>
+
+    <!-- CENTER CANVAS -->
+    <main class="kas-center">
+      <div id="canvas-viewport" class="canvas-viewport">
+        <canvas id="studio-canvas" data-testid="studio-canvas" width="1280" height="720"></canvas>
+        <canvas id="overlay-canvas" width="1280" height="720"></canvas>
+      </div>
+    </main>
+
+    <!-- RIGHT INSPECTOR DOCK -->
+    <aside id="right-dock" class="kas-right-dock" aria-label="Studio Inspectors">
+
+      <!-- COLOR PANEL -->
+      <section class="dock-section">
+        <div class="dock-head">
+          <h2>Color</h2>
+          <div class="timeline-group">
+            <button type="button" class="kas-btn sm" id="btn-swap-colors" title="Swap FG/BG (X)">Swap</button>
+            <button type="button" class="kas-btn sm" id="btn-reset-colors" title="Reset Default Colors (D)">Default</button>
+          </div>
+        </div>
+        <div class="color-layout">
+          <canvas id="color-wheel-canvas" width="112" height="112"></canvas>
+          <div class="color-controls">
+            <div class="fg-bg-row">
+              <div class="swatch-pair">
+                <div id="fg-swatch" class="swatch-box" title="Foreground Color"></div>
+                <div id="bg-swatch" class="swatch-box" title="Background Color"></div>
+              </div>
+              <input id="hex-input" class="hex-input" type="text" aria-label="Hex color" value="#3B82F6">
+            </div>
+            <div class="slider-mini">
+              <span>H</span>
+              <input id="slider-h" type="range" min="0" max="360" value="217" aria-label="Hue">
+              <span id="val-h" class="tabular-nums">217°</span>
+            </div>
+            <div class="slider-mini">
+              <span>S</span>
+              <input id="slider-s" type="range" min="0" max="100" value="76" aria-label="Saturation">
+              <span id="val-s" class="tabular-nums">76%</span>
+            </div>
+            <div class="slider-mini">
+              <span>V</span>
+              <input id="slider-v" type="range" min="0" max="100" value="96" aria-label="Value">
+              <span id="val-v" class="tabular-nums">96%</span>
+            </div>
+          </div>
+        </div>
+        <div class="palette-bar">
+          <select id="palette-select" aria-label="Color Palette"></select>
+          <button type="button" class="kas-btn sm" id="btn-save-color">+ Save</button>
+        </div>
+        <div id="palette-swatches" class="swatch-grid"></div>
+        <div id="recent-swatches" class="swatch-grid"></div>
+      </section>
+
+      <!-- BRUSH PRESETS & SETTINGS -->
+      <section class="dock-section">
+        <div class="dock-head">
+          <h2>Brushes (20)</h2>
+          <button type="button" class="kas-btn sm" id="btn-dup-brush">+ Custom</button>
+        </div>
+        <div class="brush-cats">
+          <button type="button" class="cat-btn active" data-brush-cat="All">All</button>
+          <button type="button" class="cat-btn" data-brush-cat="Sketch">Sketch</button>
+          <button type="button" class="cat-btn" data-brush-cat="Ink">Ink</button>
+          <button type="button" class="cat-btn" data-brush-cat="Paint">Paint</button>
+          <button type="button" class="cat-btn" data-brush-cat="Texture">Texture</button>
+          <button type="button" class="cat-btn" data-brush-cat="Eraser">Eraser</button>
+        </div>
+        <input id="brush-search" class="kas-input" type="search" placeholder="Search brushes...">
+        <div id="brush-list" class="brush-list"></div>
+
+        <div class="brush-sliders-grid">
+          <div class="prop-row">
+            <label for="brush-size">Size <span id="brush-size-val" class="tabular-nums">10 px</span></label>
+            <input id="brush-size" type="range" min="1" max="160" value="10">
+          </div>
+          <div class="prop-row">
+            <label for="brush-opacity">Opacity <span id="brush-opacity-val" class="tabular-nums">100%</span></label>
+            <input id="brush-opacity" type="range" min="5" max="100" value="100">
+          </div>
+          <div class="prop-row">
+            <label for="brush-hardness">Hardness <span id="brush-hardness-val" class="tabular-nums">100%</span></label>
+            <input id="brush-hardness" type="range" min="5" max="100" value="100">
+          </div>
+          <div class="prop-row">
+            <label for="brush-stab">Stabilize <span id="brush-stab-val" class="tabular-nums">70%</span></label>
+            <input id="brush-stab" type="range" min="0" max="100" value="70">
+          </div>
+        </div>
+        <div class="prop-row row-inline" style="margin-bottom:0;">
+          <label for="brush-stab-mode">Stabilizer Mode</label>
+          <select id="brush-stab-mode">
+            <option value="none">None</option>
+            <option value="basic">Basic Smoothing</option>
+            <option value="moving_avg">Moving Average</option>
+            <option value="weighted">Weighted Smoothing</option>
+            <option value="advanced">Advanced Stabilizer</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- LAYERS -->
+      <section class="dock-section">
+        <div class="dock-head">
+          <h2>Layers</h2>
+          <div class="timeline-group">
+            <button type="button" class="kas-btn sm" id="btn-alpha-lock">Alpha Lock</button>
+            <button type="button" class="kas-btn sm" id="btn-clip-layer">Clip</button>
+          </div>
+        </div>
+        <div class="layer-controls-top">
+          <select id="layer-blend" aria-label="Layer Blend Mode"></select>
+          <div class="slider-mini" style="grid-template-columns: 1fr 34px;">
+            <input id="layer-opacity" type="range" min="0" max="100" value="100" aria-label="Layer Opacity">
+            <span id="layer-opacity-val" class="tabular-nums">100%</span>
+          </div>
+        </div>
+        <div id="layer-list" class="layer-list"></div>
+        <div class="prop-actions" style="margin-bottom:0;">
+          <button type="button" class="kas-btn sm primary" id="btn-add-layer">+ Layer</button>
+          <button type="button" class="kas-btn sm" id="btn-dup-layer">Dup</button>
+          <button type="button" class="kas-btn sm" id="btn-merge-layer">Merge</button>
+          <button type="button" class="kas-btn sm" id="btn-up-layer">Up</button>
+          <button type="button" class="kas-btn sm" id="btn-down-layer">Down</button>
+          <button type="button" class="kas-btn sm danger" id="btn-del-layer">Del</button>
+        </div>
+      </section>
+
+      <!-- TABBED TOOL PROPERTIES / NAVIGATOR & HISTORY -->
+      <section class="dock-section dock-tabbed-section">
+        <div class="dock-subtabs" role="tablist">
+          <button type="button" class="dock-subtab active" data-dock-tab="tool-props" role="tab" aria-selected="true">Tool Props</button>
+          <button type="button" class="dock-subtab" data-dock-tab="nav-history" role="tab" aria-selected="false">Navigator &amp; History</button>
+        </div>
+
+        <div id="dock-pane-tool-props" class="dock-pane">
+          <div id="tool-props-body"></div>
+        </div>
+
+        <div id="dock-pane-nav-history" class="dock-pane" hidden>
+          <div class="nav-wrap">
+            <canvas id="navigator-canvas" width="110" height="76"></canvas>
+            <div class="prop-row" style="margin:0;">
+              <label for="nav-zoom-slider">Zoom <span id="nav-zoom-val" class="tabular-nums">100%</span></label>
+              <input id="nav-zoom-slider" type="range" min="10" max="400" value="100">
+            </div>
+          </div>
+          <div id="history-list" class="history-list"></div>
+        </div>
+      </section>
+
+    </aside>
+  </div>
+
+  <!-- ANIMATION TIMELINE -->
+  <section id="timeline-panel" class="kas-timeline" hidden aria-label="Animation Timeline">
+    <div class="timeline-toolbar">
+      <div class="timeline-group">
+        <button type="button" class="kas-btn sm" id="btn-first-frame">|&lt;</button>
+        <button type="button" class="kas-btn sm" id="btn-prev-frame">&lt;</button>
+        <button type="button" class="kas-btn sm primary" id="btn-play">Play</button>
+        <button type="button" class="kas-btn sm" id="btn-stop">Stop</button>
+        <button type="button" class="kas-btn sm" id="btn-next-frame">&gt;</button>
+        <button type="button" class="kas-btn sm" id="btn-last-frame">&gt;|</button>
+        <button type="button" class="kas-btn sm active" id="btn-loop">Loop</button>
+        <select id="fps-select" class="kas-btn sm" aria-label="Frames Per Second"></select>
+        <span id="frame-counter" class="tabular-nums" style="margin-left:6px;font-size:12px;">Frame 1 / 1</span>
+      </div>
+
+      <div class="timeline-group">
+        <button type="button" class="kas-btn sm active" id="btn-onion">Onion Skin</button>
+        <button type="button" class="kas-btn sm" id="btn-camera-bounds">Camera</button>
+        <button type="button" class="kas-btn sm primary" id="btn-add-frame">+ Frame</button>
+        <button type="button" class="kas-btn sm" id="btn-dup-frame">Duplicate</button>
+        <button type="button" class="kas-btn sm" id="btn-exp-plus">+ Hold</button>
+        <button type="button" class="kas-btn sm" id="btn-exp-minus">- Hold</button>
+        <button type="button" class="kas-btn sm" id="btn-clear-frame">Clear</button>
+        <button type="button" class="kas-btn sm danger" id="btn-del-frame">Delete</button>
+        <input id="frame-note-input" class="kas-input" style="width:140px;" type="text" placeholder="Frame note..." aria-label="Frame exposure note">
+        <button type="button" class="kas-btn sm orange" id="btn-export-gif">Export GIF</button>
+        <button type="button" class="kas-btn sm" id="btn-export-seq">PNG Seq</button>
+      </div>
+    </div>
+
+    <div id="timeline-cells" class="timeline-cells"></div>
+
+    <div class="audio-strip">
+      <button type="button" class="kas-btn sm" id="btn-import-audio">Import Audio</button>
+      <span id="audio-file-label">No Audio Track</span>
+      <canvas id="audio-waveform-canvas" width="480" height="22"></canvas>
+    </div>
+  </section>
+
+  <!-- STATUS BAR -->
+  <footer class="kas-statusbar">
+    <div class="status-left">
+      <span id="status-doc-info" class="tabular-nums">1280 × 720 px · 150 DPI</span>
+      <span id="status-coords" class="tabular-nums">0, 0 px</span>
+      <span id="status-tool">BRUSH (G-Pen)</span>
+    </div>
+    <div class="status-right">
+      <span id="status-zoom" class="tabular-nums">100%</span>
+      <span id="status-rot" class="tabular-nums">0°</span>
+    </div>
+  </footer>
+</div>
+
+<!-- HIDDEN FILE INPUTS -->
+<input type="file" id="input-open-kas" accept=".kas,.json" hidden>
+<input type="file" id="input-import-img" accept="image/png,image/jpeg,image/webp,image/svg+xml" hidden>
+<input type="file" id="input-import-audio" accept="audio/wav,audio/mp3,audio/mpeg,audio/ogg" hidden>
+
+<!-- WELCOME MODAL -->
+<div id="welcome-modal" class="kas-modal-backdrop" hidden>
+  <div class="kas-modal" role="dialog" aria-labelledby="welcome-title">
+    <div class="kas-modal-head">
+      <h2 id="welcome-title">KAIRO ART STUDIO</h2>
+      <button type="button" class="kas-btn sm" data-close-modal="welcome-modal">Close</button>
+    </div>
+    <p class="muted-note">Professional Digital Painting, Manga/Comic Creation, and Frame-by-Frame 2D Animation Studio.</p>
+
+    <div id="welcome-recovery-banner" class="recovery-banner" hidden>
+      <div>
+        <strong>Crash Recovery Available</strong>
+        <div id="recovery-doc-name" class="muted-note"></div>
+      </div>
+      <div class="timeline-group">
+        <button type="button" class="kas-btn sm orange" id="btn-restore-autosave">Restore</button>
+        <button type="button" class="kas-btn sm" id="btn-dismiss-autosave">Dismiss</button>
+      </div>
+    </div>
+
+    <div class="welcome-grid">
+      <button type="button" class="welcome-card" id="welcome-start-ill">
+        <strong>Illustration Workspace</strong>
+        <span>20 brushes, blend modes, alpha lock & color wheel</span>
+      </button>
+      <button type="button" class="welcome-card" id="welcome-start-anim">
+        <strong>2D Animation Workspace</strong>
+        <span>Frame timeline, onion skinning, audio sync & GIF export</span>
+      </button>
+      <button type="button" class="welcome-card" id="welcome-start-comic">
+        <strong>Comic & Manga Page</strong>
+        <span>Panel grids, speech bubbles, thought bubbles & ink pens</span>
+      </button>
+      <button type="button" class="welcome-card" id="welcome-open-kas">
+        <strong>Open .kas Project</strong>
+        <span>Load a saved native KAIRO ART STUDIO project</span>
+      </button>
+    </div>
+
+    <div class="prop-label">Recent Projects</div>
+    <div id="welcome-recent-list"></div>
+  </div>
+</div>
+
+<!-- NEW DOCUMENT MODAL -->
+<div id="new-doc-modal" class="kas-modal-backdrop" hidden>
+  <div class="kas-modal" role="dialog" aria-labelledby="new-doc-title">
+    <div class="kas-modal-head">
+      <h2 id="new-doc-title">New Document</h2>
+      <button type="button" class="kas-btn sm" data-close-modal="new-doc-modal">Cancel</button>
+    </div>
+    <form id="new-doc-form">
+      <div class="prop-row">
+        <label for="new-doc-name">Document Name</label>
+        <input id="new-doc-name" type="text" value="Kairo Artwork">
+      </div>
+      <div class="prop-row">
+        <label for="new-doc-preset">Preset</label>
+        <select id="new-doc-preset"></select>
+      </div>
+      <div class="form-grid">
+        <div class="prop-row">
+          <label for="new-doc-width">Width</label>
+          <input id="new-doc-width" class="kas-input" type="number" min="64" max="6000" value="1920">
+        </div>
+        <div class="prop-row">
+          <label for="new-doc-height">Height</label>
+          <input id="new-doc-height" class="kas-input" type="number" min="64" max="6000" value="1080">
+        </div>
+        <div class="prop-row">
+          <label for="new-doc-unit">Units</label>
+          <select id="new-doc-unit">
+            <option value="px">Pixels (px)</option>
+            <option value="mm">Millimeters (mm)</option>
+            <option value="in">Inches (in)</option>
+          </select>
+        </div>
+        <div class="prop-row">
+          <label for="new-doc-dpi">DPI Resolution</label>
+          <select id="new-doc-dpi">
+            <option value="72">72 DPI</option>
+            <option value="96">96 DPI</option>
+            <option value="150" selected>150 DPI</option>
+            <option value="300">300 DPI (Print)</option>
+          </select>
+        </div>
+        <div class="prop-row">
+          <label for="new-doc-layers">Initial Layers</label>
+          <input id="new-doc-layers" class="kas-input" type="number" min="1" max="8" value="2">
+        </div>
+        <div class="prop-row">
+          <label for="new-doc-fps">Animation FPS</label>
+          <input id="new-doc-fps" class="kas-input" type="number" min="1" max="60" value="24">
+        </div>
+      </div>
+      <div class="prop-row row-inline">
+        <label for="new-doc-bg">Background Color</label>
+        <input id="new-doc-bg" type="color" value="#FFFFFF">
+      </div>
+      <div class="prop-row row-inline">
+        <label for="new-doc-transparent">Transparent Background</label>
+        <input id="new-doc-transparent" type="checkbox">
+      </div>
+      <div class="prop-actions" style="justify-content:flex-end;margin-top:12px;">
+        <button type="submit" class="kas-btn primary">Create Document</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- EXPORT MODAL -->
+<div id="export-modal" class="kas-modal-backdrop" hidden>
+  <div class="kas-modal" role="dialog" aria-labelledby="export-title">
+    <div class="kas-modal-head">
+      <h2 id="export-title">Export Project / Artwork</h2>
+      <button type="button" class="kas-btn sm" data-close-modal="export-modal">Cancel</button>
+    </div>
+    <div class="prop-row">
+      <label for="export-format">Export Format</label>
+      <select id="export-format">
+        <option value="png">PNG Image (Lossless + Alpha)</option>
+        <option value="jpeg">JPEG Image</option>
+        <option value="webp">WebP Image</option>
+        <option value="gif">Animated GIF (All Frames)</option>
+        <option value="png-seq">PNG Image Sequence</option>
+        <option value="kas">Native .kas Project Archive</option>
+      </select>
+    </div>
+    <div class="prop-row">
+      <label for="export-quality">Quality (JPEG / WebP)</label>
+      <input id="export-quality" type="range" min="40" max="100" value="92">
+    </div>
+    <div class="prop-actions" style="justify-content:flex-end;margin-top:12px;">
+      <button type="button" class="kas-btn primary" id="btn-do-export">Export File</button>
+    </div>
+  </div>
+</div>
+
+<!-- SETTINGS MODAL -->
+<div id="settings-modal" class="kas-modal-backdrop" hidden>
+  <div class="kas-modal" role="dialog" aria-labelledby="settings-title">
+    <div class="kas-modal-head">
+      <h2 id="settings-title">Studio Settings & Shortcuts</h2>
+      <button type="button" class="kas-btn sm" data-close-modal="settings-modal">Cancel</button>
+    </div>
+    <div class="prop-row row-inline">
+      <label for="set-autosave">Enable Background Autosave & Recovery</label>
+      <input id="set-autosave" type="checkbox" checked>
+    </div>
+    <div class="form-grid">
+      <div class="prop-row">
+        <label for="set-grid-size">Grid Size (px)</label>
+        <input id="set-grid-size" class="kas-input" type="number" min="8" max="256" value="32">
+      </div>
+      <div class="prop-row">
+        <label for="set-history-depth">Undo History Depth</label>
+        <input id="set-history-depth" class="kas-input" type="number" min="10" max="100" value="35">
+      </div>
+    </div>
+    <p class="muted-note" style="margin-top:8px;">
+      Shortcuts: B Brush · P Pencil · E Eraser · G Fill · I Eyedropper · M Select · V Move · U Shape · T Text · C Comic · Space+Drag Pan · Ctrl+Z/Y Undo/Redo · [ / ] Brush Size.
+    </p>
+    <div class="prop-actions" style="justify-content:flex-end;margin-top:14px;">
+      <button type="button" class="kas-btn primary" id="btn-save-settings">Apply Settings</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<script type="module" src="studio/kairo-art-studio.js"></script>
+</body>
+</html>
