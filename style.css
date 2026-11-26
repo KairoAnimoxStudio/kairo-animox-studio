@@ -674,7 +674,8 @@ section {
   transition: 0.25s;
 }
 
-.app-nav a img {
+.app-nav a img,
+.app-nav a svg.nav-icon {
   width: 30px;
   height: 30px;
   object-fit: contain;
@@ -1109,12 +1110,12 @@ section {
 }
 
 .portal-grid {
-  max-width: 1220px;
+  max-width: 1360px;
   margin: 26px auto 0;
-  padding: 0 35px 70px;
+  padding: 0 32px 70px;
   display: grid;
-  grid-template-columns: 1.1fr 1.1fr 1fr 0.9fr;
-  gap: 18px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
 }
 
 .portal-panel {
@@ -1126,6 +1127,8 @@ section {
   box-shadow: 0 20px 60px rgba(0,0,0,0.34);
   transition: 0.25s;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .portal-panel:hover {
@@ -1138,28 +1141,30 @@ section {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  gap: 8px;
+  margin-bottom: 14px;
 }
 
 .panel-head h2 {
-  font-size: 18px;
+  font-size: 16px;
   margin: 0;
 }
 
 .panel-head a {
   color: white;
-  font-size: 12px;
+  font-size: 11px;
   text-decoration: none;
   background: rgba(255,255,255,0.08);
-  padding: 8px 12px;
+  padding: 7px 11px;
   border-radius: 999px;
+  white-space: nowrap;
 }
 
 .comic-strip,
 .game-strip {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 8px;
 }
 
 .game-strip {
@@ -1169,9 +1174,9 @@ section {
 .comic-strip img,
 .game-strip img {
   width: 100%;
-  height: 150px;
+  height: 132px;
   object-fit: cover;
-  border-radius: 14px;
+  border-radius: 12px;
 }
 
 .video-preview {
@@ -1180,17 +1185,17 @@ section {
 
 .video-preview img {
   width: 100%;
-  height: 170px;
+  height: 132px;
   object-fit: cover;
-  border-radius: 16px;
+  border-radius: 14px;
 }
 
 .play-circle {
   position: absolute;
   inset: 0;
   margin: auto;
-  width: 58px;
-  height: 58px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -1200,18 +1205,19 @@ section {
 }
 
 .portal-panel h3 {
-  margin: 16px 0 6px;
-  font-size: 18px;
+  margin: 14px 0 6px;
+  font-size: 17px;
 }
 
 .portal-panel p {
   margin: 0;
   color: #94a3b8;
+  font-size: 14px;
   line-height: 1.45;
 }
 
 .update-item {
-  padding: 15px 0;
+  padding: 12px 0;
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
@@ -1226,7 +1232,7 @@ section {
   font-size: 13px;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1180px) {
   .portal-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1238,17 +1244,175 @@ section {
 }
 
 @media (max-width: 760px) {
+  header {
+    padding: 14px 16px;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .app-nav {
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .app-nav a {
+    min-width: 60px;
+    margin-left: 0;
+    padding: 8px 8px 10px;
+  }
+
+  .app-nav a b {
+    font-size: 12px;
+  }
+
+  section {
+    padding: 40px 18px;
+  }
+
   .portal-grid {
     grid-template-columns: 1fr;
+    padding: 0 18px 50px;
   }
 
   .portal-hero {
-    padding: 55px 22px 330px;
-    background-size: auto 310px, cover;
+    padding: 45px 20px 300px;
+    background-size: auto 280px, cover;
     background-position: center bottom, center;
   }
 
   .portal-hero h1 {
-    font-size: 42px;
+    font-size: 40px;
   }
+
+  .studio-preview-body {
+    grid-template-columns: 1fr;
+  }
+
+  .studio-preview-tools,
+  .studio-preview-panels {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: none;
+  }
+}
+
+/* ===== KAIAPPS PAGE & STUDIO PREVIEW ===== */
+.apps-page {
+  background:
+    radial-gradient(circle at top left, rgba(59, 130, 246, 0.18), transparent 35%),
+    radial-gradient(circle at top right, rgba(242, 140, 40, 0.14), transparent 35%);
+}
+
+.studio-preview-card {
+  background: #17191E;
+  border: 1px solid #343945;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.55);
+}
+
+.studio-preview-bar {
+  background: #20232A;
+  border-bottom: 1px solid #343945;
+  padding: 12px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 800;
+  color: #F4F4F5;
+}
+
+.studio-preview-bar span:last-child {
+  color: #A1A1AA;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.studio-preview-body {
+  display: grid;
+  grid-template-columns: 44px 1fr 124px;
+  min-height: 290px;
+}
+
+.studio-preview-tools {
+  background: #20232A;
+  border-right: 1px solid #343945;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 6px;
+}
+
+.studio-preview-tools span {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: #282C35;
+  border: 1px solid #343945;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 800;
+  color: #3B82F6;
+}
+
+.studio-preview-canvas {
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: #121419;
+}
+
+.studio-preview-canvas img {
+  max-height: 240px;
+  max-width: 100%;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+.studio-preview-panels {
+  background: #20232A;
+  border-left: 1px solid #343945;
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.preview-chip {
+  background: #282C35;
+  border: 1px solid #343945;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #F4F4F5;
+}
+
+.studio-home-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 14px;
+  background: linear-gradient(135deg, #17191E, #20232A);
+  border: 1px solid #343945;
+  border-radius: 14px;
+  height: 132px;
+  color: #60A5FA;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.studio-home-card:hover {
+  border-color: #F28C28;
+  color: #F28C28;
 }
