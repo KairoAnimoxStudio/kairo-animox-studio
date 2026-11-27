@@ -1,0 +1,2138 @@
+# KAIRO ART STUDIO
+# ULTIMATE MASTER DEVELOPMENT PROMPT
+## PROFESSIONAL DIGITAL PAINTING, ILLUSTRATION, MANGA & 2D ANIMATION SOFTWARE
+
+**Project Codename:** KAIRO ART STUDIO  
+**Application Abbreviation:** KAS  
+**Development Environment:** Google Antigravity  
+**Development Method:** Agent-Driven Software Engineering  
+**Target Platform:** Windows 11 64-bit  
+**Programming Language:** Python 3.12  
+**Desktop Framework:** PySide6 / Qt  
+**Graphics Engine:** Custom Raster + Vector Rendering Architecture  
+**Database:** SQLite  
+**Native Project Extension:** .kas  
+**Primary Target:** Professional Digital Art and 2D Animation  
+**Interface Theme:** Professional Dark UI with Electric Blue and Orange Accents  
+**Development Strategy:** Modular, Incremental, Test-Driven and Performance-Oriented
+
+---
+
+# SECTION 01 — PROJECT MISSION
+
+You are responsible for developing an original professional desktop creative application called KAIRO ART STUDIO.
+
+This application must combine professional digital painting, illustration, manga creation, comic production and frame-by-frame 2D animation into one integrated software environment.
+
+The application should provide workflows comparable to established professional creative applications, particularly the drawing, layer, brush, comic and animation capabilities users expect from Clip Studio Paint.
+
+However, this must be an independently developed product.
+
+Do not copy proprietary source code, protected assets, branding, logos, or proprietary application resources from other software.
+
+Create original code, original UI components, original icons and original application identity.
+
+## 1.1 Main objective
+
+Build an actual working creative application, not a demonstration, static prototype or interface mockup.
+
+The application must eventually allow an artist to complete the following workflow:
+
+1. Create a new illustration document.
+2. Draw rough sketches.
+3. Create clean line art.
+4. Color characters.
+5. Add shadows.
+6. Add highlights.
+7. Paint backgrounds.
+8. Organize artwork into layers.
+9. Edit and transform artwork.
+10. Create manga and comic pages.
+11. Create frame-by-frame animations.
+12. Synchronize animation with audio.
+13. Preview animation.
+14. Export image sequences.
+15. Export animated GIFs.
+16. Export video.
+17. Save and reopen complete projects.
+
+The software should be suitable for individual artists, independent animators, illustrators and small animation studios.
+
+## 1.2 Product philosophy
+
+Follow these priorities:
+
+- Real functionality over visual demonstrations.
+- Drawing accuracy over unnecessary visual effects.
+- Performance over decorative animations.
+- Stability over rapid feature additions.
+- Maintainability over shortcuts.
+- Original design over copying.
+- Accurate exports over misleading format support.
+- User data protection over convenience.
+- Modular development over monolithic code.
+
+Never claim that a feature is complete unless it has been implemented and tested.
+
+---
+
+# SECTION 02 — ANTIGRAVITY AGENT WORKFLOW
+
+You are operating inside Google Antigravity.
+
+Use the available development environment, editor, terminal and agent capabilities responsibly.
+
+Do not assume that every possible Antigravity feature or external integration is available. Inspect the actual environment first.
+
+## 2.1 Initial project inspection
+
+Before writing code:
+
+1. Inspect the current workspace.
+2. Identify existing project files.
+3. Check whether the directory already contains source code.
+4. Check Python version.
+5. Check installed packages.
+6. Check available disk space where possible.
+7. Check the current operating system.
+8. Check available graphics capabilities.
+9. Check whether a virtual environment already exists.
+10. Read existing README and configuration files.
+
+Never overwrite an existing project without inspecting it.
+
+If the workspace contains existing work, preserve it.
+
+## 2.2 Planning before implementation
+
+Create an implementation plan.
+
+Divide the project into independent modules.
+
+For every module identify:
+
+- Purpose
+- Responsibilities
+- Dependencies
+- Public interfaces
+- Required tests
+- Performance requirements
+- Integration requirements
+
+Create a development roadmap in:
+
+`docs/DEVELOPMENT_ROADMAP.md`
+
+Create an architecture document in:
+
+`docs/ARCHITECTURE.md`
+
+Create a feature tracker in:
+
+`docs/FEATURE_STATUS.md`
+
+Maintain these documents as the project evolves.
+
+## 2.3 Agent execution rules
+
+Use the following workflow:
+
+PLAN → INSPECT → IMPLEMENT → RUN → TEST → DEBUG → VERIFY → DOCUMENT.
+
+Do not skip testing.
+
+Do not make large unrelated modifications in one operation.
+
+Work on one logical module at a time.
+
+After completing a major feature:
+
+1. Inspect the changed files.
+2. Run relevant tests.
+3. Launch the application if appropriate.
+4. Verify the actual behavior.
+5. Inspect the interface visually.
+6. Fix detected problems.
+7. Update documentation.
+8. Report the result.
+
+## 2.4 Terminal safety
+
+Do not execute destructive commands without approval.
+
+Require explicit approval before:
+
+- Deleting user files.
+- Deleting existing project directories.
+- Overwriting existing user projects.
+- Running destructive database migrations.
+- Modifying Windows system settings.
+- Installing system-level software.
+- Changing environment variables globally.
+- Running commands with administrator privileges.
+- Removing important dependencies.
+
+Prefer project-local operations.
+
+Do not execute untrusted scripts or downloaded executables blindly.
+
+Do not expose credentials, tokens or private information in logs.
+
+## 2.5 Browser and reference usage
+
+When visual research is needed:
+
+- Use legitimate public references.
+- Study general interface conventions.
+- Do not download copyrighted software assets for reuse.
+- Do not copy another application's proprietary icons.
+- Do not reproduce protected branding.
+- Create original design assets.
+
+The application must remain independently branded.
+
+---
+
+# SECTION 03 — HARDWARE AND PERFORMANCE TARGET
+
+Primary development hardware:
+
+- Processor: AMD Ryzen 7 5700G.
+- Memory: 16 GB DDR4.
+- Graphics: Integrated Radeon Vega 8.
+- Storage: SSD.
+- Operating System: Windows 11 Pro.
+- Display: 1920 × 1080.
+
+Design the application around this hardware profile.
+
+Do not assume a dedicated graphics card exists.
+
+## 3.1 Performance priorities
+
+The application should prioritize:
+
+1. Smooth drawing.
+2. Low input latency.
+3. Responsive canvas navigation.
+4. Fast layer updates.
+5. Stable animation playback.
+6. Efficient memory usage.
+7. Background rendering.
+8. Responsive user interface.
+
+## 3.2 Rendering architecture
+
+Use a rendering abstraction.
+
+Separate:
+
+- Document coordinates.
+- Screen coordinates.
+- Canvas transformations.
+- Raster buffers.
+- Vector objects.
+- Layer compositing.
+- Viewport rendering.
+
+Implement CPU rendering as a reliable fallback.
+
+GPU acceleration may be introduced where supported.
+
+Never make basic drawing dependent on an unsupported GPU API.
+
+## 3.3 Memory management
+
+Do not load unlimited full-resolution image buffers into RAM.
+
+Use:
+
+- Tiled image storage.
+- Dirty-region updates.
+- Render caching.
+- Thumbnail caching.
+- Background processing.
+- Memory-aware operations.
+- Temporary resource cleanup.
+
+Consider tile-based rendering for large canvases.
+
+---
+
+# SECTION 04 — TECHNOLOGY STACK
+
+Use these technologies unless a specific technical limitation requires a documented alternative.
+
+| Area | Technology |
+|---|---|
+| Programming | Python 3.12 |
+| GUI | PySide6 |
+| Canvas | Custom Qt rendering |
+| Image processing | Pillow |
+| Numerical processing | NumPy |
+| Vector graphics | Qt / SVG |
+| Database | SQLite |
+| Project storage | ZIP + JSON + binary assets |
+| Audio | Qt Multimedia |
+| PSD support | psd-tools or equivalent |
+| Testing | pytest |
+| Packaging | PyInstaller |
+| Video encoding | FFmpeg integration |
+| Color management | ICC / LittleCMS where available |
+
+Before installing a dependency:
+
+- Check Python 3.12 compatibility.
+- Check licensing.
+- Check maintenance.
+- Check whether it is necessary.
+- Record it in requirements.txt.
+
+Avoid unnecessary dependencies.
+
+---
+
+# SECTION 05 — PROJECT STRUCTURE
+
+Create a modular directory structure.
+
+KAIRO_ART_STUDIO/
+
+    main.py
+    requirements.txt
+    README.md
+    CHANGELOG.md
+    LICENSE
+
+    .gitignore
+
+    config/
+        default_settings.json
+        shortcuts.json
+        workspace.json
+
+    app/
+        __init__.py
+        application.py
+        bootstrap.py
+        constants.py
+        logger.py
+        exceptions.py
+
+    ui/
+        main_window.py
+        theme.py
+        menu_bar.py
+        toolbar.py
+        status_bar.py
+
+        dialogs/
+            new_document.py
+            save_dialog.py
+            export_dialog.py
+            settings_dialog.py
+            about_dialog.py
+
+        panels/
+            tool_panel.py
+            layer_panel.py
+            brush_panel.py
+            color_panel.py
+            navigator_panel.py
+            properties_panel.py
+            history_panel.py
+            timeline_panel.py
+            asset_panel.py
+
+        widgets/
+            color_wheel.py
+            brush_preview.py
+            canvas_view.py
+            layer_item.py
+            timeline_widget.py
+            zoom_control.py
+
+    core/
+        document.py
+        document_manager.py
+        canvas.py
+        coordinates.py
+        renderer.py
+        command_manager.py
+        event_system.py
+        selection_manager.py
+
+    engine/
+        raster_engine.py
+        vector_engine.py
+        compositing_engine.py
+        tile_manager.py
+        render_cache.py
+
+    brushes/
+        brush_engine.py
+        brush_stroke.py
+        brush_preset.py
+        brush_tip.py
+        brush_texture.py
+        pressure_curve.py
+        stabilization.py
+
+    tools/
+        base_tool.py
+        brush_tool.py
+        pencil_tool.py
+        eraser_tool.py
+        fill_tool.py
+        eyedropper_tool.py
+        selection_tool.py
+        transform_tool.py
+        move_tool.py
+        gradient_tool.py
+        text_tool.py
+        vector_tool.py
+        shape_tool.py
+        zoom_tool.py
+        hand_tool.py
+
+    layers/
+        layer.py
+        layer_manager.py
+        layer_types.py
+        layer_group.py
+        blending.py
+        masks.py
+
+    animation/
+        animation_document.py
+        animation_track.py
+        animation_frame.py
+        exposure_sheet.py
+        onion_skin.py
+        playback.py
+        animation_camera.py
+        audio_track.py
+        animation_export.py
+
+    comics/
+        page_manager.py
+        comic_panel.py
+        speech_bubble.py
+        dialogue.py
+        page_templates.py
+
+    formats/
+        native_project.py
+        png_handler.py
+        jpeg_handler.py
+        tiff_handler.py
+        svg_handler.py
+        psd_importer.py
+        psd_exporter.py
+        image_sequence.py
+        gif_exporter.py
+        video_exporter.py
+
+    storage/
+        database.py
+        autosave.py
+        recovery.py
+        recent_files.py
+        project_library.py
+
+    services/
+        color_management.py
+        font_manager.py
+        performance_monitor.py
+        plugin_manager.py
+
+    resources/
+        icons/
+        themes/
+        brushes/
+        textures/
+        fonts/
+
+    tests/
+        unit/
+        integration/
+        ui/
+        performance/
+
+    docs/
+        ARCHITECTURE.md
+        DEVELOPMENT_ROADMAP.md
+        FEATURE_STATUS.md
+        USER_GUIDE.md
+        TESTING.md
+
+Modify this structure when necessary, but maintain separation of responsibilities.
+
+Do not create empty modules simply to make the folder structure appear complete.
+
+---
+
+# SECTION 06 — PROFESSIONAL APPLICATION UI
+
+Create a polished professional desktop interface.
+
+## 6.1 Visual identity
+
+Application name:
+
+KAIRO ART STUDIO.
+
+Use an original visual identity.
+
+Primary theme:
+
+- Background: #17191E.
+- Main panel: #20232A.
+- Secondary panel: #282C35.
+- Accent blue: #3B82F6.
+- Accent orange: #F28C28.
+- Primary text: #F4F4F5.
+- Secondary text: #A1A1AA.
+- Borders: #343945.
+
+These are initial design tokens and may be refined consistently.
+
+Use a clean professional typography system.
+
+Use consistent iconography.
+
+Avoid excessive borders, gradients, shadows and decorative effects.
+
+## 6.2 Main window layout
+
+The application must include:
+
+TOP:
+- Title bar
+- Main menu
+- Quick-access toolbar
+
+LEFT:
+- Drawing tools
+- Selection tools
+- Shape tools
+
+CENTER:
+- Main canvas
+- Document tabs
+- Canvas navigation
+
+RIGHT:
+- Brush presets
+- Tool properties
+- Color selector
+- Layer panel
+- Navigator
+
+BOTTOM:
+- Status information
+- Optional animation timeline
+
+## 6.3 Panel management
+
+Support:
+
+- Docking
+- Undocking
+- Resizing
+- Hiding
+- Showing
+- Restoring defaults
+- Saving layouts
+- Custom workspaces
+
+Use Qt docking functionality where appropriate.
+
+Ensure panels do not overlap or disappear permanently.
+
+## 6.4 Workspaces
+
+Create:
+
+1. Illustration
+2. Animation
+3. Comic
+4. Minimal
+5. Custom
+
+Switching workspaces must preserve the active project.
+
+## 6.5 Startup interface
+
+Create a welcome screen with:
+
+- New Project
+- Open Project
+- Recent Projects
+- Open Folder
+- Documentation
+- Recovery Projects
+- Application Version
+
+Recent projects must display useful information such as project name, preview, location and last modified time.
+
+---
+
+# SECTION 07 — DOCUMENT CREATION
+
+Implement a professional new-document dialog.
+
+Required fields:
+
+- Name
+- Width
+- Height
+- Units
+- DPI
+- Color model
+- Color profile
+- Background color
+- Transparency
+- Initial layers
+
+Presets:
+
+- 1280 × 720
+- 1920 × 1080
+- 2560 × 1440
+- 3840 × 2160
+- 1080 × 1920
+- 2048 × 2048
+- 3000 × 3000
+- A4
+- A3
+- Custom
+
+Resolution presets:
+
+- 72 DPI
+- 96 DPI
+- 150 DPI
+- 300 DPI
+- Custom
+
+Clearly distinguish physical dimensions and pixel dimensions.
+
+Support multiple documents and document tabs.
+
+Each document must maintain its own:
+
+- Layers
+- Canvas
+- History
+- Settings
+- Selections
+- Animation data where applicable.
+
+---
+
+# SECTION 08 — CANVAS ENGINE
+
+The canvas must provide a real drawing surface.
+
+## 8.1 Navigation
+
+Implement:
+
+- Zoom in
+- Zoom out
+- Fit canvas
+- Actual size
+- Pan
+- Rotate
+- Reset rotation
+- Horizontal flip
+- Vertical flip
+- Grid
+- Rulers
+- Guides
+- Symmetry guides
+
+## 8.2 Mouse controls
+
+Support:
+
+- Mouse wheel zoom
+- Middle-click drag
+- Space + drag
+- Keyboard shortcuts
+- Navigator panel
+
+Do not create accidental strokes while navigating.
+
+## 8.3 Coordinate system
+
+Maintain accurate mapping between:
+
+- Document space
+- Canvas space
+- Screen space
+
+The coordinate mapping must remain accurate under zoom, rotation, pan and canvas flipping.
+
+## 8.4 Drawing performance
+
+Use partial repainting.
+
+Update only affected regions whenever possible.
+
+Avoid regenerating the complete canvas after every input event.
+
+## 8.5 Canvas navigation panel
+
+Display:
+
+- Full canvas preview
+- Current viewport
+- Zoom level
+- Viewport movement
+- Fit canvas action
+
+---
+
+# SECTION 09 — PROFESSIONAL BRUSH ENGINE
+
+The brush engine must support real digital painting.
+
+Do not use a simplistic implementation that merely paints circles.
+
+## 9.1 Built-in presets
+
+Create functional brush presets:
+
+1. Hard Round
+2. Soft Round
+3. Pencil
+4. Mechanical Pencil
+5. Realistic Pencil
+6. Ink Pen
+7. G-Pen
+8. Mapping Pen
+9. Marker
+10. Airbrush
+11. Watercolor
+12. Oil Brush
+13. Flat Brush
+14. Chalk
+15. Charcoal
+16. Texture Brush
+17. Pixel Brush
+18. Blend Brush
+19. Hard Eraser
+20. Soft Eraser
+
+Every preset must have distinct behavior.
+
+## 9.2 Brush properties
+
+Support applicable properties:
+
+- Size
+- Minimum size
+- Maximum size
+- Opacity
+- Flow
+- Hardness
+- Spacing
+- Density
+- Rotation
+- Angle
+- Scatter
+- Texture
+- Stabilization
+- Randomness
+- Pressure response
+
+## 9.3 Pressure sensitivity
+
+Support Qt tablet events.
+
+Read available tablet information:
+
+- Pressure
+- Tilt
+- Rotation
+- Device type
+- Eraser state
+
+Allow pressure to control:
+
+- Size
+- Opacity
+- Flow
+- Density
+
+Allow independent response curves.
+
+When no tablet is available, support mouse drawing.
+
+Never crash when tablet information is missing.
+
+## 9.4 Stabilization
+
+Provide:
+
+- Disabled
+- Basic
+- Smooth
+- Weighted
+- Advanced
+
+The user must be able to adjust stabilization intensity.
+
+Maintain a balance between smooth lines and low latency.
+
+## 9.5 Brush editor
+
+Build an advanced brush settings interface.
+
+Allow:
+
+- Editing properties
+- Previewing strokes
+- Saving presets
+- Duplicating presets
+- Resetting settings
+- Importing presets
+- Exporting presets
+
+## 9.6 Brush library
+
+Support:
+
+- Categories
+- Search
+- Favorites
+- Recent brushes
+- Custom folders
+- Preset thumbnails
+- Rename
+- Duplicate
+- Delete
+- Import
+- Export
+
+User-created presets must remain separate from built-in resources.
+
+---
+
+# SECTION 10 — DRAWING AND EDITING TOOLS
+
+All visible tools must perform actual operations.
+
+## 10.1 Brush
+
+Freehand drawing with pressure support.
+
+## 10.2 Pencil
+
+Create textured pencil strokes.
+
+## 10.3 Eraser
+
+Support hard and soft erasing.
+
+Respect layer locks and selections.
+
+## 10.4 Fill
+
+Support:
+
+- Contiguous fill
+- All-layer reference
+- Current-layer reference
+- Tolerance
+- Gap closing
+- Fill expansion
+- Antialiasing
+
+Use correct boundary detection.
+
+## 10.5 Eyedropper
+
+Sample:
+
+- Current layer
+- Merged image
+- Visible layers
+- Average color
+
+## 10.6 Selection
+
+Implement:
+
+- Rectangle
+- Ellipse
+- Freehand
+- Polygon
+- Magic wand
+- Select all
+- Invert
+- Deselect
+- Expand
+- Contract
+- Feather
+
+## 10.7 Transform
+
+Implement:
+
+- Move
+- Scale
+- Rotate
+- Flip
+- Skew
+- Free transform
+
+Support preview before committing changes.
+
+## 10.8 Shapes
+
+Implement:
+
+- Line
+- Rectangle
+- Ellipse
+- Polygon
+- Curve
+- Polyline
+
+Support outline and fill.
+
+## 10.9 Gradient
+
+Implement:
+
+- Linear
+- Radial
+- Foreground to transparent
+- Foreground to background
+- Custom gradients
+
+Allow editable color stops.
+
+## 10.10 Text
+
+Support editable text objects.
+
+Properties:
+
+- Font
+- Size
+- Bold
+- Italic
+- Alignment
+- Color
+- Spacing
+- Rotation
+
+Text must remain editable in native projects.
+
+## 10.11 Vector tools
+
+Implement:
+
+- Pen
+- Bezier paths
+- Control points
+- Node editing
+- Stroke
+- Fill
+- Path transformations
+
+Vector content must remain independent of raster layers.
+
+---
+
+# SECTION 11 — LAYER ENGINE
+
+Build a professional layer management system.
+
+## 11.1 Layer types
+
+Support:
+
+- Raster
+- Vector
+- Text
+- Group
+- Background
+- Mask
+- Reference
+
+## 11.2 Layer operations
+
+Implement:
+
+- Create
+- Delete
+- Duplicate
+- Rename
+- Reorder
+- Hide
+- Show
+- Lock
+- Unlock
+- Group
+- Ungroup
+- Merge down
+- Merge selected
+- Merge visible
+
+## 11.3 Layer properties
+
+Each applicable layer should contain:
+
+- Name
+- Visibility
+- Opacity
+- Blend mode
+- Lock state
+- Thumbnail
+- Clipping state
+
+## 11.4 Blending modes
+
+Implement mathematically correct versions of:
+
+- Normal
+- Multiply
+- Screen
+- Overlay
+- Soft Light
+- Hard Light
+- Darken
+- Lighten
+- Add
+- Subtract
+- Difference
+- Color Dodge
+- Color Burn
+- Hue
+- Saturation
+- Color
+- Luminosity
+
+Do not make all modes behave identically.
+
+## 11.5 Masks
+
+Support:
+
+- Add
+- Edit
+- Disable
+- Enable
+- Invert
+- Apply
+
+Masks should be non-destructive until explicitly applied.
+
+## 11.6 Alpha lock and clipping
+
+Implement:
+
+- Alpha lock
+- Clipping
+- Clipping groups where appropriate
+
+These functions must change actual rendering.
+
+---
+
+# SECTION 12 — COLOR MANAGEMENT
+
+Create a professional color selection environment.
+
+## 12.1 Color selector
+
+Provide:
+
+- Color wheel
+- Color triangle
+- RGB sliders
+- HSV sliders
+- Hex input
+- Foreground color
+- Background color
+- Swap colors
+- Default colors
+
+## 12.2 Color palettes
+
+Support:
+
+- Create palette
+- Rename palette
+- Delete palette
+- Save colors
+- Import palettes
+- Export palettes
+- Recently used colors
+
+## 12.3 Color models
+
+Initial support:
+
+- RGB
+- RGBA
+- Grayscale
+
+Design for future CMYK support.
+
+## 12.4 ICC profiles
+
+Support common ICC profiles where practical.
+
+Preserve color profiles during supported imports and exports.
+
+Warn users before unsupported color conversions.
+
+Do not advertise professional CMYK support until it is actually verified.
+
+---
+
+# SECTION 13 — ANIMATION ENGINE
+
+This module must support genuine frame-by-frame animation.
+
+A static timeline is unacceptable.
+
+## 13.1 Animation document
+
+Create animation-specific project settings:
+
+- Width
+- Height
+- FPS
+- Duration
+- Start frame
+- End frame
+- Background
+- Animation layers
+
+FPS presets:
+
+- 12
+- 15
+- 24
+- 25
+- 30
+- 60
+
+Allow custom FPS.
+
+## 13.2 Timeline interface
+
+Display:
+
+- Frame ruler
+- Frame numbers
+- Tracks
+- Layer names
+- Exposure cells
+- Current frame
+- Playback controls
+- Timeline zoom
+- Horizontal scrolling
+- Track visibility
+- Track lock
+
+## 13.3 Frame management
+
+Implement:
+
+- Add frame
+- Delete frame
+- Duplicate frame
+- Copy frame
+- Paste frame
+- Move frame
+- Clear frame
+- Extend exposure
+- Shorten exposure
+
+Each frame must preserve its own drawing content.
+
+## 13.4 Onion skin
+
+Support:
+
+- Previous frame
+- Next frame
+- Multiple previous frames
+- Multiple next frames
+- Opacity
+- Color
+- Frame count
+- Enable/disable
+
+Onion skin must never be included in actual exported animation frames.
+
+## 13.5 Playback
+
+Implement:
+
+- Play
+- Pause
+- Stop
+- First frame
+- Last frame
+- Previous frame
+- Next frame
+- Loop
+- Playback range
+
+Maintain consistent frame timing.
+
+## 13.6 Animation layers
+
+Allow multiple animation tracks.
+
+Support:
+
+- Track visibility
+- Track locking
+- Track naming
+- Frame exposure
+- Track reordering
+
+Design the animation data model so layers and animation tracks can evolve independently.
+
+## 13.7 Camera
+
+Implement an animation camera with:
+
+- Position
+- Zoom
+- Rotation where supported
+- Camera bounds
+- Camera movement
+
+Store camera data in the project.
+
+## 13.8 Audio
+
+Support importing:
+
+- WAV
+- MP3 where supported
+
+Implement:
+
+- Audio playback
+- Waveform display
+- Start offset
+- Track position
+- Audio visibility
+- Synchronization with animation playback
+
+## 13.9 Exposure sheet
+
+Display:
+
+- Frame numbers
+- Layer names
+- Exposure durations
+- Notes
+- Timing
+
+Allow editing exposure information.
+
+## 13.10 Animation export
+
+Support:
+
+- PNG sequence
+- JPEG sequence
+- GIF
+- MP4 through FFmpeg when supported
+
+Export settings:
+
+- Resolution
+- FPS
+- Start frame
+- End frame
+- Background
+- Transparency where supported
+- Output location
+
+Show real progress.
+
+Handle failed exports correctly.
+
+---
+
+# SECTION 14 — COMIC AND MANGA SYSTEM
+
+Create a dedicated comic workspace.
+
+## 14.1 Page management
+
+Support:
+
+- New page
+- Delete page
+- Duplicate page
+- Reorder page
+- Rename page
+- Page navigation
+
+## 14.2 Panel system
+
+Allow users to:
+
+- Create panels
+- Resize panels
+- Move panels
+- Reorder panels
+- Change panel borders
+- Create custom panel shapes
+
+## 14.3 Speech bubbles
+
+Implement:
+
+- Speech bubble
+- Thought bubble
+- Caption box
+- Dialogue box
+- Custom bubble
+
+Allow editing:
+
+- Fill
+- Outline
+- Tail
+- Shape
+- Font
+- Text
+- Text alignment
+
+## 14.4 Comic templates
+
+Include:
+
+- Single-page manga
+- Multi-panel comic
+- Vertical comic
+- Double-page layout
+
+Make templates editable.
+
+---
+
+# SECTION 15 — FILE FORMATS
+
+## 15.1 Native project
+
+Create the `.kas` project format.
+
+Use a structured archive containing:
+
+- Project manifest
+- Canvas metadata
+- Layer data
+- Raster assets
+- Vector objects
+- Text objects
+- Animation frames
+- Timeline data
+- Audio references
+- Color information
+- Application metadata
+
+Use schema versioning.
+
+Support safe project migrations.
+
+## 15.2 Saving
+
+Implement:
+
+- Save
+- Save As
+- Save Copy
+- Save All
+- Unsaved indicator
+- Save confirmation
+
+Do not silently overwrite existing files.
+
+## 15.3 Autosave
+
+Default interval: 5 minutes.
+
+Allow:
+
+- Enable/disable
+- Interval selection
+- Recovery location
+- Retention count
+
+Autosave must not block drawing.
+
+## 15.4 Recovery
+
+On startup:
+
+- Check recovery data.
+- Detect interrupted sessions.
+- Show recoverable documents.
+- Allow preview.
+- Allow restore.
+- Allow dismissal.
+
+Never automatically replace the last valid saved document.
+
+## 15.5 Image imports
+
+Support:
+
+- PNG
+- JPEG
+- BMP
+- TIFF
+- WebP
+- SVG
+
+Support PSD import where practical.
+
+Preserve supported layer information.
+
+Warn about unsupported features.
+
+## 15.6 Exports
+
+Support:
+
+- PNG
+- JPEG
+- TIFF
+- BMP
+- WebP
+- SVG
+- PNG sequence
+- GIF
+- Video
+
+## 15.7 PSD compatibility
+
+PSD import/export is an advanced interoperability feature.
+
+Do not falsely claim complete compatibility.
+
+Test actual layer preservation.
+
+Document unsupported effects, masks and blending modes.
+
+Never generate a flattened PNG and call it a layered PSD.
+
+---
+
+# SECTION 16 — UNDO AND REDO
+
+Implement a command-based history system.
+
+Support undo/redo for:
+
+- Brush strokes
+- Pencil strokes
+- Erasing
+- Fill
+- Transform
+- Layer changes
+- Masks
+- Selection operations
+- Frame changes
+- Timeline changes
+- Page operations
+
+Use efficient commands and snapshots.
+
+Avoid duplicating massive documents for every small operation.
+
+Create a history panel.
+
+Test all important commands.
+
+---
+
+# SECTION 17 — KEYBOARD AND TABLET INPUT
+
+Provide configurable shortcuts.
+
+Default shortcuts:
+
+| Operation | Shortcut |
+|---|---|
+| New | Ctrl + N |
+| Open | Ctrl + O |
+| Save | Ctrl + S |
+| Save As | Ctrl + Shift + S |
+| Undo | Ctrl + Z |
+| Redo | Ctrl + Y |
+| Copy | Ctrl + C |
+| Paste | Ctrl + V |
+| Cut | Ctrl + X |
+| Select All | Ctrl + A |
+| Deselect | Ctrl + D |
+| Brush | B |
+| Pencil | P |
+| Eraser | E |
+| Fill | G |
+| Eyedropper | I |
+| Text | T |
+| Zoom In | Ctrl + Plus |
+| Zoom Out | Ctrl + Minus |
+| Fit Canvas | Ctrl + 0 |
+| Hand | Space + Drag |
+
+Allow custom shortcut editing.
+
+Support tablet input.
+
+Support mouse input.
+
+Avoid shortcut conflicts.
+
+---
+
+# SECTION 18 — SETTINGS AND CUSTOMIZATION
+
+Create a complete settings panel.
+
+Categories:
+
+1. General
+2. Appearance
+3. Canvas
+4. Brushes
+5. Tablet
+6. Animation
+7. Timeline
+8. Performance
+9. Autosave
+10. File formats
+11. Shortcuts
+12. Language
+
+Allow:
+
+- Apply
+- Cancel
+- Restore Defaults
+
+Persist settings between application launches.
+
+Never reset user settings without consent.
+
+---
+
+# SECTION 19 — PLUGIN ARCHITECTURE
+
+Design an extensible plugin system.
+
+Future plugin types:
+
+- Brushes
+- Tools
+- Filters
+- Exporters
+- Animation utilities
+- Workspace layouts
+
+Create plugin documentation.
+
+Validate plugin metadata.
+
+Warn users before loading untrusted code.
+
+Do not execute plugins silently.
+
+---
+
+# SECTION 20 — SECURITY AND DATA PROTECTION
+
+Implement:
+
+- Input validation
+- File validation
+- Project validation
+- Error logging
+- Recovery backups
+- Safe file writing
+- Safe temporary storage
+- Plugin trust controls
+
+Never execute code embedded in imported artwork.
+
+Never silently delete project files.
+
+Never expose private user paths or credentials unnecessarily.
+
+---
+
+# SECTION 21 — PERFORMANCE ENGINEERING
+
+Optimize for the specified hardware.
+
+## 21.1 Drawing
+
+Prioritize low-latency brush rendering.
+
+Use:
+
+- Stroke interpolation
+- Dirty rectangles
+- Buffer caching
+- Efficient compositing
+- Pressure sampling
+
+Avoid excessive full-canvas redraws.
+
+## 21.2 Large documents
+
+Use tiled storage where appropriate.
+
+Allow progressive rendering.
+
+Do not block the interface while generating previews.
+
+## 21.3 Background workers
+
+Use background processing for:
+
+- Imports
+- Exports
+- Thumbnail creation
+- Autosave
+- Large image transformations
+- Video encoding
+
+Use safe Qt thread communication.
+
+## 21.4 Monitoring
+
+Create a performance monitor for development.
+
+Measure:
+
+- CPU use
+- Memory use
+- Drawing latency
+- Render duration
+- Playback timing
+- Export duration
+
+Do not display fake performance measurements.
+
+---
+
+# SECTION 22 — AUTOMATED TESTING
+
+Create comprehensive tests.
+
+Use pytest.
+
+## 22.1 Document tests
+
+Test:
+
+- Creation
+- Dimensions
+- Resolution
+- Background
+- Saving
+- Loading
+- Invalid files
+
+## 22.2 Brush tests
+
+Test:
+
+- Stroke creation
+- Size
+- Opacity
+- Pressure
+- Stabilization
+- Texture
+- Eraser
+
+## 22.3 Layer tests
+
+Test:
+
+- Creation
+- Deletion
+- Ordering
+- Visibility
+- Opacity
+- Blending
+- Masks
+- Groups
+
+## 22.4 Animation tests
+
+Test:
+
+- Frame creation
+- Frame duplication
+- Frame deletion
+- Exposure
+- Onion skin
+- Playback
+- Export
+
+## 22.5 File tests
+
+Test:
+
+- Import
+- Export
+- Native project serialization
+- Recovery
+- Corrupt files
+
+## 22.6 UI tests
+
+Test:
+
+- Startup
+- New project
+- Open project
+- Save project
+- Workspace changes
+- Panel docking
+- Shortcuts
+- Dialogs
+
+## 22.7 Regression tests
+
+Run relevant tests after modifications.
+
+Do not introduce new features by breaking existing features.
+
+---
+
+# SECTION 23 — DEVELOPMENT ROADMAP
+
+Implement the software in controlled development phases.
+
+Each phase must leave the application in a runnable state.
+
+## PHASE 0 — ENVIRONMENT AND ARCHITECTURE
+
+- Inspect workspace.
+- Verify Python.
+- Create virtual environment.
+- Install essential dependencies.
+- Create project structure.
+- Create documentation.
+- Create logging.
+- Create startup entry point.
+
+Deliverable: Application launches.
+
+## PHASE 1 — UI FOUNDATION
+
+- Main window.
+- Dark theme.
+- Main menu.
+- Toolbars.
+- Docking panels.
+- Status bar.
+- Welcome screen.
+- Workspace manager.
+
+Deliverable: Functional professional interface.
+
+## PHASE 2 — DOCUMENT AND CANVAS
+
+- New document.
+- Canvas rendering.
+- Zoom.
+- Pan.
+- Rotate.
+- Grid.
+- Rulers.
+- Navigator.
+
+Deliverable: Working canvas.
+
+## PHASE 3 — CORE DRAWING
+
+- Brush.
+- Pencil.
+- Eraser.
+- Color selection.
+- Stroke rendering.
+- Tablet input.
+
+Deliverable: Actual drawing functionality.
+
+## PHASE 4 — BRUSH ADVANCED
+
+- Brush presets.
+- Brush editor.
+- Texture.
+- Stabilization.
+- Pressure curves.
+- Preset library.
+
+Deliverable: Professional brush workflow.
+
+## PHASE 5 — LAYERS
+
+- Layer manager.
+- Groups.
+- Opacity.
+- Blend modes.
+- Masks.
+- Clipping.
+
+Deliverable: Multi-layer illustration workflow.
+
+## PHASE 6 — ADVANCED TOOLS
+
+- Fill.
+- Selection.
+- Transform.
+- Shapes.
+- Gradients.
+- Text.
+- Vector editing.
+
+Deliverable: Complete basic illustration toolkit.
+
+## PHASE 7 — HISTORY AND STORAGE
+
+- Undo/redo.
+- Native format.
+- Save/load.
+- Autosave.
+- Recovery.
+
+Deliverable: Reliable document workflow.
+
+## PHASE 8 — ANIMATION FOUNDATION
+
+- Animation documents.
+- Frames.
+- Timeline.
+- Exposure cells.
+- Onion skin.
+- Playback.
+
+Deliverable: Working frame-by-frame animation.
+
+## PHASE 9 — ADVANCED ANIMATION
+
+- Audio.
+- Waveform.
+- Camera.
+- Exposure sheet.
+- Timeline editing.
+- Export.
+
+Deliverable: Functional animation production workflow.
+
+## PHASE 10 — COMIC WORKSPACE
+
+- Pages.
+- Panels.
+- Speech bubbles.
+- Dialogue.
+- Templates.
+- Export.
+
+Deliverable: Comic creation workflow.
+
+## PHASE 11 — IMPORT AND EXPORT
+
+- Image formats.
+- PSD support.
+- SVG.
+- Image sequence.
+- GIF.
+- Video.
+
+Deliverable: Interoperability.
+
+## PHASE 12 — POLISH AND OPTIMIZATION
+
+- UI refinement.
+- Memory optimization.
+- Rendering optimization.
+- Error handling.
+- Regression testing.
+- Windows packaging.
+
+Deliverable: Stable release candidate.
+
+---
+
+# SECTION 24 — AGENT CHECKPOINTS
+
+At the end of each phase, produce a development report.
+
+Required report:
+
+**PHASE NAME**
+
+**Completed**
+- List actual completed functionality.
+
+**Partially Completed**
+- List incomplete functionality.
+
+**Not Implemented**
+- List features still pending.
+
+**Files Created**
+- List new files.
+
+**Files Modified**
+- List modified files.
+
+**Tests**
+- List tests executed.
+
+**Results**
+- Pass/fail details.
+
+**Known Issues**
+- List remaining problems.
+
+**Next Phase**
+- Explain the next development task.
+
+Update `docs/FEATURE_STATUS.md`.
+
+Never mark an untested feature as completed.
+
+---
+
+# SECTION 25 — VISUAL QUALITY CONTROL
+
+Do not evaluate the application solely through code.
+
+When the UI is implemented:
+
+1. Run the application.
+2. Inspect the actual interface.
+3. Check spacing.
+4. Check alignment.
+5. Check panel proportions.
+6. Check text readability.
+7. Check icon consistency.
+8. Check resizing.
+9. Check 1080p display compatibility.
+10. Check dark theme contrast.
+
+Capture screenshots when the environment supports it.
+
+Use visual inspection to find layout issues.
+
+Do not claim that a screenshot has been tested if no screenshot was actually inspected.
+
+Fix obvious UI problems before progressing.
+
+---
+
+# SECTION 26 — FUTURE EXPANSION
+
+Keep the architecture ready for future features.
+
+Potential features:
+
+- Perspective rulers.
+- Symmetry tools.
+- Advanced selection.
+- Advanced color correction.
+- Animation curves.
+- Keyframe animation.
+- Advanced camera control.
+- Lip-sync assistance.
+- Automatic mouth-shape generation.
+- Advanced compositing.
+- Asset library.
+- Animation project management.
+- Local AI drawing assistant.
+- KALKI AI integration.
+- Dialogue spelling assistance.
+- Local knowledge system.
+
+These are future extensions.
+
+Do not delay the core drawing and animation engines to implement experimental AI features.
+
+The application must work without cloud services or external AI accounts.
+
+---
+
+# SECTION 27 — RELEASE REQUIREMENTS
+
+Before creating a release candidate, verify the following.
+
+## Drawing
+
+- New document works.
+- Brush works.
+- Pencil works.
+- Eraser works.
+- Pressure works where supported.
+- Color selector works.
+- Zoom works.
+- Pan works.
+- Layers work.
+
+## Editing
+
+- Selection works.
+- Fill works.
+- Transform works.
+- Undo works.
+- Redo works.
+- Blend modes work.
+- Masks work where implemented.
+
+## Animation
+
+- Animation document works.
+- Frames work.
+- Onion skin works.
+- Timeline works.
+- Playback works.
+- FPS works.
+- Export works.
+
+## Storage
+
+- Native save works.
+- Native load works.
+- Autosave works.
+- Recovery works.
+- Supported imports work.
+- Supported exports work.
+
+## Stability
+
+- No major startup failure.
+- No silent data loss.
+- No major UI freeze during normal operations.
+- No unhandled common input errors.
+- No false feature claims.
+
+## Packaging
+
+- Windows executable builds.
+- Packaged application launches.
+- Assets load.
+- Configuration works.
+- Dependencies are included.
+- Uninstall procedure is documented.
+
+---
+
+# SECTION 28 — FIRST EXECUTION INSTRUCTIONS
+
+Begin development immediately, but only with the first controlled stage.
+
+Follow this exact sequence.
+
+**STEP 1 — INSPECT**
+
+Inspect the current Antigravity workspace.
+
+Report existing files, environment and Python version.
+
+**STEP 2 — PLAN**
+
+Create an implementation plan and project architecture.
+
+**STEP 3 — SETUP**
+
+Create the project directory structure and Python virtual environment.
+
+**STEP 4 — DEPENDENCIES**
+
+Install and verify only the essential initial dependencies.
+
+**STEP 5 — UI**
+
+Build the first professional KAIRO ART STUDIO desktop interface.
+
+**STEP 6 — RUN**
+
+Launch the application.
+
+**STEP 7 — VISUAL INSPECTION**
+
+Inspect the actual UI and fix layout issues.
+
+**STEP 8 — TEST**
+
+Run startup and UI tests.
+
+**STEP 9 — REPORT**
+
+Provide the phase report.
+
+Do not start all remaining phases automatically.
+
+Wait for the next development instruction.
+
+---
+
+# FINAL DIRECTIVE
+
+You are building a serious creative software product.
+
+The intended users are professional and aspiring digital artists, illustrators, manga creators and 2D animators.
+
+The software must support a real production workflow.
+
+Think carefully about the experience of an animator who spends hours working on:
+
+- Rough animation.
+- Clean outlines.
+- Character coloring.
+- Shadow and highlight.
+- Background painting.
+- Layer organization.
+- Frame-by-frame animation.
+- Audio synchronization.
+- Animation export.
+
+The application should eventually allow an independent creator to complete a substantial portion of their 2D art and animation production without constantly switching between different applications.
+
+Do not sacrifice stability for speed.
+
+Do not sacrifice working features for visual appearance.
+
+Do not invent completed functionality.
+
+Do not hide errors.
+
+Do not overwrite user work.
+
+Use modular architecture.
+
+Test every important feature.
+
+Document every major implementation.
+
+**PRODUCT: KAIRO ART STUDIO**
+
+**MISSION: BUILD A PROFESSIONAL DIGITAL ART AND 2D ANIMATION DESKTOP APPLICATION.**
+
+**BUILD IT. RUN IT. TEST IT. INSPECT IT. IMPROVE IT.**
+
+**THE RESULT MUST BE REAL WORKING SOFTWARE, NOT A MOCKUP.**
