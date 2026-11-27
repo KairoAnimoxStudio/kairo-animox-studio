@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>EXTREME HILL RIDER | KaiPlay</title>
+  <meta name="description" content="Play EXTREME HILL RIDER: 2D physics-based hill-climbing racing game with 8 vehicles, 8 maps, upgrades, flips, and fuel management.">
+  <link rel="stylesheet" href="extreme-hill-rider.css">
+</head>
+<body data-state="loading">
+
+<div class="hr-viewport">
+  <canvas id="hill-canvas" data-testid="hill-canvas" tabindex="0"></canvas>
+
+  <!-- LOADING SCREEN -->
+  <div id="screen-loading" class="hr-layer centered">
+    <div class="hr-modal-card">
+      <h2>EXTREME HILL RIDER</h2>
+      <p class="hr-modal-sub">Preparing physics engine and terrain...</p>
+    </div>
+  </div>
+
+  <!-- TITLE / MAIN MENU -->
+  <section id="screen-title" class="hr-layer hr-title-stage" hidden aria-label="Main Menu">
+    <div class="hr-title-topbar">
+      <a class="hr-btn sm" href="kaiplay.html">Back to KaiPlay</a>
+      <div class="hr-coin-readout" aria-label="Available Coins">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" fill="#FACC15" stroke="#92400E" stroke-width="2"/>
+          <path d="M12 7v10" stroke="#92400E" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+        <span id="menu-coins" class="tabular-nums">500</span>
+      </div>
+    </div>
+
+    <div class="hr-title-center">
+      <svg class="hr-title-emblem" viewBox="0 0 540 132" fill="none" role="img" aria-label="Extreme Hill Rider">
+        <text x="270" y="52" text-anchor="middle" fill="#F8FAFC" stroke="#0F172A" stroke-width="8" paint-order="stroke fill" font-family="Outfit, sans-serif" font-weight="800" font-size="44" letter-spacing="2">EXTREME HILL RIDER</text>
+        <text x="270" y="80" text-anchor="middle" fill="#FACC15" stroke="#0F172A" stroke-width="5" paint-order="stroke fill" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="14" letter-spacing="3">PHYSICS HILL CLIMB RACING</text>
+        <path d="M24 116 Q 145 86, 270 108 T 516 96" stroke="#F97316" stroke-width="5" stroke-linecap="round"/>
+      </svg>
+
+      <div class="hr-title-summary">
+        <span>Vehicle: <strong id="menu-selected-vehicle">Starter Jeep</strong></span>
+        <span aria-hidden="true">·</span>
+        <span>Map: <strong id="menu-selected-map">Green Valley</strong></span>
+        <span aria-hidden="true">·</span>
+        <span>Best: <strong id="menu-best-dist" class="tabular-nums">0 m</strong></span>
+      </div>
+
+      <div class="hr-title-cta-row">
+        <button type="button" id="btn-play" class="hr-btn primary play-hero" data-start="true">Play Race</button>
+      </div>
+
+      <div class="hr-secondary-nav">
+        <button type="button" id="btn-open-garage" class="hr-btn sm">Garage</button>
+        <button type="button" id="btn-open-maps" class="hr-btn sm">Maps</button>
+        <button type="button" id="btn-open-upgrades" class="hr-btn sm">Upgrades</button>
+        <button type="button" id="btn-open-stats" class="hr-btn sm">Statistics</button>
+        <button type="button" id="btn-open-settings" class="hr-btn sm">Settings</button>
+      </div>
+    </div>
+
+    <div class="hr-control-hint">
+      Right Arrow / D Accelerate · Left Arrow / A Brake · R Restart · Esc Pause
+    </div>
+  </section>
+
+  <!-- GARAGE SCREEN -->
+  <section id="screen-garage" class="hr-layer centered" hidden aria-label="Vehicle Garage">
+    <div class="hr-submenu-panel">
+      <div class="hr-submenu-head">
+        <h2>Vehicle Garage (8 Vehicles)</h2>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span class="hr-coin-readout tabular-nums">Coins: <span id="garage-coins">0</span></span>
+          <button type="button" class="hr-btn sm" data-nav-back>Back</button>
+        </div>
+      </div>
+      <div class="hr-submenu-scroll">
+        <div id="garage-grid" class="hr-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAPS SCREEN -->
+  <section id="screen-maps" class="hr-layer centered" hidden aria-label="Map Selection">
+    <div class="hr-submenu-panel">
+      <div class="hr-submenu-head">
+        <h2>Select Course (8 Maps)</h2>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span class="hr-coin-readout tabular-nums">Coins: <span id="maps-coins">0</span></span>
+          <button type="button" class="hr-btn sm" data-nav-back>Back</button>
+        </div>
+      </div>
+      <div class="hr-submenu-scroll">
+        <div id="maps-grid" class="hr-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UPGRADES SCREEN -->
+  <section id="screen-upgrades" class="hr-layer centered" hidden aria-label="Vehicle Upgrades">
+    <div class="hr-submenu-panel">
+      <div class="hr-submenu-head">
+        <h2>Upgrades · <span id="upgrades-vehicle-name">Starter Jeep</span></h2>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span class="hr-coin-readout tabular-nums">Coins: <span id="upgrades-coins">0</span></span>
+          <button type="button" class="hr-btn sm" data-nav-back>Back</button>
+        </div>
+      </div>
+      <div class="hr-submenu-scroll">
+        <div id="upgrades-grid" class="hr-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATISTICS SCREEN -->
+  <section id="screen-stats" class="hr-layer centered" hidden aria-label="Player Statistics">
+    <div class="hr-submenu-panel">
+      <div class="hr-submenu-head">
+        <h2>Driver Statistics</h2>
+        <button type="button" class="hr-btn sm" data-nav-back>Back</button>
+      </div>
+      <div class="hr-submenu-scroll">
+        <div class="hr-stats-kpis">
+          <div class="hr-kpi-tile"><span>Total Runs</span><strong id="stat-runs" class="tabular-nums">0</strong></div>
+          <div class="hr-kpi-tile"><span>Total Distance</span><strong id="stat-distance" class="tabular-nums">0 m</strong></div>
+          <div class="hr-kpi-tile"><span>Coins Earned</span><strong id="stat-coins" class="tabular-nums">0</strong></div>
+          <div class="hr-kpi-tile"><span>Flips Landed</span><strong id="stat-flips" class="tabular-nums">0</strong></div>
+          <div class="hr-kpi-tile"><span>Vehicles Owned</span><strong id="stat-vehicles" class="tabular-nums">1 / 8</strong></div>
+          <div class="hr-kpi-tile"><span>Maps Unlocked</span><strong id="stat-maps" class="tabular-nums">1 / 8</strong></div>
+        </div>
+        <div id="stats-map-records" class="hr-records-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SETTINGS SCREEN -->
+  <section id="screen-settings" class="hr-layer centered" hidden aria-label="Audio and Game Settings">
+    <div class="hr-submenu-panel hr-settings-box">
+      <div class="hr-submenu-head">
+        <h2>Settings</h2>
+        <button type="button" class="hr-btn sm" data-nav-back>Back</button>
+      </div>
+      <div class="hr-setting-row">
+        <label for="set-music-vol">Music Volume (<span id="set-music-val" class="tabular-nums">35%</span>)</label>
+        <input id="set-music-vol" type="range" min="0" max="100" value="35">
+      </div>
+      <div class="hr-setting-row">
+        <label for="set-sfx-vol">Sound Effects Volume (<span id="set-sfx-val" class="tabular-nums">75%</span>)</label>
+        <input id="set-sfx-vol" type="range" min="0" max="100" value="75">
+      </div>
+      <div class="hr-setting-row">
+        <label for="set-mute-all">Mute All Audio</label>
+        <input id="set-mute-all" type="checkbox">
+      </div>
+      <div class="hr-setting-row" style="border-bottom:none;">
+        <span>Save Data</span>
+        <button type="button" id="btn-reset-save" class="hr-btn sm danger">Reset Progress</button>
+      </div>
+      <div id="reset-confirm-row" style="display:flex;justify-content:flex-end;gap:8px;" hidden>
+        <button type="button" id="btn-reset-cancel" class="hr-btn sm">Cancel</button>
+        <button type="button" id="btn-reset-confirm" class="hr-btn sm danger">Confirm Wipe</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTIVE PLAY HUD -->
+  <div id="hud-overlay" class="hr-layer" hidden aria-label="Race HUD">
+    <div class="hr-hud-top">
+      <div class="hr-hud-cluster">
+        <div class="hr-hud-metric">
+          <span class="hr-hud-kicker">Distance</span>
+          <span id="hud-distance" class="hr-hud-val tabular-nums">0 m</span>
+        </div>
+        <div class="hr-hud-metric">
+          <span class="hr-hud-kicker">Best</span>
+          <span id="hud-best" class="hr-hud-val tabular-nums" style="color:#93C5FD;">0 m</span>
+        </div>
+        <div class="hr-hud-metric">
+          <span class="hr-hud-kicker">Run Coins</span>
+          <span id="hud-coins" class="hr-hud-val tabular-nums" style="color:#FACC15;">0</span>
+        </div>
+        <div class="hr-hud-metric">
+          <span id="hud-vehicle" class="hr-hud-kicker">Starter Jeep</span>
+          <span id="hud-speed" class="hr-hud-val tabular-nums">0 km/h</span>
+        </div>
+      </div>
+
+      <div class="hr-fuel-cluster">
+        <div class="hr-fuel-head">
+          <span>FUEL</span>
+          <span id="hud-fuel-pct" class="tabular-nums">100%</span>
+        </div>
+        <div class="hr-fuel-track">
+          <div id="hud-fuel-fill" class="hr-fuel-fill" data-low="false"></div>
+        </div>
+        <span id="hud-fuel-alert" class="hr-fuel-alert" hidden>LOW FUEL!</span>
+      </div>
+
+      <div class="hr-hud-actions">
+        <button type="button" id="btn-hud-mute" class="hr-btn sm" tabindex="-1" aria-label="Toggle Mute" aria-pressed="false">Audio</button>
+        <button type="button" id="btn-hud-pause" class="hr-btn sm" tabindex="-1" aria-label="Pause Race">Pause</button>
+      </div>
+    </div>
+
+    <div class="hr-pedals-row">
+      <button type="button" id="btn-pedal-brake" class="hr-pedal-btn brake" aria-label="Brake or Reverse">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>BRAKE</span>
+      </button>
+
+      <button type="button" id="btn-pedal-gas" class="hr-pedal-btn gas" aria-label="Accelerate">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>GAS</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- PAUSE MODAL -->
+  <div id="modal-pause" class="hr-layer centered" hidden>
+    <div class="hr-modal-card" role="dialog" aria-labelledby="pause-title">
+      <h2 id="pause-title">Race Paused</h2>
+      <p class="hr-modal-sub">Catch your breath before hitting the next hill.</p>
+      <div class="hr-modal-actions">
+        <button type="button" id="btn-resume" class="hr-btn primary">Resume</button>
+        <button type="button" id="btn-pause-restart" class="hr-btn">Restart</button>
+        <button type="button" id="btn-pause-menu" class="hr-btn">Main Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GAME OVER MODAL -->
+  <div id="modal-gameover" class="hr-layer centered" hidden>
+    <div class="hr-modal-card" role="dialog" aria-labelledby="gameover-title">
+      <h2 id="gameover-title">Run Complete</h2>
+      <p id="gameover-reason" class="hr-modal-sub">Summary</p>
+      <div class="hr-go-stats">
+        <div class="hr-kpi-tile"><span>Distance</span><strong id="go-distance" class="tabular-nums">0 m</strong></div>
+        <div class="hr-kpi-tile"><span>Best Record</span><strong id="go-best" class="tabular-nums">0 m</strong></div>
+        <div class="hr-kpi-tile"><span>Coins Picked</span><strong id="go-coins" class="tabular-nums" style="color:#FACC15;">+0</strong></div>
+        <div class="hr-kpi-tile"><span>Stunts</span><strong id="go-flips" class="tabular-nums">0 Flips</strong></div>
+      </div>
+      <div class="hr-kpi-tile">
+        <span>Total Earned Rewards</span>
+        <strong id="go-rewards" class="tabular-nums" style="color:#4ADE80;">+0 Coins</strong>
+      </div>
+      <div id="go-unlock-banner" class="hr-unlock-note" hidden></div>
+      <div class="hr-modal-actions">
+        <button type="button" id="btn-retry" class="hr-btn primary" data-start="true">Retry</button>
+        <button type="button" id="btn-gameover-garage" class="hr-btn">Garage</button>
+        <button type="button" id="btn-gameover-menu" class="hr-btn">Menu</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="games/hill-rider.js"></script>
+</body>
+</html>
