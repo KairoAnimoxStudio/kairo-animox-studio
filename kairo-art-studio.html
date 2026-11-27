@@ -3,6 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#17191E">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="KairoStudio">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/icons/icon-192.png">
   <title>KAIRO ART STUDIO | Digital Painting, Comic & 2D Animation</title>
   <link rel="stylesheet" href="studio.css">
 </head>
@@ -10,122 +18,164 @@
 
 <div id="kas-root" class="kas-shell" data-workspace="illustration">
 
-  <!-- TOP BAR -->
+  <!-- TOP MENU BAR & WORKSPACE SWITCH -->
   <header class="kas-topbar">
     <div class="kas-brand-group">
-      <a class="kas-back-link" href="kaiapps.html">← KaiApps</a>
+      <a class="kas-back-link" href="kaiapps.html" title="Return to KaiApps Portal">
+        <span class="icon-slot" data-icon="tb-back" data-icon-size="16"></span>
+        <span>KaiApps</span>
+      </a>
       <div class="kas-brand">
         <img src="images/logo/kairo-logo.png" alt="Kairo Art Studio Logo">
         <span>KAIRO ART STUDIO</span>
       </div>
-      <div class="kas-menu-actions">
-        <button type="button" class="kas-btn sm" id="btn-open-kas">Open .kas</button>
-        <button type="button" class="kas-btn sm" id="btn-import-img">Import Image</button>
-        <button type="button" class="kas-btn sm" id="btn-toggle-timeline">Timeline</button>
-        <button type="button" class="kas-btn sm" id="btn-open-settings">Settings</button>
-      </div>
+      <nav id="kas-menubar" class="kas-menubar" aria-label="Main Menu Bar"></nav>
     </div>
 
     <div class="kas-workspace-switch" role="group" aria-label="Workspace Modes">
-      <button type="button" class="kas-ws-btn active" data-workspace-btn="illustration">Illustration</button>
-      <button type="button" class="kas-ws-btn" data-workspace-btn="animation">Animation</button>
-      <button type="button" class="kas-ws-btn" data-workspace-btn="comic">Comic</button>
-      <button type="button" class="kas-ws-btn" data-workspace-btn="minimal">Minimal</button>
+      <button type="button" class="kas-ws-btn active" data-workspace-btn="illustration" title="Illustration Workspace">
+        <span class="icon-slot" data-icon="tool-brush" data-icon-size="16"></span>
+        <span>Illustration</span>
+      </button>
+      <button type="button" class="kas-ws-btn" data-workspace-btn="animation" title="2D Animation Workspace">
+        <span class="icon-slot" data-icon="menu-animation" data-icon-size="16"></span>
+        <span>Animation</span>
+      </button>
+      <button type="button" class="kas-ws-btn" data-workspace-btn="comic" title="Comic & Manga Workspace">
+        <span class="icon-slot" data-icon="menu-comic" data-icon-size="16"></span>
+        <span>Comic</span>
+      </button>
+      <button type="button" class="kas-ws-btn" data-workspace-btn="minimal" title="Minimal Canvas Focus">
+        <span class="icon-slot" data-icon="tb-fullscreen" data-icon-size="16"></span>
+        <span>Minimal</span>
+      </button>
     </div>
 
     <div class="kas-top-right">
-      <button type="button" class="kas-btn sm" id="btn-undo" title="Undo (Ctrl+Z)">Undo</button>
-      <button type="button" class="kas-btn sm" id="btn-redo" title="Redo (Ctrl+Y)">Redo</button>
-      <button type="button" class="kas-btn sm" id="btn-save-kas" title="Save Native .kas Project (Ctrl+S)">Save .kas</button>
-      <button type="button" class="kas-btn sm primary" id="btn-open-export">Export</button>
+      <button type="button" class="kas-btn sm orange" id="btn-get-app" title="Download Windows Software / Install App">
+        <span class="icon-slot" data-icon="tb-windows-app" data-icon-size="16"></span>
+        <span>Windows App</span>
+      </button>
+      <button type="button" class="kas-btn sm primary" id="btn-open-export" title="Export Artwork, GIF, or .kas (Ctrl+E)">
+        <span class="icon-slot" data-icon="dlg-export" data-icon-size="16"></span>
+        <span>Export</span>
+      </button>
     </div>
   </header>
 
-  <!-- DOCUMENT TABS & VIEW CONTROLS -->
+  <!-- DOCUMENT TABS & MAIN ICON TOOLBAR (24x24) -->
   <div class="kas-docbar">
     <div id="doc-tabs" class="doc-tabs"></div>
 
-    <div class="quick-view-bar">
-      <button type="button" class="kas-btn sm" id="btn-toggle-grid">Grid</button>
-      <button type="button" class="kas-btn sm" id="btn-toggle-symmetry">Symmetry</button>
-      <button type="button" class="kas-btn sm" id="btn-rot-left" title="Rotate -15°">Rot -15°</button>
-      <button type="button" class="kas-btn sm" id="btn-rot-right" title="Rotate +15°">Rot +15°</button>
-      <button type="button" class="kas-btn sm" id="btn-flip-h" title="Flip Canvas Horizontally">Flip H</button>
-      <button type="button" class="kas-btn sm" id="btn-flip-v" title="Flip Canvas Vertically">Flip V</button>
-      <button type="button" class="kas-btn sm" id="btn-fit-canvas" title="Fit Canvas (Ctrl+0)">Fit</button>
-      <button type="button" class="kas-btn sm" id="btn-actual-size">100%</button>
-      <button type="button" class="kas-btn sm" id="btn-reset-view">Reset View</button>
+    <div class="main-toolbar-strip" role="toolbar" aria-label="Main Toolbar">
+      <button type="button" class="kas-icon-btn tb" id="btn-new-doc" title="New Document (Ctrl+N)" aria-label="New Document">
+        <span class="icon-slot" data-icon="tb-new" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-open-kas" title="Open .kas Project (Ctrl+O)" aria-label="Open Project">
+        <span class="icon-slot" data-icon="tb-open" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-save-kas" title="Save Native .kas Project (Ctrl+S)" aria-label="Save Project">
+        <span class="icon-slot" data-icon="tb-save" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-save-all" title="Save All Open Documents" aria-label="Save All">
+        <span class="icon-slot" data-icon="tb-save-all" data-icon-size="24"></span>
+      </button>
+
+      <div class="tb-sep" aria-hidden="true"></div>
+
+      <button type="button" class="kas-icon-btn tb" id="btn-undo" title="Undo (Ctrl+Z)" aria-label="Undo">
+        <span class="icon-slot" data-icon="tb-undo" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-redo" title="Redo (Ctrl+Y)" aria-label="Redo">
+        <span class="icon-slot" data-icon="tb-redo" data-icon-size="24"></span>
+      </button>
+
+      <div class="tb-sep" aria-hidden="true"></div>
+
+      <button type="button" class="kas-icon-btn tb" id="btn-cut" title="Cut Selection / Layer (Ctrl+X)" aria-label="Cut">
+        <span class="icon-slot" data-icon="tb-cut" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-copy" title="Copy Selection / Layer (Ctrl+C)" aria-label="Copy">
+        <span class="icon-slot" data-icon="tb-copy" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-paste" title="Paste Clipboard as Layer (Ctrl+V)" aria-label="Paste">
+        <span class="icon-slot" data-icon="tb-paste" data-icon-size="24"></span>
+      </button>
+
+      <div class="tb-sep" aria-hidden="true"></div>
+
+      <button type="button" class="kas-icon-btn tb" id="btn-zoom-in" title="Zoom In (Ctrl++)" aria-label="Zoom In">
+        <span class="icon-slot" data-icon="nav-zoom-in" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-zoom-out" title="Zoom Out (Ctrl+-)" aria-label="Zoom Out">
+        <span class="icon-slot" data-icon="nav-zoom-out" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-fit-canvas" title="Fit Canvas to Viewport (Ctrl+0)" aria-label="Fit Canvas">
+        <span class="icon-slot" data-icon="nav-fit" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-actual-size" title="Actual Size 100% (Ctrl+1)" aria-label="Actual Size">
+        <span class="icon-slot" data-icon="nav-actual" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-rot-left" title="Rotate Canvas -15°" aria-label="Rotate Canvas Left">
+        <span class="icon-slot" data-icon="nav-rotate-left" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-rot-right" title="Rotate Canvas +15°" aria-label="Rotate Canvas Right">
+        <span class="icon-slot" data-icon="nav-rotate-right" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-reset-rot" title="Reset Canvas Rotation" aria-label="Reset Rotation">
+        <span class="icon-slot" data-icon="nav-reset-rot" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-flip-h" title="Flip Canvas Horizontally" aria-label="Flip Horizontal">
+        <span class="icon-slot" data-icon="nav-flip-h" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-flip-v" title="Flip Canvas Vertically" aria-label="Flip Vertical">
+        <span class="icon-slot" data-icon="nav-flip-v" data-icon-size="24"></span>
+      </button>
+
+      <div class="tb-sep" aria-hidden="true"></div>
+
+      <button type="button" class="kas-icon-btn tb" id="btn-toggle-grid" title="Toggle Pixel Grid" aria-label="Grid">
+        <span class="icon-slot" data-icon="tb-grid" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb active" id="btn-toggle-rulers" title="Toggle Canvas Rulers" aria-label="Rulers">
+        <span class="icon-slot" data-icon="tb-rulers" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-toggle-guides" title="Toggle Center & Rule-of-Thirds Guides" aria-label="Guides">
+        <span class="icon-slot" data-icon="tb-guides" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb orange-active" id="btn-toggle-symmetry" title="Toggle Mirror Symmetry Axis" aria-label="Symmetry Guide">
+        <span class="icon-slot" data-icon="tool-symmetry" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-fullscreen" title="Toggle Full Screen (F11)" aria-label="Full Screen">
+        <span class="icon-slot" data-icon="tb-fullscreen" data-icon-size="24"></span>
+      </button>
+
+      <div class="tb-sep" aria-hidden="true"></div>
+
+      <button type="button" class="kas-icon-btn tb" id="btn-import-img" title="Import Image as Layer" aria-label="Import Image">
+        <span class="icon-slot" data-icon="dlg-import" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-toggle-timeline" title="Toggle Animation Timeline" aria-label="Toggle Timeline">
+        <span class="icon-slot" data-icon="menu-animation" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-open-settings" title="Studio Preferences & Theme" aria-label="Settings">
+        <span class="icon-slot" data-icon="dlg-settings" data-icon-size="24"></span>
+      </button>
     </div>
   </div>
 
   <!-- MAIN WORKSPACE -->
   <div class="kas-main">
 
-    <!-- LEFT TOOL RAIL -->
-    <aside id="left-tools" class="kas-left-tools" aria-label="Drawing Tools">
-      <button type="button" class="tool-btn active" data-tool="brush" title="Brush (B)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 3a3 3 0 0 1 3 3L9 18l-4 1 1-4Z"/><path d="M5 19c-1.5 0-2 1-2 2 2 0 3.5-.5 4-2"/></svg>
-        <span>Brush</span>
-      </button>
-      <button type="button" class="tool-btn" data-tool="pencil" title="Pencil (P)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.8 2.8 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
-        <span>Pencil</span>
-      </button>
-      <button type="button" class="tool-btn" data-tool="eraser" title="Eraser (E)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7"/><path d="m5 11 9 9"/></svg>
-        <span>Eraser</span>
-      </button>
-      <button type="button" class="tool-btn" data-tool="fill" title="Bucket Fill (G)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m19 11-8-8-8.6 8.6a2 2 0 0 0 0 2.8l5.2 5.2c.8.8 2 .8 2.8 0L19 11Z"/><path d="M20 14s2 2.2 2 3.5a2 2 0 0 1-4 0c0-1.3 2-3.5 2-3.5Z"/></svg>
-        <span>Fill</span>
-      </button>
-      <button type="button" class="tool-btn" data-tool="eyedropper" title="Eyedropper (I)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m2 22 1-1h3l9-9"/><path d="M3 21v-3l9-9"/><path d="m15 6 3.4-3.4a2.1 2.1 0 1 1 3 3L18 9l.4.4a2.1 2.1 0 1 1-3 3l-3.8-3.8a2.1 2.1 0 1 1 3-3l.4.4Z"/></svg>
-        <span>Pick</span>
-      </button>
+    <!-- LEFT TOOL RAIL (Rendered dynamically from 27-tool registry + flyout tool groups) -->
+    <aside id="left-tools" class="kas-left-tools" aria-label="Drawing Tools"></aside>
+    <div id="tool-flyout" class="kas-tool-flyout" hidden role="menu" aria-label="Related Drawing Tools"></div>
 
-      <div class="tool-sep"></div>
-
-      <button type="button" class="tool-btn" data-tool="selection" title="Selection Marquee (M)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 2"><rect x="4" y="4" width="16" height="16" rx="1"/></svg>
-        <span>Select</span>
-      </button>
-      <button type="button" class="tool-btn" data-tool="move" title="Move Layer (V)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20"/></svg>
-        <span>Move</span>
-      </button>
-      <button type="button" class="tool-btn" data-tool="gradient" title="Gradient">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 17 17 7"/></svg>
-        <span>Grad</span>
-      </button>
-      <button type="button" class="tool-btn" data-tool="shape" title="Shapes (U)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="10" height="10" rx="1"/><circle cx="15" cy="9" r="5"/></svg>
-        <span>Shape</span>
-      </button>
-      <button type="button" class="tool-btn" data-tool="text" title="Text Tool (T)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
-        <span>Text</span>
-      </button>
-      <button type="button" class="tool-btn" data-tool="comic" title="Comic Panels & Speech Bubbles (C)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        <span>Comic</span>
-      </button>
-
-      <div class="tool-sep"></div>
-
-      <button type="button" class="tool-btn" data-tool="hand" title="Hand Pan (H / Space+Drag)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 11V6a2 2 0 0 0-4 0v5M14 10V4a2 2 0 0 0-4 0v6M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.9-5.9-2.5L3.3 15.8a2 2 0 0 1 2.9-2.7L8 15"/></svg>
-        <span>Hand</span>
-      </button>
-      <button type="button" class="tool-btn" data-tool="zoom" title="Zoom Tool (Z)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg>
-        <span>Zoom</span>
-      </button>
-    </aside>
-
-    <!-- CENTER CANVAS -->
+    <!-- CENTER CANVAS VIEWPORT + RULERS -->
     <main class="kas-center">
       <div id="canvas-viewport" class="canvas-viewport">
+        <div id="canvas-ruler-top" class="canvas-ruler-top" aria-hidden="true"></div>
+        <div id="canvas-ruler-left" class="canvas-ruler-left" aria-hidden="true"></div>
         <canvas id="studio-canvas" data-testid="studio-canvas" width="1280" height="720"></canvas>
         <canvas id="overlay-canvas" width="1280" height="720"></canvas>
       </div>
@@ -138,13 +188,23 @@
       <section class="dock-section">
         <div class="dock-head">
           <h2>Color</h2>
-          <div class="timeline-group">
-            <button type="button" class="kas-btn sm" id="btn-swap-colors" title="Swap FG/BG (X)">Swap</button>
-            <button type="button" class="kas-btn sm" id="btn-reset-colors" title="Reset Default Colors (D)">Default</button>
+          <div class="dock-actions-row">
+            <button type="button" class="kas-icon-btn panel" id="btn-swap-colors" title="Swap Foreground & Background (X)" aria-label="Swap Colors">
+              <span class="icon-slot" data-icon="color-swap" data-icon-size="18"></span>
+            </button>
+            <button type="button" class="kas-icon-btn panel" id="btn-reset-colors" title="Reset Default Black/White (D)" aria-label="Default Colors">
+              <span class="icon-slot" data-icon="color-default" data-icon-size="18"></span>
+            </button>
+            <button type="button" class="kas-icon-btn panel" id="btn-save-color" title="Add Active Color to Palette" aria-label="Add Color to Palette">
+              <span class="icon-slot" data-icon="color-add" data-icon-size="18"></span>
+            </button>
+            <button type="button" class="kas-icon-btn panel danger" id="btn-remove-color" title="Remove Active Color from Palette" aria-label="Remove Color">
+              <span class="icon-slot" data-icon="color-remove" data-icon-size="18"></span>
+            </button>
           </div>
         </div>
         <div class="color-layout">
-          <canvas id="color-wheel-canvas" width="112" height="112"></canvas>
+          <canvas id="color-wheel-canvas" width="108" height="108"></canvas>
           <div class="color-controls">
             <div class="fg-bg-row">
               <div class="swatch-pair">
@@ -172,7 +232,15 @@
         </div>
         <div class="palette-bar">
           <select id="palette-select" aria-label="Color Palette"></select>
-          <button type="button" class="kas-btn sm" id="btn-save-color">+ Save</button>
+          <button type="button" class="kas-icon-btn panel" id="btn-save-palette" title="Save as New Palette" aria-label="Save Palette">
+            <span class="icon-slot" data-icon="color-save-pal" data-icon-size="18"></span>
+          </button>
+          <button type="button" class="kas-icon-btn panel" id="btn-import-palette" title="Import Palette (.json, .gpl, hex)" aria-label="Import Palette">
+            <span class="icon-slot" data-icon="color-import-pal" data-icon-size="18"></span>
+          </button>
+          <button type="button" class="kas-icon-btn panel" id="btn-export-palette" title="Export Active Palette" aria-label="Export Palette">
+            <span class="icon-slot" data-icon="color-export-pal" data-icon-size="18"></span>
+          </button>
         </div>
         <div id="palette-swatches" class="swatch-grid"></div>
         <div id="recent-swatches" class="swatch-grid"></div>
@@ -182,7 +250,32 @@
       <section class="dock-section">
         <div class="dock-head">
           <h2>Brushes (20)</h2>
-          <button type="button" class="kas-btn sm" id="btn-dup-brush">+ Custom</button>
+          <div class="dock-actions-row">
+            <button type="button" class="kas-icon-btn panel" id="btn-new-brush" title="New Brush Preset" aria-label="New Brush">
+              <span class="icon-slot" data-icon="brush-new" data-icon-size="18"></span>
+            </button>
+            <button type="button" class="kas-icon-btn panel" id="btn-dup-brush" title="Duplicate Brush Preset" aria-label="Duplicate Brush">
+              <span class="icon-slot" data-icon="brush-dup" data-icon-size="18"></span>
+            </button>
+            <button type="button" class="kas-icon-btn panel danger" id="btn-del-brush" title="Delete Custom Brush Preset" aria-label="Delete Brush">
+              <span class="icon-slot" data-icon="brush-del" data-icon-size="18"></span>
+            </button>
+            <button type="button" class="kas-icon-btn panel" id="btn-import-brush" title="Import Brush (.kbr.json)" aria-label="Import Brush">
+              <span class="icon-slot" data-icon="brush-import" data-icon-size="18"></span>
+            </button>
+            <button type="button" class="kas-icon-btn panel" id="btn-export-brush" title="Export Brush (.kbr.json)" aria-label="Export Brush">
+              <span class="icon-slot" data-icon="brush-export" data-icon-size="18"></span>
+            </button>
+            <button type="button" class="kas-icon-btn panel orange-active" id="btn-fav-filter" title="Filter Favorite Brushes" aria-label="Favorite Brushes">
+              <span class="icon-slot" data-icon="brush-fav" data-icon-size="18"></span>
+            </button>
+            <button type="button" class="kas-icon-btn panel" id="btn-brush-settings" title="Brush Dynamics Settings" aria-label="Brush Settings">
+              <span class="icon-slot" data-icon="brush-settings" data-icon-size="18"></span>
+            </button>
+            <button type="button" class="kas-icon-btn panel" id="btn-reset-brush" title="Reset Brush to Factory Settings" aria-label="Reset Brush Settings">
+              <span class="icon-slot" data-icon="brush-reset" data-icon-size="18"></span>
+            </button>
+          </div>
         </div>
         <div class="brush-cats">
           <button type="button" class="cat-btn active" data-brush-cat="All">All</button>
@@ -192,7 +285,10 @@
           <button type="button" class="cat-btn" data-brush-cat="Texture">Texture</button>
           <button type="button" class="cat-btn" data-brush-cat="Eraser">Eraser</button>
         </div>
-        <input id="brush-search" class="kas-input" type="search" placeholder="Search brushes...">
+        <div class="search-input-wrap">
+          <span class="icon-slot" data-icon="brush-search" data-icon-size="16"></span>
+          <input id="brush-search" class="kas-input" type="search" placeholder="Search brushes..." aria-label="Search brushes">
+        </div>
         <div id="brush-list" class="brush-list"></div>
 
         <div class="brush-sliders-grid">
@@ -229,9 +325,13 @@
       <section class="dock-section">
         <div class="dock-head">
           <h2>Layers</h2>
-          <div class="timeline-group">
-            <button type="button" class="kas-btn sm" id="btn-alpha-lock">Alpha Lock</button>
-            <button type="button" class="kas-btn sm" id="btn-clip-layer">Clip</button>
+          <div class="dock-actions-row">
+            <button type="button" class="kas-icon-btn panel" id="btn-alpha-lock" title="Toggle Layer Alpha Lock" aria-label="Alpha Lock">
+              <span class="icon-slot" data-icon="layer-alpha-lock" data-icon-size="18"></span>
+            </button>
+            <button type="button" class="kas-icon-btn panel" id="btn-clip-layer" title="Toggle Clipping Mask" aria-label="Clipping Mask">
+              <span class="icon-slot" data-icon="layer-clip" data-icon-size="18"></span>
+            </button>
           </div>
         </div>
         <div class="layer-controls-top">
@@ -242,21 +342,51 @@
           </div>
         </div>
         <div id="layer-list" class="layer-list"></div>
-        <div class="prop-actions" style="margin-bottom:0;">
-          <button type="button" class="kas-btn sm primary" id="btn-add-layer">+ Layer</button>
-          <button type="button" class="kas-btn sm" id="btn-dup-layer">Dup</button>
-          <button type="button" class="kas-btn sm" id="btn-merge-layer">Merge</button>
-          <button type="button" class="kas-btn sm" id="btn-up-layer">Up</button>
-          <button type="button" class="kas-btn sm" id="btn-down-layer">Down</button>
-          <button type="button" class="kas-btn sm danger" id="btn-del-layer">Del</button>
+        <div class="dock-actions-row">
+          <button type="button" class="kas-icon-btn panel" id="btn-add-layer" title="New Raster Layer" aria-label="New Raster Layer">
+            <span class="icon-slot" data-icon="layer-new-raster" data-icon-size="18"></span>
+          </button>
+          <button type="button" class="kas-icon-btn panel" id="btn-add-vector-layer" title="New Vector Layer" aria-label="New Vector Layer">
+            <span class="icon-slot" data-icon="layer-new-vector" data-icon-size="18"></span>
+          </button>
+          <button type="button" class="kas-icon-btn panel" id="btn-add-group-layer" title="New Layer Group" aria-label="New Layer Group">
+            <span class="icon-slot" data-icon="layer-new-group" data-icon-size="18"></span>
+          </button>
+          <button type="button" class="kas-icon-btn panel" id="btn-add-mask-layer" title="New Mask Layer" aria-label="New Mask Layer">
+            <span class="icon-slot" data-icon="layer-new-mask" data-icon-size="18"></span>
+          </button>
+          <button type="button" class="kas-icon-btn panel" id="btn-dup-layer" title="Duplicate Layer" aria-label="Duplicate Layer">
+            <span class="icon-slot" data-icon="layer-duplicate" data-icon-size="18"></span>
+          </button>
+          <button type="button" class="kas-icon-btn panel" id="btn-merge-layer" title="Merge Down" aria-label="Merge Down">
+            <span class="icon-slot" data-icon="layer-merge-down" data-icon-size="18"></span>
+          </button>
+          <button type="button" class="kas-icon-btn panel" id="btn-merge-visible" title="Merge Visible Layers" aria-label="Merge Visible">
+            <span class="icon-slot" data-icon="layer-merge-visible" data-icon-size="18"></span>
+          </button>
+          <button type="button" class="kas-icon-btn panel" id="btn-up-layer" title="Move Layer Up" aria-label="Move Layer Up">
+            <span class="icon-slot" data-icon="layer-up" data-icon-size="18"></span>
+          </button>
+          <button type="button" class="kas-icon-btn panel" id="btn-down-layer" title="Move Layer Down" aria-label="Move Layer Down">
+            <span class="icon-slot" data-icon="layer-down" data-icon-size="18"></span>
+          </button>
+          <button type="button" class="kas-icon-btn panel danger" id="btn-del-layer" title="Delete Active Layer" aria-label="Delete Layer">
+            <span class="icon-slot" data-icon="layer-delete" data-icon-size="18"></span>
+          </button>
         </div>
       </section>
 
       <!-- TABBED TOOL PROPERTIES / NAVIGATOR & HISTORY -->
       <section class="dock-section dock-tabbed-section">
         <div class="dock-subtabs" role="tablist">
-          <button type="button" class="dock-subtab active" data-dock-tab="tool-props" role="tab" aria-selected="true">Tool Props</button>
-          <button type="button" class="dock-subtab" data-dock-tab="nav-history" role="tab" aria-selected="false">Navigator &amp; History</button>
+          <button type="button" class="dock-subtab active" data-dock-tab="tool-props" role="tab" aria-selected="true">
+            <span class="icon-slot" data-icon="menu-tools" data-icon-size="16"></span>
+            <span>Tool Props</span>
+          </button>
+          <button type="button" class="dock-subtab" data-dock-tab="nav-history" role="tab" aria-selected="false">
+            <span class="icon-slot" data-icon="nav-fit" data-icon-size="16"></span>
+            <span>Nav &amp; History</span>
+          </button>
         </div>
 
         <div id="dock-pane-tool-props" class="dock-pane">
@@ -265,10 +395,53 @@
 
         <div id="dock-pane-nav-history" class="dock-pane" hidden>
           <div class="nav-wrap">
-            <canvas id="navigator-canvas" width="110" height="76"></canvas>
-            <div class="prop-row" style="margin:0;">
-              <label for="nav-zoom-slider">Zoom <span id="nav-zoom-val" class="tabular-nums">100%</span></label>
-              <input id="nav-zoom-slider" type="range" min="10" max="400" value="100">
+            <canvas id="navigator-canvas" width="108" height="74"></canvas>
+            <div>
+              <div class="prop-row" style="margin:0;">
+                <label for="nav-zoom-slider">Zoom <span id="nav-zoom-val" class="tabular-nums">100%</span></label>
+                <input id="nav-zoom-slider" type="range" min="10" max="400" value="100">
+              </div>
+              <div class="nav-mini-actions">
+                <button type="button" class="kas-icon-btn panel" id="nav-zoom-in" title="Zoom In" aria-label="Navigator Zoom In">
+                  <span class="icon-slot" data-icon="nav-zoom-in" data-icon-size="18"></span>
+                </button>
+                <button type="button" class="kas-icon-btn panel" id="nav-zoom-out" title="Zoom Out" aria-label="Navigator Zoom Out">
+                  <span class="icon-slot" data-icon="nav-zoom-out" data-icon-size="18"></span>
+                </button>
+                <button type="button" class="kas-icon-btn panel" id="nav-fit" title="Fit Canvas" aria-label="Navigator Fit Canvas">
+                  <span class="icon-slot" data-icon="nav-fit" data-icon-size="18"></span>
+                </button>
+                <button type="button" class="kas-icon-btn panel" id="nav-reset-rot" title="Reset Rotation" aria-label="Navigator Reset Rotation">
+                  <span class="icon-slot" data-icon="nav-reset-rot" data-icon-size="18"></span>
+                </button>
+                <button type="button" class="kas-icon-btn panel" id="nav-rot-left" title="Rotate Left -15°" aria-label="Navigator Rotate Left">
+                  <span class="icon-slot" data-icon="nav-rotate-left" data-icon-size="18"></span>
+                </button>
+                <button type="button" class="kas-icon-btn panel" id="nav-rot-right" title="Rotate Right +15°" aria-label="Navigator Rotate Right">
+                  <span class="icon-slot" data-icon="nav-rotate-right" data-icon-size="18"></span>
+                </button>
+                <button type="button" class="kas-icon-btn panel" id="nav-flip-h" title="Flip Canvas" aria-label="Navigator Flip Canvas">
+                  <span class="icon-slot" data-icon="nav-flip-h" data-icon-size="18"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="history-head-bar">
+            <span class="prop-label" style="margin:0;">History Steps</span>
+            <div class="dock-actions-row">
+              <button type="button" class="kas-icon-btn panel" id="btn-hist-undo" title="Undo Step" aria-label="History Undo">
+                <span class="icon-slot" data-icon="tb-undo" data-icon-size="18"></span>
+              </button>
+              <button type="button" class="kas-icon-btn panel" id="btn-hist-redo" title="Redo Step" aria-label="History Redo">
+                <span class="icon-slot" data-icon="tb-redo" data-icon-size="18"></span>
+              </button>
+              <button type="button" class="kas-icon-btn panel danger" id="btn-hist-clear" title="Clear History Stack" aria-label="Clear History">
+                <span class="icon-slot" data-icon="dlg-history-clear" data-icon-size="18"></span>
+              </button>
+              <button type="button" class="kas-icon-btn panel" id="btn-hist-settings" title="History Depth Settings" aria-label="History Settings">
+                <span class="icon-slot" data-icon="dlg-history-settings" data-icon-size="18"></span>
+              </button>
             </div>
           </div>
           <div id="history-list" class="history-list"></div>
@@ -278,40 +451,125 @@
     </aside>
   </div>
 
-  <!-- ANIMATION TIMELINE -->
+  <!-- ANIMATION TIMELINE (All 28 Controls) -->
   <section id="timeline-panel" class="kas-timeline" hidden aria-label="Animation Timeline">
     <div class="timeline-toolbar">
       <div class="timeline-group">
-        <button type="button" class="kas-btn sm" id="btn-first-frame">|&lt;</button>
-        <button type="button" class="kas-btn sm" id="btn-prev-frame">&lt;</button>
-        <button type="button" class="kas-btn sm primary" id="btn-play">Play</button>
-        <button type="button" class="kas-btn sm" id="btn-stop">Stop</button>
-        <button type="button" class="kas-btn sm" id="btn-next-frame">&gt;</button>
-        <button type="button" class="kas-btn sm" id="btn-last-frame">&gt;|</button>
-        <button type="button" class="kas-btn sm active" id="btn-loop">Loop</button>
+        <button type="button" class="kas-icon-btn panel" id="btn-first-frame" title="First Frame" aria-label="First Frame">
+          <span class="icon-slot" data-icon="anim-first-frame" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-prev-frame" title="Previous Frame" aria-label="Previous Frame">
+          <span class="icon-slot" data-icon="anim-prev-frame" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel active" id="btn-play" title="Play / Pause Animation (Space)" aria-label="Play or Pause">
+          <span class="icon-slot" id="play-icon-slot" data-icon="anim-play" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-stop" title="Stop Playback" aria-label="Stop">
+          <span class="icon-slot" data-icon="anim-stop" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-next-frame" title="Next Frame" aria-label="Next Frame">
+          <span class="icon-slot" data-icon="anim-next-frame" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-last-frame" title="Last Frame" aria-label="Last Frame">
+          <span class="icon-slot" data-icon="anim-last-frame" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel active" id="btn-loop" title="Toggle Loop Playback" aria-label="Loop Playback">
+          <span class="icon-slot" data-icon="anim-loop" data-icon-size="18"></span>
+        </button>
         <select id="fps-select" class="kas-btn sm" aria-label="Frames Per Second"></select>
-        <span id="frame-counter" class="tabular-nums" style="margin-left:6px;font-size:12px;">Frame 1 / 1</span>
+        <span id="frame-counter" class="tabular-nums" style="margin-left:4px;font-size:11.5px;">Frame 1 / 1</span>
       </div>
 
       <div class="timeline-group">
-        <button type="button" class="kas-btn sm active" id="btn-onion">Onion Skin</button>
-        <button type="button" class="kas-btn sm" id="btn-camera-bounds">Camera</button>
-        <button type="button" class="kas-btn sm primary" id="btn-add-frame">+ Frame</button>
-        <button type="button" class="kas-btn sm" id="btn-dup-frame">Duplicate</button>
-        <button type="button" class="kas-btn sm" id="btn-exp-plus">+ Hold</button>
-        <button type="button" class="kas-btn sm" id="btn-exp-minus">- Hold</button>
-        <button type="button" class="kas-btn sm" id="btn-clear-frame">Clear</button>
-        <button type="button" class="kas-btn sm danger" id="btn-del-frame">Delete</button>
-        <input id="frame-note-input" class="kas-input" style="width:140px;" type="text" placeholder="Frame note..." aria-label="Frame exposure note">
-        <button type="button" class="kas-btn sm orange" id="btn-export-gif">Export GIF</button>
-        <button type="button" class="kas-btn sm" id="btn-export-seq">PNG Seq</button>
+        <button type="button" class="kas-icon-btn panel" id="btn-add-frame" title="Add Blank Frame" aria-label="Add Frame">
+          <span class="icon-slot" data-icon="anim-add-frame" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-dup-frame" title="Duplicate Frame" aria-label="Duplicate Frame">
+          <span class="icon-slot" data-icon="anim-dup-frame" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-copy-frame" title="Copy Frame" aria-label="Copy Frame">
+          <span class="icon-slot" data-icon="anim-copy-frame" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-paste-frame" title="Paste Frame" aria-label="Paste Frame">
+          <span class="icon-slot" data-icon="anim-paste-frame" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-exp-plus" title="Extend Frame Exposure (+1 Hold)" aria-label="Extend Exposure">
+          <span class="icon-slot" data-icon="anim-extend-exp" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-exp-minus" title="Shorten Frame Exposure (-1 Hold)" aria-label="Shorten Exposure">
+          <span class="icon-slot" data-icon="anim-shorten-exp" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-clear-frame" title="Clear Frame Contents" aria-label="Clear Frame">
+          <span class="icon-slot" data-icon="anim-clear-frame" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel danger" id="btn-del-frame" title="Delete Frame" aria-label="Delete Frame">
+          <span class="icon-slot" data-icon="anim-del-frame" data-icon-size="18"></span>
+        </button>
+
+        <div class="tb-sep" aria-hidden="true"></div>
+
+        <button type="button" class="kas-icon-btn panel" id="btn-add-track" title="Add Animation Track" aria-label="Add Track">
+          <span class="icon-slot" data-icon="anim-add-track" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel danger" id="btn-del-track" title="Delete Active Track" aria-label="Delete Track">
+          <span class="icon-slot" data-icon="anim-del-track" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-track-up" title="Move Track Up" aria-label="Move Track Up">
+          <span class="icon-slot" data-icon="anim-track-up" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-track-down" title="Move Track Down" aria-label="Move Track Down">
+          <span class="icon-slot" data-icon="anim-track-down" data-icon-size="18"></span>
+        </button>
+
+        <div class="tb-sep" aria-hidden="true"></div>
+
+        <button type="button" class="kas-icon-btn panel active" id="btn-onion" title="Toggle Onion Skin" aria-label="Toggle Onion Skin">
+          <span class="icon-slot" data-icon="anim-onion" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel active" id="btn-onion-prev" title="Toggle Previous Frame Onion Skin" aria-label="Previous Onion Skin">
+          <span class="icon-slot" data-icon="anim-onion-prev" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel active" id="btn-onion-next" title="Toggle Next Frame Onion Skin" aria-label="Next Onion Skin">
+          <span class="icon-slot" data-icon="anim-onion-next" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel orange-active" id="btn-camera-bounds" title="Toggle Camera Frame Bounds" aria-label="Camera Bounds">
+          <span class="icon-slot" data-icon="anim-camera" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-timeline-settings" title="Timeline & Playback Settings" aria-label="Timeline Settings">
+          <span class="icon-slot" data-icon="anim-settings" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-tl-zoom-out" title="Zoom Out Timeline" aria-label="Timeline Zoom Out">
+          <span class="icon-slot" data-icon="anim-zoom-out" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-tl-zoom-in" title="Zoom In Timeline" aria-label="Timeline Zoom In">
+          <span class="icon-slot" data-icon="anim-zoom-in" data-icon-size="18"></span>
+        </button>
+
+        <input id="frame-note-input" class="kas-input" style="width:128px;" type="text" placeholder="Frame note..." aria-label="Frame exposure note">
+        <button type="button" class="kas-btn sm orange" id="btn-export-gif" title="Export Animated GIF">
+          <span class="icon-slot" data-icon="dlg-export" data-icon-size="16"></span>
+          <span>GIF</span>
+        </button>
+        <button type="button" class="kas-btn sm" id="btn-export-seq" title="Export PNG Image Sequence">
+          <span class="icon-slot" data-icon="dlg-save" data-icon-size="16"></span>
+          <span>PNG Seq</span>
+        </button>
       </div>
     </div>
 
-    <div id="timeline-cells" class="timeline-cells"></div>
+    <div class="timeline-track-body">
+      <div id="timeline-tracks" class="timeline-tracks-col" aria-label="Animation Tracks"></div>
+      <div id="timeline-cells" class="timeline-cells"></div>
+    </div>
 
     <div class="audio-strip">
-      <button type="button" class="kas-btn sm" id="btn-import-audio">Import Audio</button>
+      <button type="button" class="kas-btn sm" id="btn-import-audio" title="Import Reference Audio Track (WAV/MP3)">
+        <span class="icon-slot" data-icon="anim-audio-import" data-icon-size="16"></span>
+        <span>Audio</span>
+      </button>
+      <button type="button" class="kas-icon-btn mini active" id="btn-audio-vis" title="Toggle Audio Waveform Strip" aria-label="Toggle Audio Visibility">
+        <span class="icon-slot" data-icon="anim-audio-vis" data-icon-size="16"></span>
+      </button>
       <span id="audio-file-label">No Audio Track</span>
       <canvas id="audio-waveform-canvas" width="480" height="22"></canvas>
     </div>
@@ -325,6 +583,10 @@
       <span id="status-tool">BRUSH (G-Pen)</span>
     </div>
     <div class="status-right">
+      <span id="status-connection" class="conn-badge">
+        <span class="icon-slot" id="status-conn-icon" data-icon="st-ready" data-icon-size="16"></span>
+        <span id="status-conn-label">Ready</span>
+      </span>
       <span id="status-zoom" class="tabular-nums">100%</span>
       <span id="status-rot" class="tabular-nums">0°</span>
     </div>
@@ -335,47 +597,82 @@
 <input type="file" id="input-open-kas" accept=".kas,.json" hidden>
 <input type="file" id="input-import-img" accept="image/png,image/jpeg,image/webp,image/svg+xml" hidden>
 <input type="file" id="input-import-audio" accept="audio/wav,audio/mp3,audio/mpeg,audio/ogg" hidden>
+<input type="file" id="input-import-brush" accept=".json,.kbr.json" hidden>
+<input type="file" id="input-import-palette" accept=".json,.gpl,.txt" hidden>
 
 <!-- WELCOME MODAL -->
 <div id="welcome-modal" class="kas-modal-backdrop" hidden>
   <div class="kas-modal" role="dialog" aria-labelledby="welcome-title">
     <div class="kas-modal-head">
-      <h2 id="welcome-title">KAIRO ART STUDIO</h2>
-      <button type="button" class="kas-btn sm" data-close-modal="welcome-modal">Close</button>
+      <div class="kas-modal-title-wrap">
+        <span class="icon-slot" data-icon="dlg-new-project" data-icon-size="18"></span>
+        <h2 id="welcome-title">KAIRO ART STUDIO</h2>
+      </div>
+      <button type="button" class="kas-btn sm" data-close-modal="welcome-modal">
+        <span class="icon-slot" data-icon="dlg-cancel" data-icon-size="16"></span>
+        <span>Close</span>
+      </button>
     </div>
     <p class="muted-note">Professional Digital Painting, Manga/Comic Creation, and Frame-by-Frame 2D Animation Studio.</p>
 
     <div id="welcome-recovery-banner" class="recovery-banner" hidden>
-      <div>
-        <strong>Crash Recovery Available</strong>
-        <div id="recovery-doc-name" class="muted-note"></div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="icon-slot" style="color:var(--kas-orange);" data-icon="dlg-recovery" data-icon-size="18"></span>
+        <div>
+          <strong>Crash Recovery Available</strong>
+          <div id="recovery-doc-name" class="muted-note"></div>
+        </div>
       </div>
       <div class="timeline-group">
-        <button type="button" class="kas-btn sm orange" id="btn-restore-autosave">Restore</button>
-        <button type="button" class="kas-btn sm" id="btn-dismiss-autosave">Dismiss</button>
+        <button type="button" class="kas-btn sm orange" id="btn-restore-autosave">
+          <span class="icon-slot" data-icon="dlg-reset" data-icon-size="16"></span>
+          <span>Restore</span>
+        </button>
+        <button type="button" class="kas-btn sm" id="btn-dismiss-autosave">
+          <span class="icon-slot" data-icon="dlg-cancel" data-icon-size="16"></span>
+          <span>Dismiss</span>
+        </button>
       </div>
     </div>
 
     <div class="welcome-grid">
       <button type="button" class="welcome-card" id="welcome-start-ill">
-        <strong>Illustration Workspace</strong>
-        <span>20 brushes, blend modes, alpha lock & color wheel</span>
+        <span class="icon-slot" data-icon="tool-brush" data-icon-size="28"></span>
+        <div class="welcome-card-text">
+          <strong>Illustration Workspace</strong>
+          <span>20 brushes, blend modes, alpha lock &amp; color wheel</span>
+        </div>
       </button>
       <button type="button" class="welcome-card" id="welcome-start-anim">
-        <strong>2D Animation Workspace</strong>
-        <span>Frame timeline, onion skinning, audio sync & GIF export</span>
+        <span class="icon-slot" data-icon="menu-animation" data-icon-size="28"></span>
+        <div class="welcome-card-text">
+          <strong>2D Animation Workspace</strong>
+          <span>Frame timeline, onion skinning, audio sync &amp; GIF export</span>
+        </div>
       </button>
       <button type="button" class="welcome-card" id="welcome-start-comic">
-        <strong>Comic & Manga Page</strong>
-        <span>Panel grids, speech bubbles, thought bubbles & ink pens</span>
+        <span class="icon-slot" data-icon="menu-comic" data-icon-size="28"></span>
+        <div class="welcome-card-text">
+          <strong>Comic &amp; Manga Page</strong>
+          <span>Panel grids, speech bubbles, thought bubbles &amp; ink pens</span>
+        </div>
       </button>
       <button type="button" class="welcome-card" id="welcome-open-kas">
-        <strong>Open .kas Project</strong>
-        <span>Load a saved native KAIRO ART STUDIO project</span>
+        <span class="icon-slot" data-icon="dlg-open-project" data-icon-size="28"></span>
+        <div class="welcome-card-text">
+          <strong>Open .kas Project</strong>
+          <span>Load a saved native KAIRO ART STUDIO project</span>
+        </div>
       </button>
     </div>
 
-    <div class="prop-label">Recent Projects</div>
+    <div class="prop-actions" style="justify-content:space-between;align-items:center;margin-top:10px;">
+      <div class="prop-label" style="margin:0;">Recent Projects</div>
+      <button type="button" class="kas-btn sm orange" id="welcome-install-app">
+        <span class="icon-slot" data-icon="tb-windows-app" data-icon-size="16"></span>
+        <span>Download Windows Software / App</span>
+      </button>
+    </div>
     <div id="welcome-recent-list"></div>
   </div>
 </div>
@@ -384,8 +681,14 @@
 <div id="new-doc-modal" class="kas-modal-backdrop" hidden>
   <div class="kas-modal" role="dialog" aria-labelledby="new-doc-title">
     <div class="kas-modal-head">
-      <h2 id="new-doc-title">New Document</h2>
-      <button type="button" class="kas-btn sm" data-close-modal="new-doc-modal">Cancel</button>
+      <div class="kas-modal-title-wrap">
+        <span class="icon-slot" data-icon="dlg-new-project" data-icon-size="18"></span>
+        <h2 id="new-doc-title">New Document</h2>
+      </div>
+      <button type="button" class="kas-btn sm" data-close-modal="new-doc-modal">
+        <span class="icon-slot" data-icon="dlg-cancel" data-icon-size="16"></span>
+        <span>Cancel</span>
+      </button>
     </div>
     <form id="new-doc-form">
       <div class="prop-row">
@@ -440,7 +743,14 @@
         <input id="new-doc-transparent" type="checkbox">
       </div>
       <div class="prop-actions" style="justify-content:flex-end;margin-top:12px;">
-        <button type="submit" class="kas-btn primary">Create Document</button>
+        <button type="button" class="kas-btn" data-close-modal="new-doc-modal">
+          <span class="icon-slot" data-icon="dlg-cancel" data-icon-size="18"></span>
+          <span>Cancel</span>
+        </button>
+        <button type="submit" class="kas-btn primary">
+          <span class="icon-slot" data-icon="dlg-confirm" data-icon-size="18"></span>
+          <span>Create Document</span>
+        </button>
       </div>
     </form>
   </div>
@@ -450,8 +760,14 @@
 <div id="export-modal" class="kas-modal-backdrop" hidden>
   <div class="kas-modal" role="dialog" aria-labelledby="export-title">
     <div class="kas-modal-head">
-      <h2 id="export-title">Export Project / Artwork</h2>
-      <button type="button" class="kas-btn sm" data-close-modal="export-modal">Cancel</button>
+      <div class="kas-modal-title-wrap">
+        <span class="icon-slot" data-icon="dlg-export" data-icon-size="18"></span>
+        <h2 id="export-title">Export Project / Artwork</h2>
+      </div>
+      <button type="button" class="kas-btn sm" data-close-modal="export-modal">
+        <span class="icon-slot" data-icon="dlg-cancel" data-icon-size="16"></span>
+        <span>Cancel</span>
+      </button>
     </div>
     <div class="prop-row">
       <label for="export-format">Export Format</label>
@@ -469,20 +785,40 @@
       <input id="export-quality" type="range" min="40" max="100" value="92">
     </div>
     <div class="prop-actions" style="justify-content:flex-end;margin-top:12px;">
-      <button type="button" class="kas-btn primary" id="btn-do-export">Export File</button>
+      <button type="button" class="kas-btn" data-close-modal="export-modal">
+        <span class="icon-slot" data-icon="dlg-cancel" data-icon-size="18"></span>
+        <span>Cancel</span>
+      </button>
+      <button type="button" class="kas-btn primary" id="btn-do-export">
+        <span class="icon-slot" data-icon="dlg-export" data-icon-size="18"></span>
+        <span>Export File</span>
+      </button>
     </div>
   </div>
 </div>
 
-<!-- SETTINGS MODAL -->
+<!-- SETTINGS & PREFERENCES MODAL -->
 <div id="settings-modal" class="kas-modal-backdrop" hidden>
   <div class="kas-modal" role="dialog" aria-labelledby="settings-title">
     <div class="kas-modal-head">
-      <h2 id="settings-title">Studio Settings & Shortcuts</h2>
-      <button type="button" class="kas-btn sm" data-close-modal="settings-modal">Cancel</button>
+      <div class="kas-modal-title-wrap">
+        <span class="icon-slot" data-icon="dlg-settings" data-icon-size="18"></span>
+        <h2 id="settings-title">Studio Settings &amp; Preferences</h2>
+      </div>
+      <button type="button" class="kas-btn sm" data-close-modal="settings-modal">
+        <span class="icon-slot" data-icon="dlg-cancel" data-icon-size="16"></span>
+        <span>Cancel</span>
+      </button>
     </div>
     <div class="prop-row row-inline">
-      <label for="set-autosave">Enable Background Autosave & Recovery</label>
+      <label for="set-theme">Application Color Theme</label>
+      <select id="set-theme">
+        <option value="dark">Studio Dark (Default)</option>
+        <option value="light">Studio Light</option>
+      </select>
+    </div>
+    <div class="prop-row row-inline">
+      <label for="set-autosave">Enable Background Autosave &amp; Recovery</label>
       <input id="set-autosave" type="checkbox" checked>
     </div>
     <div class="form-grid">
@@ -496,16 +832,195 @@
       </div>
     </div>
     <p class="muted-note" style="margin-top:8px;">
-      Shortcuts: B Brush · P Pencil · E Eraser · G Fill · I Eyedropper · M Select · V Move · U Shape · T Text · C Comic · Space+Drag Pan · Ctrl+Z/Y Undo/Redo · [ / ] Brush Size.
+      Shortcuts: B Brush · P Pencil · E Eraser · G Fill · I Pick · M Select · L Lasso · W Wand · V Move · U Shape · T Text · Y Symmetry · C Comic · Space+Drag Pan · Ctrl+Z/Y Undo/Redo · [ / ] Size.
     </p>
     <div class="prop-actions" style="justify-content:flex-end;margin-top:14px;">
-      <button type="button" class="kas-btn primary" id="btn-save-settings">Apply Settings</button>
+      <button type="button" class="kas-btn" id="btn-reset-settings">
+        <span class="icon-slot" data-icon="dlg-reset" data-icon-size="18"></span>
+        <span>Reset Defaults</span>
+      </button>
+      <button type="button" class="kas-btn primary" id="btn-save-settings">
+        <span class="icon-slot" data-icon="dlg-apply" data-icon-size="18"></span>
+        <span>Apply Settings</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- BRUSH DYNAMICS SETTINGS MODAL -->
+<div id="brush-settings-modal" class="kas-modal-backdrop" hidden>
+  <div class="kas-modal compact" role="dialog" aria-labelledby="brush-settings-title">
+    <div class="kas-modal-head">
+      <div class="kas-modal-title-wrap">
+        <span class="icon-slot" data-icon="brush-settings" data-icon-size="18"></span>
+        <h2 id="brush-settings-title">Brush Dynamics Settings</h2>
+      </div>
+      <button type="button" class="kas-btn sm" data-close-modal="brush-settings-modal">
+        <span class="icon-slot" data-icon="dlg-cancel" data-icon-size="16"></span>
+        <span>Close</span>
+      </button>
+    </div>
+    <div class="prop-row">
+      <label for="bset-spacing">Stamp Spacing <span id="bset-spacing-v" class="tabular-nums">12%</span></label>
+      <input id="bset-spacing" type="range" min="4" max="60" value="12">
+    </div>
+    <div class="prop-row">
+      <label for="bset-flow">Pigment Flow <span id="bset-flow-v" class="tabular-nums">100%</span></label>
+      <input id="bset-flow" type="range" min="10" max="100" value="100">
+    </div>
+    <div class="prop-row">
+      <label for="bset-scatter">Scatter Jitter <span id="bset-scatter-v" class="tabular-nums">0%</span></label>
+      <input id="bset-scatter" type="range" min="0" max="100" value="0">
+    </div>
+    <div class="prop-row">
+      <label for="bset-grain">Paper Grain Texture <span id="bset-grain-v" class="tabular-nums">0%</span></label>
+      <input id="bset-grain" type="range" min="0" max="100" value="0">
+    </div>
+    <div class="prop-row row-inline">
+      <label for="bset-pressure-size">Pen Pressure Affects Size</label>
+      <input id="bset-pressure-size" type="checkbox" checked>
+    </div>
+    <div class="prop-row row-inline">
+      <label for="bset-pressure-opacity">Pen Pressure Affects Opacity</label>
+      <input id="bset-pressure-opacity" type="checkbox">
+    </div>
+    <div class="prop-actions" style="justify-content:flex-end;margin-top:12px;">
+      <button type="button" class="kas-btn" id="bset-reset">
+        <span class="icon-slot" data-icon="dlg-reset" data-icon-size="18"></span>
+        <span>Reset</span>
+      </button>
+      <button type="button" class="kas-btn primary" id="bset-apply">
+        <span class="icon-slot" data-icon="dlg-apply" data-icon-size="18"></span>
+        <span>Apply</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- WINDOWS DESKTOP SOFTWARE / PWA INSTALL MODAL -->
+<div id="install-app-modal" class="kas-modal-backdrop" hidden>
+  <div class="kas-modal" role="dialog" aria-labelledby="install-app-title">
+    <div class="kas-modal-head">
+      <div class="kas-modal-title-wrap">
+        <span class="icon-slot" data-icon="tb-windows-app" data-icon-size="18"></span>
+        <h2 id="install-app-title">Download KAIRO ART STUDIO for Windows</h2>
+      </div>
+      <button type="button" class="kas-btn sm" data-close-modal="install-app-modal">
+        <span class="icon-slot" data-icon="dlg-cancel" data-icon-size="16"></span>
+        <span>Close</span>
+      </button>
+    </div>
+    <p class="muted-note">Run KAIRO ART STUDIO as standalone Windows desktop software with offline support, dedicated window, and desktop shortcut.</p>
+
+    <div class="install-options-grid">
+      <div class="install-option-card">
+        <div>
+          <strong>1. Windows Portable Software (.zip) — Offline</strong>
+          <span class="muted-note">Extract anywhere on Windows and double-click <code>Launch-Kairo-Art-Studio.bat</code>. Works 100% offline in a dedicated app window.</span>
+        </div>
+        <a class="kas-btn primary" href="/api/download/windows-zip" download="Kairo-Art-Studio-Windows-Portable.zip">
+          <span class="icon-slot" data-icon="dlg-import" data-icon-size="18"></span>
+          <span>Download .ZIP</span>
+        </a>
+      </div>
+
+      <div class="install-option-card">
+        <div>
+          <strong>2. Install Desktop App (Edge / Chrome PWA)</strong>
+          <span id="pwa-install-hint" class="muted-note">Pins KAIRO ART STUDIO to Windows Start Menu, Taskbar, and Desktop with offline caching.</span>
+        </div>
+        <button type="button" class="kas-btn orange" id="btn-pwa-install">
+          <span class="icon-slot" data-icon="st-desktop" data-icon-size="18"></span>
+          <span>Install App</span>
+        </button>
+      </div>
+
+      <div class="install-option-card">
+        <div>
+          <strong>3. Single-File Offline Studio (.html)</strong>
+          <span class="muted-note">Self-contained studio file — double-click on any Windows PC to paint and animate offline.</span>
+        </div>
+        <a class="kas-btn" href="/api/download/standalone-html" download="Kairo-Art-Studio-Offline.html">
+          <span class="icon-slot" data-icon="dlg-save" data-icon-size="18"></span>
+          <span>Download .HTML</span>
+        </a>
+      </div>
+
+      <div class="install-option-card">
+        <div>
+          <strong>4. Windows App-Mode Launcher (.bat)</strong>
+          <span class="muted-note">Opens the live studio in Edge/Chrome frameless Windows app mode without browser tabs.</span>
+        </div>
+        <a class="kas-btn" href="/api/download/windows-launcher" download="Launch-Kairo-Art-Studio-Online.bat">
+          <span class="icon-slot" data-icon="dlg-browse" data-icon-size="18"></span>
+          <span>Download .BAT</span>
+        </a>
+      </div>
+    </div>
+
+    <p id="pwa-manual-steps" class="muted-note">
+      Tip: In Microsoft Edge or Google Chrome on Windows, you can also click the <strong>Install app</strong> icon in the address bar (or Menu &rarr; Apps &rarr; Install KAIRO ART STUDIO).
+    </p>
+  </div>
+</div>
+
+<!-- ABOUT MODAL -->
+<div id="about-modal" class="kas-modal-backdrop" hidden>
+  <div class="kas-modal compact" role="dialog" aria-labelledby="about-title">
+    <div class="kas-modal-head">
+      <div class="kas-modal-title-wrap">
+        <span class="icon-slot" data-icon="dlg-about" data-icon-size="18"></span>
+        <h2 id="about-title">About KAIRO ART STUDIO</h2>
+      </div>
+      <button type="button" class="kas-btn sm" data-close-modal="about-modal">
+        <span class="icon-slot" data-icon="dlg-cancel" data-icon-size="16"></span>
+        <span>Close</span>
+      </button>
+    </div>
+    <p class="muted-note" style="margin-bottom:10px;">
+      <strong>KAIRO ART STUDIO</strong> is a digital painting, manga/comic creation, and frame-by-frame 2D animation studio engineered with a unified SVG icon system, 27 drawing tools, 20 brush presets, 17 blend modes, onion skinning, audio sync, and standalone Windows offline packaging.
+    </p>
+    <p class="muted-note">
+      Native project format: <code>.kas</code> · Export formats: PNG, JPEG, WebP, Animated GIF, PNG Sequence.
+    </p>
+    <div class="prop-actions" style="justify-content:flex-end;margin-top:14px;">
+      <button type="button" class="kas-btn primary" data-close-modal="about-modal">
+        <span class="icon-slot" data-icon="dlg-confirm" data-icon-size="18"></span>
+        <span>OK</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- REUSABLE CONFIRMATION MODAL (No window.confirm) -->
+<div id="confirm-modal" class="kas-modal-backdrop" hidden>
+  <div class="kas-modal compact" role="dialog" aria-labelledby="confirm-title">
+    <div class="kas-modal-head">
+      <div class="kas-modal-title-wrap">
+        <span class="icon-slot" style="color:var(--kas-red);" data-icon="dlg-warning" data-icon-size="18"></span>
+        <h2 id="confirm-title">Confirm Action</h2>
+      </div>
+      <button type="button" class="kas-btn sm" id="btn-confirm-close">
+        <span class="icon-slot" data-icon="dlg-cancel" data-icon-size="16"></span>
+        <span>Cancel</span>
+      </button>
+    </div>
+    <p id="confirm-message" class="muted-note">Are you sure you want to proceed?</p>
+    <div class="prop-actions" style="justify-content:flex-end;margin-top:14px;">
+      <button type="button" class="kas-btn" id="btn-confirm-cancel">
+        <span class="icon-slot" data-icon="dlg-cancel" data-icon-size="18"></span>
+        <span>Cancel</span>
+      </button>
+      <button type="button" class="kas-btn danger" id="btn-confirm-ok">
+        <span class="icon-slot" data-icon="dlg-delete" data-icon-size="18"></span>
+        <span>Delete</span>
+      </button>
     </div>
   </div>
 </div>
 
 <div id="toast-container"></div>
 
-<script type="module" src="studio/kairo-art-studio.js"></script>
+<script defer src="studio/kairo-art-studio.js"></script>
 </body>
 </html>
