@@ -1076,5 +1076,855 @@
   });
 })();
 </script>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#17191E">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="KairoStudio">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="./icons/icon-192.png">
+  <title>KAIRO ART STUDIO | Digital Painting, Comic & 2D Animation</title>
+  <link rel="stylesheet" href="studio.css">
+  <style>
+    /* Ensures icon slots & canvas stay aligned even if external JS/CSS has minor gaps */
+    .icon-slot {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .icon-slot svg {
+      display: block;
+    }
+    .kas-fallback-tool.active,
+    .kas-fallback-brush.active,
+    .kas-fallback-layer.active {
+      outline: 1px solid #3B82F6;
+      background: rgba(59, 130, 246, 0.16);
+    }
+  </style>
+</head>
+<body>
+
+<div id="kas-root" class="kas-shell" data-workspace="illustration">
+
+  <!-- TOP MENU BAR & WORKSPACE SWITCH -->
+  <header class="kas-topbar">
+    <div class="kas-brand-group">
+      <a class="kas-back-link" href="kaiapps.html" title="Return to KaiApps Portal">
+        <span class="icon-slot" data-icon="tb-back" data-icon-size="16"></span>
+        <span>KaiApps</span>
+      </a>
+      <div class="kas-brand">
+        <img src="images/logo/kairo-logo.png" alt="Kairo Art Studio Logo">
+        <span>KAIRO ART STUDIO</span>
+      </div>
+      <nav id="kas-menubar" class="kas-menubar" aria-label="Main Menu Bar"></nav>
+    </div>
+
+    <div class="kas-workspace-switch" role="group" aria-label="Workspace Modes">
+      <button type="button" class="kas-ws-btn active" data-workspace-btn="illustration" title="Illustration Workspace">
+        <span class="icon-slot" data-icon="tool-brush" data-icon-size="16"></span>
+        <span>Illustration</span>
+      </button>
+      <button type="button" class="kas-ws-btn" data-workspace-btn="animation" title="2D Animation Workspace">
+        <span class="icon-slot" data-icon="menu-animation" data-icon-size="16"></span>
+        <span>Animation</span>
+      </button>
+      <button type="button" class="kas-ws-btn" data-workspace-btn="comic" title="Comic & Manga Workspace">
+        <span class="icon-slot" data-icon="menu-comic" data-icon-size="16"></span>
+        <span>Comic</span>
+      </button>
+      <button type="button" class="kas-ws-btn" data-workspace-btn="minimal" title="Minimal Canvas Focus">
+        <span class="icon-slot" data-icon="tb-fullscreen" data-icon-size="16"></span>
+        <span>Minimal</span>
+      </button>
+    </div>
+
+    <div class="kas-top-right">
+      <button type="button" class="kas-btn sm orange" id="btn-get-app" title="Download Windows Software / Install App">
+        <span class="icon-slot" data-icon="tb-windows-app" data-icon-size="16"></span>
+        <span>Windows App</span>
+      </button>
+      <button type="button" class="kas-btn sm primary" id="btn-open-export" title="Export Artwork, GIF, or .kas (Ctrl+E)">
+        <span class="icon-slot" data-icon="dlg-export" data-icon-size="16"></span>
+        <span>Export</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- DOCUMENT TABS & MAIN ICON TOOLBAR (24x24) -->
+  <div class="kas-docbar">
+    <div id="doc-tabs" class="doc-tabs"></div>
+
+    <div class="main-toolbar-strip" role="toolbar" aria-label="Main Toolbar">
+      <button type="button" class="kas-icon-btn tb" id="btn-new-doc" title="New Document (Ctrl+N)" aria-label="New Document">
+        <span class="icon-slot" data-icon="tb-new" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-open-kas" title="Open .kas Project (Ctrl+O)" aria-label="Open Project">
+        <span class="icon-slot" data-icon="tb-open" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-save-kas" title="Save Native .kas Project (Ctrl+S)" aria-label="Save Project">
+        <span class="icon-slot" data-icon="tb-save" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-save-all" title="Save All Open Documents" aria-label="Save All">
+        <span class="icon-slot" data-icon="tb-save-all" data-icon-size="24"></span>
+      </button>
+
+      <div class="tb-sep" aria-hidden="true"></div>
+
+      <button type="button" class="kas-icon-btn tb" id="btn-undo" title="Undo (Ctrl+Z)" aria-label="Undo">
+        <span class="icon-slot" data-icon="tb-undo" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-redo" title="Redo (Ctrl+Y)" aria-label="Redo">
+        <span class="icon-slot" data-icon="tb-redo" data-icon-size="24"></span>
+      </button>
+
+      <div class="tb-sep" aria-hidden="true"></div>
+
+      <button type="button" class="kas-icon-btn tb" id="btn-cut" title="Cut Selection / Layer (Ctrl+X)" aria-label="Cut">
+        <span class="icon-slot" data-icon="tb-cut" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-copy" title="Copy Selection / Layer (Ctrl+C)" aria-label="Copy">
+        <span class="icon-slot" data-icon="tb-copy" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-paste" title="Paste Clipboard as Layer (Ctrl+V)" aria-label="Paste">
+        <span class="icon-slot" data-icon="tb-paste" data-icon-size="24"></span>
+      </button>
+
+      <div class="tb-sep" aria-hidden="true"></div>
+
+      <button type="button" class="kas-icon-btn tb" id="btn-zoom-in" title="Zoom In (Ctrl++)" aria-label="Zoom In">
+        <span class="icon-slot" data-icon="nav-zoom-in" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-zoom-out" title="Zoom Out (Ctrl+-)" aria-label="Zoom Out">
+        <span class="icon-slot" data-icon="nav-zoom-out" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-fit-canvas" title="Fit Canvas to Viewport (Ctrl+0)" aria-label="Fit Canvas">
+        <span class="icon-slot" data-icon="nav-fit" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-actual-size" title="Actual Size 100% (Ctrl+1)" aria-label="Actual Size">
+        <span class="icon-slot" data-icon="nav-actual" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-rot-left" title="Rotate Canvas -15°" aria-label="Rotate Canvas Left">
+        <span class="icon-slot" data-icon="nav-rotate-left" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-rot-right" title="Rotate Canvas +15°" aria-label="Rotate Canvas Right">
+        <span class="icon-slot" data-icon="nav-rotate-right" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-reset-rot" title="Reset Canvas Rotation" aria-label="Reset Rotation">
+        <span class="icon-slot" data-icon="nav-reset-rot" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-flip-h" title="Flip Canvas Horizontally" aria-label="Flip Horizontal">
+        <span class="icon-slot" data-icon="nav-flip-h" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-flip-v" title="Flip Canvas Vertically" aria-label="Flip Vertical">
+        <span class="icon-slot" data-icon="nav-flip-v" data-icon-size="24"></span>
+      </button>
+
+      <div class="tb-sep" aria-hidden="true"></div>
+
+      <button type="button" class="kas-icon-btn tb" id="btn-toggle-grid" title="Toggle Pixel Grid" aria-label="Grid">
+        <span class="icon-slot" data-icon="tb-grid" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb active" id="btn-toggle-rulers" title="Toggle Canvas Rulers" aria-label="Rulers">
+        <span class="icon-slot" data-icon="tb-rulers" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-toggle-guides" title="Toggle Center & Rule-of-Thirds Guides" aria-label="Guides">
+        <span class="icon-slot" data-icon="tb-guides" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb orange-active" id="btn-toggle-symmetry" title="Toggle Mirror Symmetry Axis" aria-label="Symmetry Guide">
+        <span class="icon-slot" data-icon="tool-symmetry" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-fullscreen" title="Toggle Full Screen (F11)" aria-label="Full Screen">
+        <span class="icon-slot" data-icon="tb-fullscreen" data-icon-size="24"></span>
+      </button>
+
+      <div class="tb-sep" aria-hidden="true"></div>
+
+      <button type="button" class="kas-icon-btn tb" id="btn-import-img" title="Import Image as Layer" aria-label="Import Image">
+        <span class="icon-slot" data-icon="dlg-import" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-toggle-timeline" title="Toggle Animation Timeline" aria-label="Toggle Timeline">
+        <span class="icon-slot" data-icon="menu-animation" data-icon-size="24"></span>
+      </button>
+      <button type="button" class="kas-icon-btn tb" id="btn-open-settings" title="Studio Preferences & Theme" aria-label="Settings">
+        <span class="icon-slot" data-icon="dlg-settings" data-icon-size="24"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- MAIN WORKSPACE -->
+  <div class="kas-main">
+
+    <!-- LEFT TOOL RAIL -->
+    <aside id="left-tools" class="kas-left-tools" aria-label="Drawing Tools"></aside>
+    <div id="tool-flyout" class="kas-tool-flyout" hidden role="menu" aria-label="Related Drawing Tools"></div>
+
+    <!-- CENTER CANVAS VIEWPORT + RULERS -->
+    <main class="kas-center">
+      <div id="canvas-viewport" class="canvas-viewport">
+        <div id="canvas-ruler-top" class="canvas-ruler-top" aria-hidden="true"></div>
+        <div id="canvas-ruler-left" class="canvas-ruler-left" aria-hidden="true"></div>
+        <canvas id="studio-canvas" data-testid="studio-canvas" width="1280" height="720"></canvas>
+        <canvas id="overlay-canvas" width="1280" height="720"></canvas>
+      </div>
+    </main>
+
+    <!-- RIGHT INSPECTOR DOCK -->
+    <aside id="right-dock" class="kas-right-dock" aria-label="Studio Inspectors">
+
+      <!-- COLOR PANEL -->
+      <section class="dock-section">
+        <div class="dock-head">
+          <h2>Color</h2>
+          <div class="dock-actions-row">
+            <button type="button" class="kas-icon-btn panel" id="btn-swap-colors" title="Swap Foreground & Background (X)" aria-label="Swap Colors">
+              <span class="icon-slot" data-icon="color-swap" data-icon-size="18"></span>
+            </button>
+            <button type="button" class="kas-icon-btn panel" id="btn-reset-colors" title="Reset Default Black/White (D)" aria-label="Default Colors">
+              <span class="icon-slot" data-icon="color-default" data-icon-size="18"></span>
+            </button>
+            <button type="button" class="kas-icon-btn panel" id="btn-save-color" title="Add Active Color to Palette" aria-label="Add Color to Palette">
+              <span class="icon-slot" data-icon="color-add" data-icon-size="18"></span>
+            </button>
+            <button type="button" class="kas-icon-btn panel danger" id="btn-remove-color" title="Remove Active Color from Palette" aria-label="Remove Color">
+              <span class="icon-slot" data-icon="color-remove" data-icon-size="18"></span>
+            </button>
+          </div>
+        </div>
+        <div class="color-layout">
+          <canvas id="color-wheel-canvas" width="108" height="108"></canvas>
+          <div class="color-controls">
+            <div class="fg-bg-row">
+              <div class="swatch-pair">
+                <div id="fg-swatch" class="swatch-box" title="Foreground Color"></div>
+                <div id="bg-swatch" class="swatch-box" title="Background Color"></div>
+              </div>
+              <input id="hex-input" class="hex-input" type="text" aria-label="Hex color" value="#3B82F6">
+            </div>
+            <div class="slider-mini">
+              <span>H</span>
+              <input id="slider-h" type="range" min="0" max="360" value="217" aria-label="Hue">
+              <span id="val-h" class="tabular-nums">217°</span>
+            </div>
+            <div class="slider-mini">
+              <span>S</span>
+              <input id="slider-s" type="range" min="0" max="100" value="76" aria-label="Saturation">
+              <span id="val-s" class="tabular-nums">76%</span>
+            </div>
+            <div class="slider-mini">
+              <span>V</span>
+              <input id="slider-v" type="range" min="0" max="100" value="96" aria-label="Value">
+              <span id="val-v" class="tabular-nums">96%</span>
+            </div>
+          </div>
+        </div>
+        <div class="palette-bar">
+          <select id="palette-select" aria-label="Color Palette"></select>
+          <button type="button" class="kas-icon-btn panel" id="btn-save-palette" title="Save as New Palette" aria-label="Save Palette">
+            <span class="icon-slot" data-icon="color-save-pal" data-icon-size="18"></span>
+          </button>
+          <button type="button" class="kas-icon-btn panel" id="btn-import-palette" title="Import Palette (.json, .gpl, hex)" aria-label="Import Palette">
+            <span class="icon-slot" data-icon="color-import-pal" data-icon-size="18"></span>
+          </button>
+          <button type="button" class="kas-icon-btn panel" id="btn-export-palette" title="Export Active Palette" aria-label="Export Palette">
+            <span class="icon-slot" data-icon="color-export-pal" data-icon-size="18"></span>
+          </button>
+        </div>
+        <div id="palette-swatches" class="swatch-grid"></div>
+        <div id="recent-swatches" class="swatch-grid"></div>
+      </section>
+
+      <!-- BRUSH PRESETS & SETTINGS -->
+      <section class="dock-section">
+        <div class="dock-head">
+          <h2>Brushes (20)</h2>
+          <div class="dock-actions-row">
+            <button type="button" class="kas-icon-btn panel" id="btn-new-brush" title="New Brush Preset" aria-label="New Brush">
+              <span class="icon-slot" data-icon="brush-new" data-icon-size="18"></span>
+            </button>
+            <button type="button" class="kas-icon-btn panel" id="btn-dup-brush" title="Duplicate Brush Preset" aria-label="Duplicate Brush">
+              <span class="icon-slot" data-icon="brush-dup" data-icon-size="18"></span>
+            </button>
+            <button type="button" class="kas-icon-btn panel danger" id="btn-del-brush" title="Delete Custom Brush Preset" aria-label="Delete Brush">
+              <span class="icon-slot" data-icon="brush-del" data-icon-size="18"></span>
+            </button>
+            <button type="button" class="kas-icon-btn panel" id="btn-import-brush" title="Import Brush (.kbr.json)" aria-label="Import Brush">
+              <span class="icon-slot" data-icon="brush-import" data-icon-size="18"></span>
+            </button>
+            <button type="button" class="kas-icon-btn panel" id="btn-export-brush" title="Export Brush (.kbr.json)" aria-label="Export Brush">
+              <span class="icon-slot" data-icon="brush-export" data-icon-size="18"></span>
+            </button>
+            <button type="button" class="kas-icon-btn panel orange-active" id="btn-fav-filter" title="Filter Favorite Brushes" aria-label="Favorite Brushes">
+              <span class="icon-slot" data-icon="brush-fav" data-icon-size="18"></span>
+            </button>
+            <button type="button" class="kas-icon-btn panel" id="btn-brush-settings" title="Brush Dynamics Settings" aria-label="Brush Settings">
+              <span class="icon-slot" data-icon="brush-settings" data-icon-size="18"></span>
+            </button>
+            <button type="button" class="kas-icon-btn panel" id="btn-reset-brush" title="Reset Brush to Factory Settings" aria-label="Reset Brush Settings">
+              <span class="icon-slot" data-icon="brush-reset" data-icon-size="18"></span>
+            </button>
+          </div>
+        </div>
+        <div class="brush-cats">
+          <button type="button" class="cat-btn active" data-brush-cat="All">All</button>
+          <button type="button" class="cat-btn" data-brush-cat="Sketch">Sketch</button>
+          <button type="button" class="cat-btn" data-brush-cat="Ink">Ink</button>
+          <button type="button" class="cat-btn" data-brush-cat="Paint">Paint</button>
+          <button type="button" class="cat-btn" data-brush-cat="Texture">Texture</button>
+          <button type="button" class="cat-btn" data-brush-cat="Eraser">Eraser</button>
+        </div>
+        <div class="search-input-wrap">
+          <span class="icon-slot" data-icon="brush-search" data-icon-size="16"></span>
+          <input id="brush-search" class="kas-input" type="search" placeholder="Search brushes..." aria-label="Search brushes">
+        </div>
+        <div id="brush-list" class="brush-list"></div>
+
+        <div class="brush-sliders-grid">
+          <div class="prop-row">
+            <label for="brush-size">Size <span id="brush-size-val" class="tabular-nums">10 px</span></label>
+            <input id="brush-size" type="range" min="1" max="160" value="10">
+          </div>
+          <div class="prop-row">
+            <label for="brush-opacity">Opacity <span id="brush-opacity-val" class="tabular-nums">100%</span></label>
+            <input id="brush-opacity" type="range" min="5" max="100" value="100">
+          </div>
+          <div class="prop-row">
+            <label for="brush-hardness">Hardness <span id="brush-hardness-val" class="tabular-nums">100%</span></label>
+            <input id="brush-hardness" type="range" min="5" max="100" value="100">
+          </div>
+          <div class="prop-row">
+            <label for="brush-stab">Stabilize <span id="brush-stab-val" class="tabular-nums">70%</span></label>
+            <input id="brush-stab" type="range" min="0" max="100" value="70">
+          </div>
+        </div>
+        <div class="prop-row row-inline" style="margin-bottom:0;">
+          <label for="brush-stab-mode">Stabilizer Mode</label>
+          <select id="brush-stab-mode">
+            <option value="none">None</option>
+            <option value="basic">Basic Smoothing</option>
+            <option value="moving_avg">Moving Average</option>
+            <option value="weighted">Weighted Smoothing</option>
+            <option value="advanced">Advanced Stabilizer</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- LAYERS -->
+      <section class="dock-section">
+        <div class="dock-head">
+          <h2>Layers</h2>
+          <div class="dock-actions-row">
+            <button type="button" class="kas-icon-btn panel" id="btn-alpha-lock" title="Toggle Layer Alpha Lock" aria-label="Alpha Lock">
+              <span class="icon-slot" data-icon="layer-alpha-lock" data-icon-size="18"></span>
+            </button>
+            <button type="button" class="kas-icon-btn panel" id="btn-clip-layer" title="Toggle Clipping Mask" aria-label="Clipping Mask">
+              <span class="icon-slot" data-icon="layer-clip" data-icon-size="18"></span>
+            </button>
+          </div>
+        </div>
+        <div class="layer-controls-top">
+          <select id="layer-blend" aria-label="Layer Blend Mode"></select>
+          <div class="slider-mini" style="grid-template-columns: 1fr 34px;">
+            <input id="layer-opacity" type="range" min="0" max="100" value="100" aria-label="Layer Opacity">
+            <span id="layer-opacity-val" class="tabular-nums">100%</span>
+          </div>
+        </div>
+        <div id="layer-list" class="layer-list"></div>
+        <div class="dock-actions-row">
+          <button type="button" class="kas-icon-btn panel" id="btn-add-layer" title="New Raster Layer" aria-label="New Raster Layer">
+            <span class="icon-slot" data-icon="layer-new-raster" data-icon-size="18"></span>
+          </button>
+          <button type="button" class="kas-icon-btn panel" id="btn-add-vector-layer" title="New Vector Layer" aria-label="New Vector Layer">
+            <span class="icon-slot" data-icon="layer-new-vector" data-icon-size="18"></span>
+          </button>
+          <button type="button" class="kas-icon-btn panel" id="btn-add-group-layer" title="New Layer Group" aria-label="New Layer Group">
+            <span class="icon-slot" data-icon="layer-new-group" data-icon-size="18"></span>
+          </button>
+          <button type="button" class="kas-icon-btn panel" id="btn-add-mask-layer" title="New Mask Layer" aria-label="New Mask Layer">
+            <span class="icon-slot" data-icon="layer-new-mask" data-icon-size="18"></span>
+          </button>
+          <button type="button" class="kas-icon-btn panel" id="btn-dup-layer" title="Duplicate Layer" aria-label="Duplicate Layer">
+            <span class="icon-slot" data-icon="layer-duplicate" data-icon-size="18"></span>
+          </button>
+          <button type="button" class="kas-icon-btn panel" id="btn-merge-layer" title="Merge Down" aria-label="Merge Down">
+            <span class="icon-slot" data-icon="layer-merge-down" data-icon-size="18"></span>
+          </button>
+          <button type="button" class="kas-icon-btn panel" id="btn-merge-visible" title="Merge Visible Layers" aria-label="Merge Visible">
+            <span class="icon-slot" data-icon="layer-merge-visible" data-icon-size="18"></span>
+          </button>
+          <button type="button" class="kas-icon-btn panel" id="btn-up-layer" title="Move Layer Up" aria-label="Move Layer Up">
+            <span class="icon-slot" data-icon="layer-up" data-icon-size="18"></span>
+          </button>
+          <button type="button" class="kas-icon-btn panel" id="btn-down-layer" title="Move Layer Down" aria-label="Move Layer Down">
+            <span class="icon-slot" data-icon="layer-down" data-icon-size="18"></span>
+          </button>
+          <button type="button" class="kas-icon-btn panel danger" id="btn-del-layer" title="Delete Active Layer" aria-label="Delete Layer">
+            <span class="icon-slot" data-icon="layer-delete" data-icon-size="18"></span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TABBED TOOL PROPERTIES / NAVIGATOR & HISTORY -->
+      <section class="dock-section dock-tabbed-section">
+        <div class="dock-subtabs" role="tablist">
+          <button type="button" class="dock-subtab active" data-dock-tab="tool-props" role="tab" aria-selected="true">
+            <span class="icon-slot" data-icon="menu-tools" data-icon-size="16"></span>
+            <span>Tool Props</span>
+          </button>
+          <button type="button" class="dock-subtab" data-dock-tab="nav-history" role="tab" aria-selected="false">
+            <span class="icon-slot" data-icon="nav-fit" data-icon-size="16"></span>
+            <span>Nav &amp; History</span>
+          </button>
+        </div>
+
+        <div id="dock-pane-tool-props" class="dock-pane">
+          <div id="tool-props-body"></div>
+        </div>
+
+        <div id="dock-pane-nav-history" class="dock-pane" hidden>
+          <div class="nav-wrap">
+            <canvas id="navigator-canvas" width="108" height="74"></canvas>
+            <div>
+              <div class="prop-row" style="margin:0;">
+                <label for="nav-zoom-slider">Zoom <span id="nav-zoom-val" class="tabular-nums">100%</span></label>
+                <input id="nav-zoom-slider" type="range" min="10" max="400" value="100">
+              </div>
+              <div class="nav-mini-actions">
+                <button type="button" class="kas-icon-btn panel" id="nav-zoom-in" title="Zoom In" aria-label="Navigator Zoom In">
+                  <span class="icon-slot" data-icon="nav-zoom-in" data-icon-size="18"></span>
+                </button>
+                <button type="button" class="kas-icon-btn panel" id="nav-zoom-out" title="Zoom Out" aria-label="Navigator Zoom Out">
+                  <span class="icon-slot" data-icon="nav-zoom-out" data-icon-size="18"></span>
+                </button>
+                <button type="button" class="kas-icon-btn panel" id="nav-fit" title="Fit Canvas" aria-label="Navigator Fit Canvas">
+                  <span class="icon-slot" data-icon="nav-fit" data-icon-size="18"></span>
+                </button>
+                <button type="button" class="kas-icon-btn panel" id="nav-reset-rot" title="Reset Rotation" aria-label="Navigator Reset Rotation">
+                  <span class="icon-slot" data-icon="nav-reset-rot" data-icon-size="18"></span>
+                </button>
+                <button type="button" class="kas-icon-btn panel" id="nav-rot-left" title="Rotate Left -15°" aria-label="Navigator Rotate Left">
+                  <span class="icon-slot" data-icon="nav-rotate-left" data-icon-size="18"></span>
+                </button>
+                <button type="button" class="kas-icon-btn panel" id="nav-rot-right" title="Rotate Right +15°" aria-label="Navigator Rotate Right">
+                  <span class="icon-slot" data-icon="nav-rotate-right" data-icon-size="18"></span>
+                </button>
+                <button type="button" class="kas-icon-btn panel" id="nav-flip-h" title="Flip Canvas" aria-label="Navigator Flip Canvas">
+                  <span class="icon-slot" data-icon="nav-flip-h" data-icon-size="18"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="history-head-bar">
+            <span class="prop-label" style="margin:0;">History Steps</span>
+            <div class="dock-actions-row">
+              <button type="button" class="kas-icon-btn panel" id="btn-hist-undo" title="Undo Step" aria-label="History Undo">
+                <span class="icon-slot" data-icon="tb-undo" data-icon-size="18"></span>
+              </button>
+              <button type="button" class="kas-icon-btn panel" id="btn-hist-redo" title="Redo Step" aria-label="History Redo">
+                <span class="icon-slot" data-icon="tb-redo" data-icon-size="18"></span>
+              </button>
+              <button type="button" class="kas-icon-btn panel danger" id="btn-hist-clear" title="Clear History Stack" aria-label="Clear History">
+                <span class="icon-slot" data-icon="dlg-history-clear" data-icon-size="18"></span>
+              </button>
+              <button type="button" class="kas-icon-btn panel" id="btn-hist-settings" title="History Depth Settings" aria-label="History Settings">
+                <span class="icon-slot" data-icon="dlg-history-settings" data-icon-size="18"></span>
+              </button>
+            </div>
+          </div>
+          <div id="history-list" class="history-list"></div>
+        </div>
+      </section>
+
+    </aside>
+  </div>
+
+  <!-- ANIMATION TIMELINE -->
+  <section id="timeline-panel" class="kas-timeline" hidden aria-label="Animation Timeline">
+    <div class="timeline-toolbar">
+      <div class="timeline-group">
+        <button type="button" class="kas-icon-btn panel" id="btn-first-frame" title="First Frame" aria-label="First Frame">
+          <span class="icon-slot" data-icon="anim-first-frame" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-prev-frame" title="Previous Frame" aria-label="Previous Frame">
+          <span class="icon-slot" data-icon="anim-prev-frame" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel active" id="btn-play" title="Play / Pause Animation (Space)" aria-label="Play or Pause">
+          <span class="icon-slot" id="play-icon-slot" data-icon="anim-play" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-stop" title="Stop Playback" aria-label="Stop">
+          <span class="icon-slot" data-icon="anim-stop" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-next-frame" title="Next Frame" aria-label="Next Frame">
+          <span class="icon-slot" data-icon="anim-next-frame" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-last-frame" title="Last Frame" aria-label="Last Frame">
+          <span class="icon-slot" data-icon="anim-last-frame" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel active" id="btn-loop" title="Toggle Loop Playback" aria-label="Loop Playback">
+          <span class="icon-slot" data-icon="anim-loop" data-icon-size="18"></span>
+        </button>
+        <select id="fps-select" class="kas-btn sm" aria-label="Frames Per Second"></select>
+        <span id="frame-counter" class="tabular-nums" style="margin-left:4px;font-size:11.5px;">Frame 1 / 1</span>
+      </div>
+
+      <div class="timeline-group">
+        <button type="button" class="kas-icon-btn panel" id="btn-add-frame" title="Add Blank Frame" aria-label="Add Frame">
+          <span class="icon-slot" data-icon="anim-add-frame" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-dup-frame" title="Duplicate Frame" aria-label="Duplicate Frame">
+          <span class="icon-slot" data-icon="anim-dup-frame" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-copy-frame" title="Copy Frame" aria-label="Copy Frame">
+          <span class="icon-slot" data-icon="anim-copy-frame" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-paste-frame" title="Paste Frame" aria-label="Paste Frame">
+          <span class="icon-slot" data-icon="anim-paste-frame" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-exp-plus" title="Extend Frame Exposure (+1 Hold)" aria-label="Extend Exposure">
+          <span class="icon-slot" data-icon="anim-extend-exp" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-exp-minus" title="Shorten Frame Exposure (-1 Hold)" aria-label="Shorten Exposure">
+          <span class="icon-slot" data-icon="anim-shorten-exp" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-clear-frame" title="Clear Frame Contents" aria-label="Clear Frame">
+          <span class="icon-slot" data-icon="anim-clear-frame" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel danger" id="btn-del-frame" title="Delete Frame" aria-label="Delete Frame">
+          <span class="icon-slot" data-icon="anim-del-frame" data-icon-size="18"></span>
+        </button>
+
+        <div class="tb-sep" aria-hidden="true"></div>
+
+        <button type="button" class="kas-icon-btn panel" id="btn-add-track" title="Add Animation Track" aria-label="Add Track">
+          <span class="icon-slot" data-icon="anim-add-track" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel danger" id="btn-del-track" title="Delete Active Track" aria-label="Delete Track">
+          <span class="icon-slot" data-icon="anim-del-track" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-track-up" title="Move Track Up" aria-label="Move Track Up">
+          <span class="icon-slot" data-icon="anim-track-up" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-track-down" title="Move Track Down" aria-label="Move Track Down">
+          <span class="icon-slot" data-icon="anim-track-down" data-icon-size="18"></span>
+        </button>
+
+        <div class="tb-sep" aria-hidden="true"></div>
+
+        <button type="button" class="kas-icon-btn panel active" id="btn-onion" title="Toggle Onion Skin" aria-label="Toggle Onion Skin">
+          <span class="icon-slot" data-icon="anim-onion" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel active" id="btn-onion-prev" title="Toggle Previous Frame Onion Skin" aria-label="Previous Onion Skin">
+          <span class="icon-slot" data-icon="anim-onion-prev" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel active" id="btn-onion-next" title="Toggle Next Frame Onion Skin" aria-label="Next Onion Skin">
+          <span class="icon-slot" data-icon="anim-onion-next" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel orange-active" id="btn-camera-bounds" title="Toggle Camera Frame Bounds" aria-label="Camera Bounds">
+          <span class="icon-slot" data-icon="anim-camera" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-timeline-settings" title="Timeline & Playback Settings" aria-label="Timeline Settings">
+          <span class="icon-slot" data-icon="anim-settings" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-tl-zoom-out" title="Zoom Out Timeline" aria-label="Timeline Zoom Out">
+          <span class="icon-slot" data-icon="anim-zoom-out" data-icon-size="18"></span>
+        </button>
+        <button type="button" class="kas-icon-btn panel" id="btn-tl-zoom-in" title="Zoom In Timeline" aria-label="Timeline Zoom In">
+          <span class="icon-slot" data-icon="anim-zoom-in" data-icon-size="18"></span>
+        </button>
+
+        <input id="frame-note-input" class="kas-input" style="width:128px;" type="text" placeholder="Frame note..." aria-label="Frame exposure note">
+        <button type="button" class="kas-btn sm orange" id="btn-export-gif" title="Export Animated GIF">
+          <span class="icon-slot" data-icon="dlg-export" data-icon-size="16"></span>
+          <span>GIF</span>
+        </button>
+        <button type="button" class="kas-btn sm" id="btn-export-seq" title="Export PNG Image Sequence">
+          <span class="icon-slot" data-icon="dlg-save" data-icon-size="16"></span>
+          <span>PNG Seq</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="timeline-track-body">
+      <div id="timeline-tracks" class="timeline-tracks-col" aria-label="Animation Tracks"></div>
+      <div id="timeline-cells" class="timeline-cells"></div>
+    </div>
+
+    <div class="audio-strip">
+      <button type="button" class="kas-btn sm" id="btn-import-audio" title="Import Reference Audio Track (WAV/MP3)">
+        <span class="icon-slot" data-icon="anim-audio-import" data-icon-size="16"></span>
+        <span>Audio</span>
+      </button>
+      <button type="button" class="kas-icon-btn mini active" id="btn-audio-vis" title="Toggle Audio Waveform Strip" aria-label="Toggle Audio Visibility">
+        <span class="icon-slot" data-icon="anim-audio-vis" data-icon-size="16"></span>
+      </button>
+      <span id="audio-file-label">No Audio Track</span>
+      <canvas id="audio-waveform-canvas" width="480" height="22"></canvas>
+    </div>
+  </section>
+
+  <!-- STATUS BAR -->
+  <footer class="kas-statusbar">
+    <div class="status-left">
+      <span id="status-doc-info" class="tabular-nums">1280 × 720 px · 150 DPI</span>
+      <span id="status-coords" class="tabular-nums">0, 0 px</span>
+      <span id="status-tool">BRUSH (G-Pen)</span>
+    </div>
+    <div class="status-right">
+      <span id="status-connection" class="conn-badge">
+        <span class="icon-slot" id="status-conn-icon" data-icon="st-ready" data-icon-size="16"></span>
+        <span id="status-conn-label">Ready</span>
+      </span>
+      <span id="status-zoom" class="tabular-nums">100%</span>
+      <span id="status-rot" class="tabular-nums">0°</span>
+    </div>
+  </footer>
+</div>
+
+<!-- HIDDEN FILE INPUTS -->
+<input type="file" id="input-open-kas" accept=".kas,.json" hidden>
+<input type="file" id="input-import-img" accept="image/png,image/jpeg,image/webp,image/svg+xml" hidden>
+<input type="file" id="input-import-audio" accept="audio/wav,audio/mp3,audio/mpeg,audio/ogg" hidden>
+<input type="file" id="input-import-brush" accept=".json,.kbr.json" hidden>
+<input type="file" id="input-import-palette" accept=".json,.gpl,.txt" hidden>
+
+<!-- MODALS (Keep same structure as before) -->
+<div id="welcome-modal" class="kas-modal-backdrop" hidden>
+  <div class="kas-modal" role="dialog" aria-labelledby="welcome-title">
+    <div class="kas-modal-head">
+      <div class="kas-modal-title-wrap">
+        <span class="icon-slot" data-icon="dlg-new-project" data-icon-size="18"></span>
+        <h2 id="welcome-title">KAIRO ART STUDIO</h2>
+      </div>
+      <button type="button" class="kas-btn sm" data-close-modal="welcome-modal">
+        <span class="icon-slot" data-icon="dlg-cancel" data-icon-size="16"></span>
+        <span>Close</span>
+      </button>
+    </div>
+    <p class="muted-note">Professional Digital Painting, Manga/Comic Creation, and Frame-by-Frame 2D Animation Studio.</p>
+    <div class="prop-actions" style="justify-content:flex-end;margin-top:10px;">
+      <button type="button" class="kas-btn sm primary" data-close-modal="welcome-modal">Start Painting</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<script defer src="studio/kairo-art-studio.js"></script>
+<script>
+(() => {
+  const ICONS = {
+    'tb-undo': '<path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/>',
+    'tb-redo': '<path d="M15 14l5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/>',
+    'tb-new': '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 12v6M9 15h6"/>',
+    'tb-open': '<path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>',
+    'tb-save': '<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/>',
+    'tb-save-all': '<path d="M17 21H5a2 2 0 0 1-2-2V7"/><path d="M21 17H9a2 2 0 0 1-2-2V3h10l4 4v10z"/>',
+    'tb-cut': '<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"/>',
+    'tb-copy': '<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
+    'tb-paste': '<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/>',
+    'nav-zoom-in': '<circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/>',
+    'nav-zoom-out': '<circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M8 11h6"/>',
+    'nav-fit': '<path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>',
+    'nav-actual': '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12h6M12 9v6"/>',
+    'nav-rotate-left': '<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>',
+    'nav-rotate-right': '<path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/>',
+    'nav-reset-rot': '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>',
+    'nav-flip-h': '<path d="M12 3v18M8 7l-5 5 5 5M16 7l5 5-5 5"/>',
+    'nav-flip-v': '<path d="M3 12h18M7 8l5-5 5 5M7 16l5 5 5-5"/>',
+    'tb-grid': '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>',
+    'tb-rulers': '<path d="M3 5h18v4H3zM5 9v3M9 9v2M13 9v3M17 9v2"/>',
+    'tb-guides': '<path d="M3 12h18M12 3v18"/>',
+    'tool-symmetry': '<path d="M12 3v18"/><path d="M5 7l4 5-4 5M19 7l-4 5 4 5"/>',
+    'tb-fullscreen': '<path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>',
+    'tb-back': '<path d="M19 12H5M12 19l-7-7 7-7"/>',
+    'tb-windows-app': '<path d="M3 5.5L10.5 4.5V11.5H3V5.5zM12 4.3L21 3V11.5H12V4.3zM3 13H10.5V20L3 19V13zM12 13H21V21.5L12 20.2V13z"/>',
+    'tool-brush': '<path d="M18.37 2.63L14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 1 0-3-3z"/><path d="M9 8c-2 3-4 3.5-7 4l8 10c2-1 6-5 6-7"/>',
+    'tool-pencil': '<path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>',
+    'tool-eraser': '<path d="M20 20H7L3 16a2 2 0 0 1 0-2.8l9.9-9.9a2 2 0 0 1 2.8 0l5.7 5.7a2 2 0 0 1 0 2.8L13 20"/><path d="M18 13l-6-6"/>',
+    'tool-fill': '<path d="M19 11l-8-8-8.6 8.6a2 2 0 0 0 0 2.8l5.2 5.2c.8.8 2 .8 2.8 0L19 11z"/><path d="M5 2l5 5M22 16s-2 2.5-2 4a2 2 0 0 0 4 0c0-1.5-2-4-2-4z"/>',
+    'tool-pick': '<path d="M2 22l1-1h3l9-9"/><path d="M3 21v-3l9-9"/><path d="M14.5 5.5l4 4"/><path d="M13 7l4-4 4 4-4 4z"/>',
+    'tool-select': '<rect x="3" y="3" width="18" height="18" rx="2" stroke-dasharray="4 3"/>',
+    'tool-lasso': '<path d="M12 3c-5 0-9 3.5-9 7.5 0 2.5 1.5 4.5 4 5.5l-1 4 4-1.5c.7.1 1.3.2 2 .2 5 0 9-3.5 9-7.5S17 3 12 3z"/>',
+    'tool-wand': '<path d="M15 4l5 5L8 21l-5-5L15 4z"/><path d="M19 2v3M21 4h-3M5 10v2M6 11H4"/>',
+    'tool-move': '<path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20"/>',
+    'tool-shape': '<rect x="4" y="5" width="11" height="10" rx="1"/><circle cx="16" cy="15" r="4"/>',
+    'tool-text': '<path d="M4 7V4h16v3M12 4v16M9 20h6"/>',
+    'menu-animation': '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 9l5 3-5 3V9z"/>',
+    'menu-comic': '<rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="5" rx="1"/><rect x="13" y="10" width="8" height="11" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/>',
+    'menu-tools': '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+    'dlg-export': '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/>',
+    'dlg-import': '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/>',
+    'dlg-save': '<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/>',
+    'dlg-settings': '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
+    'color-swap': '<path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/>',
+    'color-default': '<rect x="3" y="3" width="11" height="11" fill="currentColor"/><rect x="10" y="10" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"/>',
+    'color-add': '<circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/>',
+    'color-remove': '<circle cx="12" cy="12" r="9"/><path d="M8 12h8"/>',
+    'color-save-pal': '<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M12 11v6M9 14h6"/>',
+    'color-import-pal': '<path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>',
+    'color-export-pal': '<path d="M12 15V3m0 0l-4 4m4-4l4 4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>',
+    'brush-new': '<path d="M12 5v14M5 12h14"/>',
+    'brush-dup': '<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M4 16V6a2 2 0 0 1 2-2h10"/>',
+    'brush-del': '<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>',
+    'brush-import': '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/>',
+    'brush-export': '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/>',
+    'brush-fav': '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+    'brush-settings': '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
+    'brush-reset': '<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>',
+    'brush-search': '<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/>',
+    'layer-alpha-lock': '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+    'layer-clip': '<path d="M9 17H7A5 5 0 0 1 7 7h2"/><path d="M15 7h2a5 5 0 1 1 0 10h-2"/><path d="M8 12h8"/>',
+    'layer-new-raster': '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 9v6M9 12h6"/>',
+    'layer-new-vector': '<path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>',
+    'layer-new-group': '<path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><path d="M12 11v6M9 14h6"/>',
+    'layer-new-mask': '<circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18V3z" fill="currentColor"/>',
+    'layer-duplicate': '<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M4 16V6a2 2 0 0 1 2-2h10"/>',
+    'layer-merge-down': '<path d="M12 5v10m0 0l-4-4m4 4l4-4"/><path d="M4 19h16"/>',
+    'layer-merge-visible': '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>',
+    'layer-up': '<path d="M12 19V5m0 0l-5 5m5-5l5 5"/>',
+    'layer-down': '<path d="M12 5v14m0 0l-5-5m5 5l5-5"/>',
+    'layer-delete': '<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>',
+    'dlg-history-clear': '<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>',
+    'dlg-history-settings': '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
+    'st-ready': '<circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/>',
+    'anim-play': '<polygon points="6 4 20 12 6 20 6 4"/>',
+    'anim-stop': '<rect x="6" y="6" width="12" height="12" rx="1"/>',
+    'anim-prev-frame': '<path d="M15 18l-6-6 6-6"/>',
+    'anim-next-frame': '<path d="M9 18l6-6-6-6"/>',
+    'anim-first-frame': '<path d="M19 18l-6-6 6-6M11 6v12"/>',
+    'anim-last-frame': '<path d="M5 18l6-6-6-6M13 6v12"/>',
+    'anim-loop': '<path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/>'
+  };
+
+  function makeSvg(key, size = 18) {
+    const inner = ICONS[key] || '<rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="12" cy="12" r="2"/>';
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${inner}</svg>`;
+  }
+
+  function hydrateIcons() {
+    document.querySelectorAll('.icon-slot[data-icon]').forEach((slot) => {
+      if (slot.dataset.hydrated === '1' && slot.children.length > 0) return;
+      const key = slot.getAttribute('data-icon') || '';
+      const size = Number(slot.getAttribute('data-icon-size')) || 18;
+      slot.innerHTML = makeSvg(key, size);
+      slot.dataset.hydrated = '1';
+    });
+  }
+
+  function hydrateFallbackPanels() {
+    const leftTools = document.getElementById('left-tools');
+    if (leftTools && leftTools.children.length === 0) {
+      const tools = [
+        { id: 'brush', title: 'Brush (B)', icon: 'tool-brush' },
+        { id: 'pencil', title: 'Pencil (P)', icon: 'tool-pencil' },
+        { id: 'eraser', title: 'Eraser (E)', icon: 'tool-eraser' },
+        { id: 'fill', title: 'Bucket Fill (G)', icon: 'tool-fill' },
+        { id: 'pick', title: 'Color Picker (I)', icon: 'tool-pick' },
+        { id: 'move', title: 'Move (V)', icon: 'tool-move' },
+        { id: 'select', title: 'Marquee Select (M)', icon: 'tool-select' },
+        { id: 'lasso', title: 'Lasso (L)', icon: 'tool-lasso' },
+        { id: 'wand', title: 'Magic Wand (W)', icon: 'tool-wand' },
+        { id: 'shape', title: 'Shape (U)', icon: 'tool-shape' },
+        { id: 'text', title: 'Text (T)', icon: 'tool-text' },
+        { id: 'symmetry', title: 'Symmetry (Y)', icon: 'tool-symmetry' },
+        { id: 'comic', title: 'Comic Panel (C)', icon: 'menu-comic' }
+      ];
+      leftTools.innerHTML = tools.map((t, idx) => `
+        <button type="button" class="kas-icon-btn kas-fallback-tool ${idx === 0 ? 'active' : ''}" data-fallback-tool="${t.id}" title="${t.title}" aria-label="${t.title}">
+          ${makeSvg(t.icon, 20)}
+        </button>
+      `).join('');
+
+      leftTools.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-fallback-tool]');
+        if (!btn) return;
+        leftTools.querySelectorAll('[data-fallback-tool]').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        const statusTool = document.getElementById('status-tool');
+        if (statusTool) statusTool.textContent = btn.dataset.fallbackTool.toUpperCase();
+      });
+    }
+
+    const brushList = document.getElementById('brush-list');
+    if (brushList && brushList.children.length === 0) {
+      const brushes = [
+        { name: 'G-Pen', cat: 'Ink', size: 8 },
+        { name: 'Soft Airbrush', cat: 'Paint', size: 36 },
+        { name: '2B Sketch Pencil', cat: 'Sketch', size: 6 },
+        { name: 'Flat Gouache', cat: 'Paint', size: 22 },
+        { name: 'Grain Marker', cat: 'Texture', size: 16 },
+        { name: 'Soft Eraser', cat: 'Eraser', size: 24 }
+      ];
+      brushList.innerHTML = brushes.map((b, idx) => `
+        <div class="kas-fallback-brush ${idx === 0 ? 'active' : ''}" data-brush-name="${b.name}" data-brush-size="${b.size}" style="padding:5px 8px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:12px;border-radius:4px;">
+          <span>${b.name}</span>
+          <span style="opacity:0.65;font-size:10.5px;">${b.cat}</span>
+        </div>
+      `).join('');
+
+      brushList.addEventListener('click', (e) => {
+        const row = e.target.closest('[data-brush-name]');
+        if (!row) return;
+        brushList.querySelectorAll('[data-brush-name]').forEach((r) => r.classList.remove('active'));
+        row.classList.add('active');
+        const sz = Number(row.dataset.brushSize) || 10;
+        const sizeInput = document.getElementById('brush-size');
+        const sizeVal = document.getElementById('brush-size-val');
+        if (sizeInput) sizeInput.value = String(sz);
+        if (sizeVal) sizeVal.textContent = `${sz} px`;
+        const statusTool = document.getElementById('status-tool');
+        if (statusTool) statusTool.textContent = `BRUSH (${row.dataset.brushName})`;
+      });
+    }
+
+    const layerList = document.getElementById('layer-list');
+    if (layerList && layerList.children.length === 0) {
+      layerList.innerHTML = `
+        <div class="kas-fallback-layer active" style="padding:6px 8px;display:flex;justify-content:space-between;align-items:center;font-size:12px;border-radius:4px;">
+          <span>Layer 1 (Paint)</span>
+          <span style="opacity:0.65;font-size:11px;">100%</span>
+        </div>
+        <div class="kas-fallback-layer" style="padding:6px 8px;display:flex;justify-content:space-between;align-items:center;font-size:12px;border-radius:4px;">
+          <span>Background</span>
+          <span style="opacity:0.65;font-size:11px;">100%</span>
+        </div>
+      `;
+    }
+
+    const blendSelect = document.getElementById('layer-blend');
+    if (blendSelect && blendSelect.options.length === 0) {
+      ['Normal', 'Multiply', 'Screen', 'Overlay', 'Darken', 'Lighten', 'Color Dodge', 'Color Burn'].forEach((mode) => {
+        const opt = document.createElement('option');
+        opt.value = mode.toLowerCase();
+        opt.textContent = mode;
+        blendSelect.appendChild(opt);
+      });
+    }
+  }
+
+  function runAll() {
+    hydrateIcons();
+    hydrateFallbackPanels();
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    runAll();
+    setTimeout(runAll, 250);
+    setTimeout(runAll, 1000);
+  });
+})();
+</script>
+</body>
+</html>
 </body>
 </html>
