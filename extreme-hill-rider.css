@@ -1,20 +1,118 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700;800&display=swap');
+
+/* ==========================================================================
+   EXTREME HILL RIDER — AAA ARCADE RACING UI DESIGN SYSTEM (v3.0)
+   High-Craft Glassmorphic HUD, Garage Showcase, Telemetry & Tactile Controls
+   ========================================================================== */
 
 :root {
-  --hr-bg: #0B1120;
-  --hr-panel: rgba(15, 23, 42, 0.94);
-  --hr-surface: rgba(30, 41, 59, 0.92);
-  --hr-border: rgba(148, 163, 184, 0.24);
+  /* Core Atmospheric Palette */
+  --hr-bg: #070B14;
+  --hr-bg-deep: #04070D;
+  --hr-bg-elevated: #0E1628;
+  --hr-panel: rgba(11, 18, 34, 0.92);
+  --hr-panel-heavy: rgba(9, 14, 27, 0.97);
+  --hr-surface: rgba(23, 34, 56, 0.88);
+  --hr-surface-hover: rgba(33, 49, 79, 0.94);
+  --hr-surface-active: rgba(44, 64, 102, 0.98);
+  --hr-glass: rgba(15, 23, 42, 0.68);
+  --hr-glass-light: rgba(255, 255, 255, 0.05);
+
+  /* Borders & Highlights */
+  --hr-border: rgba(148, 163, 184, 0.22);
+  --hr-border-subtle: rgba(148, 163, 184, 0.12);
+  --hr-border-strong: rgba(226, 232, 240, 0.34);
+  --hr-border-glow: rgba(249, 115, 22, 0.55);
+  --hr-inner-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  --hr-inner-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.45);
+
+  /* Text Hierarchy */
   --hr-text: #F8FAFC;
+  --hr-text-bright: #FFFFFF;
   --hr-muted: #CBD5E1;
+  --hr-dim: #94A3B8;
+  --hr-faint: #64748B;
+  --hr-text-dark: #090E1A;
+
+  /* Brand & Telemetry Accents */
   --hr-accent: #F97316;
+  --hr-accent-bright: #FB923C;
+  --hr-accent-deep: #C2410C;
+  --hr-accent-glow: rgba(249, 115, 22, 0.42);
+
   --hr-blue: #3B82F6;
+  --hr-blue-bright: #60A5FA;
+  --hr-blue-deep: #1D4ED8;
+  --hr-blue-glow: rgba(59, 130, 246, 0.4);
+
+  --hr-cyan: #06B6D4;
+  --hr-cyan-bright: #22D3EE;
+  --hr-cyan-glow: rgba(6, 182, 212, 0.38);
+
   --hr-gold: #FACC15;
+  --hr-gold-bright: #FDE047;
+  --hr-gold-deep: #CA8A04;
+  --hr-gold-glow: rgba(250, 204, 21, 0.42);
+
   --hr-green: #22C55E;
+  --hr-green-bright: #4ADE80;
+  --hr-green-deep: #15803D;
+  --hr-green-glow: rgba(34, 197, 94, 0.4);
+
   --hr-red: #EF4444;
+  --hr-red-bright: #F87171;
+  --hr-red-deep: #B91C1C;
+  --hr-red-glow: rgba(239, 68, 68, 0.45);
+
+  --hr-purple: #A855F7;
+  --hr-purple-glow: rgba(168, 85, 247, 0.38);
+
+  /* Gradients */
+  --hr-grad-primary: linear-gradient(135deg, #FB923C 0%, #F97316 50%, #EA580C 100%);
+  --hr-grad-primary-hover: linear-gradient(135deg, #FDBA74 0%, #FB923C 50%, #F97316 100%);
+  --hr-grad-gold: linear-gradient(135deg, #FDE047 0%, #FACC15 52%, #EAB308 100%);
+  --hr-grad-blue: linear-gradient(135deg, #60A5FA 0%, #3B82F6 50%, #2563EB 100%);
+  --hr-grad-green: linear-gradient(135deg, #4ADE80 0%, #22C55E 50%, #16A34A 100%);
+  --hr-grad-red: linear-gradient(135deg, #F87171 0%, #EF4444 50%, #DC2626 100%);
+  --hr-grad-surface: linear-gradient(180deg, rgba(35, 49, 79, 0.92) 0%, rgba(18, 27, 46, 0.95) 100%);
+  --hr-grad-panel: linear-gradient(165deg, rgba(17, 26, 48, 0.96) 0%, rgba(8, 13, 25, 0.98) 100%);
+  --hr-grad-sheen: linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.14) 50%, transparent 80%);
+
+  /* Elevation & Shadows */
+  --hr-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.35);
+  --hr-shadow-md: 0 12px 28px rgba(0, 0, 0, 0.5);
+  --hr-shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.72);
+  --hr-shadow-xl: 0 32px 84px rgba(0, 0, 0, 0.85);
+
+  /* Radii & Spacing */
+  --hr-radius-xs: 6px;
+  --hr-radius-sm: 9px;
+  --hr-radius-md: 13px;
+  --hr-radius-lg: 18px;
+  --hr-radius-xl: 24px;
+  --hr-radius-pill: 9999px;
+
+  /* Typography */
+  --hr-font-display: 'Outfit', system-ui, -apple-system, sans-serif;
+  --hr-font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --hr-font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* Motion */
+  --hr-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --hr-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --hr-ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+
+  /* Safe Areas for Mobile Notches */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
 }
 
-* {
+/* Global Reset (Fixed universal selector) */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
 }
@@ -23,36 +121,221 @@
   display: none !important;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: var(--hr-bg);
+  background-color: var(--hr-bg);
+  background-image:
+    radial-gradient(circle at 50% 0%, rgba(30, 58, 138, 0.22), transparent 60%),
+    radial-gradient(circle at 85% 90%, rgba(249, 115, 22, 0.12), transparent 50%);
   color: var(--hr-text);
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: var(--hr-font-sans);
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   user-select: none;
   -webkit-user-select: none;
 }
 
-button:focus-visible,
-a:focus-visible,
-input:focus-visible {
-  outline: 2px solid var(--hr-gold);
-  outline-offset: 2px;
+/* Custom Scrollbar for Garage, Maps & Stats */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
 }
 
-.tabular-nums {
-  font-family: 'JetBrains Mono', monospace;
-  font-variant-numeric: tabular-nums;
+::-webkit-scrollbar-track {
+  background: rgba(8, 13, 24, 0.6);
+  border-radius: var(--hr-radius-pill);
 }
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.28);
+  border-radius: var(--hr-radius-pill);
+  border: 1px solid rgba(15, 23, 42, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(249, 115, 22, 0.65);
+}
+
+/* Focus Accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--hr-gold);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(250, 204, 21, 0.25);
+}
+
+/* Typography Helpers */
+.tabular-nums {
+  font-family: var(--hr-font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.hr-display-font {
+  font-family: var(--hr-font-display);
+  letter-spacing: -0.02em;
+}
+
+.hr-uppercase-tag {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+
+/* ==========================================================================
+   KEYFRAME ANIMATIONS & TELEMETRY MICRO-INTERACTIONS
+   ========================================================================== */
+
+@keyframes hrFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hrScalePop {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes hrSlideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hrSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hrPulseGlow {
+  0%, 100% {
+    box-shadow: 0 10px 28px rgba(249, 115, 22, 0.36), 0 0 0 0 rgba(249, 115, 22, 0.45);
+  }
+  50% {
+    box-shadow: 0 14px 36px rgba(249, 115, 22, 0.56), 0 0 0 6px rgba(249, 115, 22, 0);
+  }
+}
+
+@keyframes hrFuelDangerPulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.7);
+  }
+  50% {
+    opacity: 0.65;
+    box-shadow: 0 0 22px rgba(239, 68, 68, 0.95);
+  }
+}
+
+@keyframes hrSheenSweep {
+  0% {
+    transform: translateX(-140%) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(240%) skewX(-20deg);
+  }
+}
+
+@keyframes hrFloatEmblem {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes hrCoinSpin {
+  0%, 100% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(0.82);
+  }
+}
+
+@keyframes hrStuntPop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 14px) scale(0.75);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1.08);
+  }
+  80% {
+    opacity: 1;
+    transform: translate(-50%, -6px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -18px) scale(0.95);
+  }
+}
+
+@keyframes hrStripesMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 28px 0;
+  }
+}
+
+
+/* ==========================================================================
+   VIEWPORT, CANVAS & OVERLAY STAGE ARCHITECTURE
+   ========================================================================== */
 
 .hr-viewport {
   position: relative;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
+  background: var(--hr-bg-deep);
+}
+
+.hr-viewport::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 90px rgba(3, 6, 14, 0.55);
+  z-index: 5;
 }
 
 #hill-canvas {
@@ -60,9 +343,10 @@ input:focus-visible {
   width: 100%;
   height: 100%;
   touch-action: none;
+  image-rendering: auto;
 }
 
-/* OVERLAY LAYERS (Pointer pass-through except interactive cards/buttons) */
+/* Overlay Layers (Pointer pass-through except interactive cards/buttons) */
 .hr-layer {
   position: fixed;
   inset: 0;
@@ -70,28 +354,47 @@ input:focus-visible {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 18px 22px;
+  padding:
+    calc(18px + var(--safe-top))
+    calc(22px + var(--safe-right))
+    calc(18px + var(--safe-bottom))
+    calc(22px + var(--safe-left));
   z-index: 20;
+  animation: hrFadeIn 0.22s var(--hr-ease-out);
 }
 
 .hr-layer.centered {
   align-items: center;
   justify-content: center;
-  background: rgba(8, 13, 24, 0.68);
+  background: radial-gradient(circle at 50% 45%, rgba(12, 20, 38, 0.65) 0%, rgba(4, 7, 15, 0.86) 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   pointer-events: auto;
+  z-index: 40;
 }
 
-/* SHARED BUTTONS */
+.hr-layer.modal-top {
+  z-index: 60;
+}
+
+
+/* ==========================================================================
+   TACTILE ARCADE BUTTON SYSTEM
+   ========================================================================== */
+
 .hr-btn {
   pointer-events: auto;
+  position: relative;
+  overflow: hidden;
   border: 1px solid var(--hr-border);
-  background: var(--hr-surface);
+  background: var(--hr-grad-surface);
   color: var(--hr-text);
   padding: 10px 18px;
-  border-radius: 10px;
-  font-family: inherit;
+  border-radius: var(--hr-radius-sm);
+  font-family: var(--hr-font-sans);
   font-size: 13.5px;
   font-weight: 700;
+  letter-spacing: 0.01em;
   cursor: pointer;
   text-decoration: none;
   display: inline-flex;
@@ -99,53 +402,183 @@ input:focus-visible {
   justify-content: center;
   gap: 8px;
   white-space: nowrap;
-  transition: transform 0.12s, border-color 0.14s, background 0.14s;
+  box-shadow: var(--hr-shadow-sm), var(--hr-inner-highlight);
+  transition:
+    transform 0.14s var(--hr-ease-spring),
+    border-color 0.16s ease,
+    background 0.16s ease,
+    box-shadow 0.18s ease,
+    color 0.16s ease;
+}
+
+.hr-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 45%;
+  height: 100%;
+  background: var(--hr-grad-sheen);
+  transform: translateX(-180%) skewX(-20deg);
+  pointer-events: none;
 }
 
 .hr-btn:hover:not(:disabled) {
   border-color: var(--hr-gold);
+  background: var(--hr-surface-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45), var(--hr-inner-highlight);
+}
+
+.hr-btn:hover:not(:disabled)::after {
+  animation: hrSheenSweep 0.65s ease;
 }
 
 .hr-btn:active:not(:disabled) {
-  transform: scale(0.97);
+  transform: scale(0.96) translateY(1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 .hr-btn:disabled {
-  opacity: 0.48;
+  opacity: 0.42;
   cursor: not-allowed;
+  filter: grayscale(0.45);
+  box-shadow: none;
 }
 
+/* Primary Orange Action */
 .hr-btn.primary {
-  background: var(--hr-accent);
-  border-color: var(--hr-accent);
-  color: #0F172A;
+  background: var(--hr-grad-primary);
+  border-color: #FDBA74;
+  color: var(--hr-text-dark);
+  font-weight: 800;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 22px rgba(249, 115, 22, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.42);
 }
 
 .hr-btn.primary:hover:not(:disabled) {
-  background: #FB923C;
+  background: var(--hr-grad-primary-hover);
+  border-color: #FEF08A;
+  box-shadow: 0 12px 28px rgba(249, 115, 22, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.55);
 }
 
-.hr-btn.amber {
-  background: var(--hr-gold);
-  border-color: var(--hr-gold);
-  color: #0F172A;
+/* Gold / Coin Upgrade Action */
+.hr-btn.amber,
+.hr-btn.gold {
+  background: var(--hr-grad-gold);
+  border-color: #FEF08A;
+  color: var(--hr-text-dark);
+  font-weight: 800;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 22px rgba(250, 204, 21, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
+.hr-btn.amber:hover:not(:disabled),
+.hr-btn.gold:hover:not(:disabled) {
+  border-color: #FFFFFF;
+  box-shadow: 0 12px 28px rgba(250, 204, 21, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+/* Blue Info / Select Action */
+.hr-btn.blue {
+  background: var(--hr-grad-blue);
+  border-color: #93C5FD;
+  color: #FFFFFF;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.hr-btn.blue:hover:not(:disabled) {
+  border-color: #DBEAFE;
+  box-shadow: 0 12px 26px rgba(59, 130, 246, 0.48);
+}
+
+/* Success / Equipped State */
+.hr-btn.success,
+.hr-btn.equipped {
+  background: rgba(34, 197, 94, 0.18);
+  border-color: rgba(34, 197, 94, 0.65);
+  color: #86EFAC;
+}
+
+/* Danger / Quit / Reset */
 .hr-btn.danger {
-  background: rgba(239, 68, 68, 0.2);
-  border-color: rgba(239, 68, 68, 0.55);
-  color: #FCA5A5;
+  background: linear-gradient(180deg, rgba(239, 68, 68, 0.24) 0%, rgba(185, 28, 28, 0.32) 100%);
+  border-color: rgba(248, 113, 113, 0.55);
+  color: #FECACA;
 }
 
+.hr-btn.danger:hover:not(:disabled) {
+  background: linear-gradient(180deg, rgba(239, 68, 68, 0.38) 0%, rgba(185, 28, 28, 0.48) 100%);
+  border-color: #FCA5A5;
+  color: #FFFFFF;
+  box-shadow: 0 8px 22px rgba(239, 68, 68, 0.35);
+}
+
+/* Ghost / Minimal */
+.hr-btn.ghost {
+  background: rgba(15, 23, 42, 0.55);
+  border-color: rgba(148, 163, 184, 0.2);
+  color: var(--hr-muted);
+}
+
+.hr-btn.ghost:hover:not(:disabled) {
+  background: rgba(30, 41, 59, 0.85);
+  color: var(--hr-text);
+}
+
+/* Size Modifiers */
 .hr-btn.sm {
   padding: 7px 13px;
   font-size: 12.5px;
   border-radius: 8px;
+  gap: 6px;
 }
 
-/* TITLE SCREEN */
+.hr-btn.lg {
+  padding: 13px 26px;
+  font-size: 15px;
+  border-radius: 12px;
+}
+
+.hr-btn.icon-only {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-radius: 10px;
+}
+
+.hr-btn.icon-only.sm {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+}
+
+.hr-btn.play-hero {
+  padding: 15px 44px;
+  font-size: 18px;
+  font-family: var(--hr-font-display);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 14px;
+  animation: hrPulseGlow 2.6s infinite ease-in-out;
+}
+
+
+/* ==========================================================================
+   TITLE SCREEN & MAIN LOBBY SHOWCASE
+   ========================================================================== */
+
 .hr-title-stage {
-  background: linear-gradient(180deg, rgba(8, 13, 24, 0.72) 0%, rgba(8, 13, 24, 0.25) 55%, rgba(8, 13, 24, 0.72) 100%);
+  background:
+    radial-gradient(circle at 50% 35%, rgba(249, 115, 22, 0.14) 0%, transparent 55%),
+    linear-gradient(
+      180deg,
+      rgba(6, 10, 20, 0.82) 0%,
+      rgba(6, 10, 20, 0.22) 48%,
+      rgba(6, 10, 20, 0.84) 100%
+    );
 }
 
 .hr-title-topbar {
@@ -153,99 +586,199 @@ input:focus-visible {
   justify-content: space-between;
   align-items: center;
   gap: 12px;
+  animation: hrSlideDown 0.35s var(--hr-ease-out);
 }
 
+.hr-topbar-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: auto;
+}
+
+/* Coin & Currency Pill */
 .hr-coin-readout {
   pointer-events: auto;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: var(--hr-panel);
-  border: 1px solid var(--hr-border);
-  padding: 7px 14px;
-  border-radius: 10px;
+  gap: 9px;
+  background: linear-gradient(180deg, rgba(20, 30, 52, 0.92) 0%, rgba(10, 16, 30, 0.96) 100%);
+  border: 1px solid rgba(250, 204, 21, 0.38);
+  padding: 7px 15px;
+  border-radius: var(--hr-radius-pill);
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--hr-gold);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(254, 240, 138, 0.2);
 }
 
+.hr-coin-readout .coin-dot,
+.hr-coin-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--hr-grad-gold);
+  color: #422006;
+  font-size: 11px;
+  font-weight: 900;
+  box-shadow: 0 0 10px rgba(250, 204, 21, 0.55);
+}
+
+/* Central Hero Card */
 .hr-title-center {
   pointer-events: auto;
-  max-width: 680px;
-  margin: 18px auto auto;
+  position: relative;
+  max-width: 720px;
+  width: 100%;
+  margin: auto;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
-  padding: 24px 32px;
-  border-radius: 20px;
-  background: rgba(11, 17, 32, 0.56);
-  border: 1px solid rgba(148, 163, 184, 0.22);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.42);
+  gap: 18px;
+  padding: 28px 36px;
+  border-radius: var(--hr-radius-xl);
+  background: linear-gradient(165deg, rgba(13, 21, 40, 0.78) 0%, rgba(7, 12, 24, 0.86) 100%);
+  border: 1px solid rgba(226, 232, 240, 0.22);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.62),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  animation: hrScalePop 0.38s var(--hr-ease-out);
+}
+
+.hr-title-center::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 18%;
+  right: 18%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--hr-accent), var(--hr-gold), var(--hr-accent), transparent);
+  border-radius: var(--hr-radius-pill);
 }
 
 .hr-title-emblem {
   width: min(520px, 84vw);
   height: auto;
   display: block;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.65));
+  animation: hrFloatEmblem 4.5s ease-in-out infinite;
 }
 
+/* Active Loadout Summary Badges */
 .hr-title-summary {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
   flex-wrap: wrap;
   justify-content: center;
-  font-size: 13.5px;
+  font-size: 13px;
+  font-weight: 600;
   color: var(--hr-muted);
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+.hr-summary-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: var(--hr-radius-pill);
+  background: rgba(30, 41, 59, 0.78);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  color: var(--hr-text);
+  font-size: 12.5px;
+}
+
+.hr-summary-chip strong {
+  color: var(--hr-gold);
 }
 
 .hr-title-cta-row {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 14px;
   flex-wrap: wrap;
-}
-
-.hr-btn.play-hero {
-  padding: 14px 36px;
-  font-size: 17px;
-  font-family: 'Outfit', sans-serif;
-  border-radius: 12px;
-  box-shadow: 0 12px 32px rgba(249, 115, 22, 0.35);
+  margin-top: 2px;
 }
 
 .hr-secondary-nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 9px;
   flex-wrap: wrap;
+  padding-top: 4px;
+}
+
+.hr-secondary-nav .hr-btn {
+  background: rgba(22, 33, 56, 0.85);
+  border-color: rgba(148, 163, 184, 0.24);
 }
 
 .hr-control-hint {
   text-align: center;
-  font-size: 12.5px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   color: var(--hr-muted);
+  background: rgba(8, 13, 24, 0.62);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  padding: 6px 16px;
+  border-radius: var(--hr-radius-pill);
+  align-self: center;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
 }
 
-/* SUBMENU SHELL (GARAGE, MAPS, UPGRADES, SETTINGS, STATS) */
+.hr-kbd {
+  display: inline-block;
+  padding: 1px 6px;
+  margin: 0 2px;
+  font-family: var(--hr-font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--hr-text);
+  background: rgba(30, 41, 59, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+}
+
+
+/* ==========================================================================
+   SUBMENU SHELLS (GARAGE, STAGE SELECT, TUNING UPGRADES, SETTINGS, STATS)
+   ========================================================================== */
+
 .hr-submenu-panel {
+  position: relative;
   width: 100%;
-  max-width: 1040px;
+  max-width: 1080px;
   max-height: 90vh;
-  background: var(--hr-panel);
-  border: 1px solid var(--hr-border);
-  border-radius: 16px;
-  padding: 24px;
+  max-height: 90dvh;
+  background: var(--hr-grad-panel);
+  border: 1px solid var(--hr-border-strong);
+  border-radius: var(--hr-radius-lg);
+  padding: 24px 26px;
   display: flex;
   flex-direction: column;
   gap: 18px;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.65);
+  box-shadow: var(--hr-shadow-xl), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  animation: hrScalePop 0.24s var(--hr-ease-out);
+}
+
+.hr-submenu-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.7), rgba(249, 115, 22, 0.8), transparent);
 }
 
 .hr-submenu-head {
@@ -258,36 +791,130 @@ input:focus-visible {
   padding-bottom: 14px;
 }
 
+.hr-submenu-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
 .hr-submenu-head h2 {
   margin: 0;
-  font-family: 'Outfit', sans-serif;
-  font-size: 24px;
+  font-family: var(--hr-font-display);
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  background: linear-gradient(180deg, #FFFFFF 0%, #CBD5E1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hr-submenu-subtitle {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--hr-dim);
 }
 
 .hr-submenu-scroll {
   overflow-y: auto;
-  padding-right: 4px;
+  padding-right: 6px;
+  padding-bottom: 4px;
 }
 
+/* Filter Tabs inside Submenus */
+.hr-tab-strip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.hr-tab-btn {
+  pointer-events: auto;
+  padding: 6px 14px;
+  border-radius: var(--hr-radius-pill);
+  border: 1px solid var(--hr-border);
+  background: rgba(15, 23, 42, 0.75);
+  color: var(--hr-muted);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.hr-tab-btn:hover {
+  border-color: var(--hr-border-strong);
+  color: var(--hr-text);
+}
+
+.hr-tab-btn.active {
+  background: var(--hr-accent);
+  border-color: var(--hr-accent-bright);
+  color: var(--hr-text-dark);
+}
+
+/* Responsive Card Grid */
 .hr-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(248px, 1fr));
+  gap: 15px;
 }
 
+/* Garage / Map / Upgrade Card */
 .hr-card {
-  background: var(--hr-surface);
+  position: relative;
+  background: linear-gradient(180deg, rgba(28, 40, 66, 0.88) 0%, rgba(16, 24, 42, 0.95) 100%);
   border: 1px solid var(--hr-border);
-  border-radius: 12px;
+  border-radius: var(--hr-radius-md);
   padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  box-shadow: var(--hr-shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition:
+    transform 0.18s var(--hr-ease-out),
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+.hr-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(148, 163, 184, 0.45);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.52), inset 0 1px 0 rgba(255, 255, 255, 0.14);
 }
 
 .hr-card.selected {
   border-color: var(--hr-accent);
-  box-shadow: 0 0 0 1px var(--hr-accent);
+  background: linear-gradient(180deg, rgba(45, 34, 30, 0.72) 0%, rgba(18, 25, 44, 0.96) 100%);
+  box-shadow:
+    0 0 0 1px var(--hr-accent),
+    0 12px 30px rgba(249, 115, 22, 0.24),
+    inset 0 1px 0 rgba(253, 186, 116, 0.25);
+}
+
+.hr-card.locked {
+  opacity: 0.82;
+}
+
+.hr-card-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 3px 9px;
+  border-radius: var(--hr-radius-pill);
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(249, 115, 22, 0.2);
+  border: 1px solid rgba(249, 115, 22, 0.55);
+  color: #FDBA74;
+}
+
+.hr-card-badge.unlocked {
+  background: rgba(34, 197, 94, 0.18);
+  border-color: rgba(34, 197, 94, 0.5);
+  color: #86EFAC;
 }
 
 .hr-card-head {
@@ -299,8 +926,10 @@ input:focus-visible {
 
 .hr-card h3 {
   margin: 0;
-  font-size: 16.5px;
-  font-weight: 700;
+  font-family: var(--hr-font-display);
+  font-size: 17.5px;
+  font-weight: 800;
+  color: var(--hr-text-bright);
 }
 
 .hr-card-desc {
@@ -310,201 +939,389 @@ input:focus-visible {
   line-height: 1.45;
 }
 
+/* Vehicle Color Swatch */
 .hr-swatch {
-  width: 24px;
-  height: 24px;
-  border-radius: 6px;
-  border: 3px solid #FFF;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  border: 2.5px solid #FFFFFF;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
   flex-shrink: 0;
 }
 
+/* Vehicle Telemetry Stat Bars */
 .hr-stat-bars {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
+  padding: 10px;
+  border-radius: var(--hr-radius-sm);
+  background: rgba(9, 14, 26, 0.55);
+  border: 1px solid var(--hr-border-subtle);
 }
 
 .hr-stat-line {
   display: grid;
-  grid-template-columns: 68px 1fr;
+  grid-template-columns: 74px 1fr;
   align-items: center;
   gap: 8px;
   font-size: 11.5px;
+  font-weight: 600;
   color: var(--hr-muted);
 }
 
 .hr-bar {
-  height: 6px;
-  background: rgba(15, 23, 42, 0.8);
-  border-radius: 999px;
+  height: 7px;
+  background: rgba(15, 23, 42, 0.92);
+  border-radius: var(--hr-radius-pill);
   overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.16);
 }
 
 .hr-bar i {
   display: block;
   height: 100%;
-  background: var(--hr-blue);
-  border-radius: 999px;
+  background: linear-gradient(90deg, var(--hr-blue) 0%, var(--hr-cyan-bright) 100%);
+  border-radius: var(--hr-radius-pill);
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.45);
+  transition: width 0.35s var(--hr-ease-out);
+}
+
+.hr-card.selected .hr-bar i {
+  background: linear-gradient(90deg, var(--hr-accent) 0%, var(--hr-gold) 100%);
+  box-shadow: 0 0 8px rgba(249, 115, 22, 0.5);
 }
 
 .hr-card-actions {
   display: flex;
   gap: 8px;
   margin-top: auto;
+  padding-top: 2px;
 }
 
 .hr-card-actions .hr-btn {
   flex: 1;
 }
 
+/* Map Stage Banner */
 .hr-map-banner {
-  border-radius: 9px;
-  padding: 14px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  padding: 16px 14px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
+  gap: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.85);
+}
+
+.hr-map-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.48) 100%);
+  pointer-events: none;
+}
+
+.hr-map-banner > * {
+  position: relative;
+  z-index: 1;
 }
 
 .hr-map-name {
-  font-family: 'Outfit', sans-serif;
-  font-size: 17px;
+  font-family: var(--hr-font-display);
+  font-size: 18px;
   font-weight: 800;
+  color: #FFFFFF;
 }
 
 .hr-map-meta {
   font-size: 12px;
-  color: #F8FAFC;
+  font-weight: 600;
+  color: #F1F5F9;
 }
 
+/* Upgrade Level Pips */
 .hr-pip-row {
   display: flex;
   gap: 6px;
+  padding: 4px 0;
 }
 
 .hr-pip {
   flex: 1;
-  height: 8px;
+  height: 9px;
   border-radius: 4px;
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid var(--hr-border);
+  background: rgba(10, 16, 30, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  transition: all 0.2s var(--hr-ease-spring);
 }
 
 .hr-pip.filled {
-  background: var(--hr-gold);
-  border-color: var(--hr-gold);
+  background: var(--hr-grad-gold);
+  border-color: #FEF08A;
+  box-shadow: 0 0 10px rgba(250, 204, 21, 0.45);
 }
 
-/* SETTINGS & STATS */
+
+/* ==========================================================================
+   SETTINGS PANEL & CAREER TELEMETRY STATS
+   ========================================================================== */
+
 .hr-settings-box {
-  max-width: 520px;
+  max-width: 560px;
 }
 
 .hr-setting-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--hr-border);
+  gap: 16px;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--hr-border-subtle);
 }
 
+.hr-setting-row:last-child {
+  border-bottom: none;
+}
+
+.hr-setting-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hr-setting-label strong {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--hr-text);
+}
+
+.hr-setting-label span {
+  font-size: 12px;
+  color: var(--hr-dim);
+}
+
+/* Custom Range Slider */
 .hr-setting-row input[type="range"] {
-  width: 180px;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 190px;
+  height: 7px;
+  border-radius: var(--hr-radius-pill);
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid var(--hr-border);
   accent-color: var(--hr-accent);
+  cursor: pointer;
 }
 
+.hr-setting-row input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--hr-grad-primary);
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+
+.hr-setting-row input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+/* Toggle Switch */
+.hr-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 48px;
+  height: 26px;
+  cursor: pointer;
+}
+
+.hr-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.hr-toggle-track {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--hr-radius-pill);
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid var(--hr-border);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.hr-toggle-track::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--hr-muted);
+  transition: transform 0.2s var(--hr-ease-spring), background 0.2s ease;
+}
+
+.hr-toggle input:checked + .hr-toggle-track {
+  background: rgba(249, 115, 22, 0.32);
+  border-color: var(--hr-accent);
+}
+
+.hr-toggle input:checked + .hr-toggle-track::after {
+  transform: translateX(22px);
+  background: var(--hr-accent-bright);
+}
+
+/* Career Stats KPI Tiles */
 .hr-stats-kpis {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
 }
 
 .hr-kpi-tile {
-  background: var(--hr-surface);
+  background: linear-gradient(180deg, rgba(28, 41, 68, 0.86) 0%, rgba(15, 23, 42, 0.95) 100%);
   border: 1px solid var(--hr-border);
-  border-radius: 10px;
-  padding: 12px;
+  border-radius: var(--hr-radius-md);
+  padding: 14px 16px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
+  box-shadow: var(--hr-shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .hr-kpi-tile span {
-  font-size: 11.5px;
-  color: var(--hr-muted);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--hr-dim);
 }
 
 .hr-kpi-tile strong {
-  font-size: 20px;
-  color: var(--hr-text);
+  font-family: var(--hr-font-mono);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--hr-text-bright);
 }
 
 .hr-records-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-  gap: 8px;
-  margin-top: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
 }
 
 .hr-record-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 9px 12px;
-  background: var(--hr-surface);
+  padding: 11px 14px;
+  background: rgba(22, 33, 56, 0.85);
   border: 1px solid var(--hr-border);
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 13px;
+  font-weight: 600;
 }
 
-/* ACTIVE GAMEPLAY HUD */
+.hr-record-row strong {
+  font-family: var(--hr-font-mono);
+  color: var(--hr-gold);
+}
+
+
+/* ==========================================================================
+   ACTIVE GAMEPLAY TELEMETRY HUD, FUEL GAUGE & STUNT NOTIFICATIONS
+   ========================================================================== */
+
 .hr-hud-top {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
+  animation: hrSlideDown 0.25s var(--hr-ease-out);
 }
 
+.hr-hud-left-stack {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Telemetry Cluster */
 .hr-hud-cluster {
   display: flex;
   align-items: center;
-  gap: 14px;
-  background: rgba(15, 23, 42, 0.84);
-  border: 1px solid var(--hr-border);
-  border-radius: 12px;
-  padding: 8px 14px;
+  gap: 16px;
+  background: linear-gradient(180deg, rgba(16, 25, 46, 0.88) 0%, rgba(9, 15, 29, 0.94) 100%);
+  border: 1px solid var(--hr-border-strong);
+  border-radius: var(--hr-radius-md);
+  padding: 9px 16px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: var(--hr-shadow-md), inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 .hr-hud-metric {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 2px;
+  position: relative;
+}
+
+.hr-hud-metric + .hr-hud-metric {
+  padding-left: 16px;
+  border-left: 1px solid var(--hr-border-subtle);
 }
 
 .hr-hud-kicker {
   font-size: 10px;
-  font-weight: 700;
-  color: var(--hr-muted);
+  font-weight: 800;
+  color: var(--hr-dim);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.07em;
 }
 
 .hr-hud-val {
-  font-size: 20px;
-  font-weight: 700;
+  font-family: var(--hr-font-mono);
+  font-size: 21px;
+  font-weight: 800;
   line-height: 1.1;
+  color: var(--hr-text-bright);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
+.hr-hud-val.gold {
+  color: var(--hr-gold);
+}
+
+.hr-hud-val.accent {
+  color: var(--hr-accent-bright);
+}
+
+/* Fuel Gauge Cluster */
 .hr-fuel-cluster {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  min-width: 190px;
-  background: rgba(15, 23, 42, 0.84);
-  border: 1px solid var(--hr-border);
-  border-radius: 12px;
-  padding: 8px 14px;
+  justify-content: center;
+  gap: 6px;
+  min-width: 210px;
+  background: linear-gradient(180deg, rgba(16, 25, 46, 0.88) 0%, rgba(9, 15, 29, 0.94) 100%);
+  border: 1px solid var(--hr-border-strong);
+  border-radius: var(--hr-radius-md);
+  padding: 9px 16px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: var(--hr-shadow-md), inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 .hr-fuel-head {
@@ -512,34 +1329,65 @@ input:focus-visible {
   justify-content: space-between;
   align-items: center;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--hr-muted);
 }
 
 .hr-fuel-track {
+  position: relative;
   width: 100%;
-  height: 10px;
-  background: rgba(15, 23, 42, 0.9);
-  border-radius: 999px;
+  height: 11px;
+  background: rgba(6, 10, 20, 0.95);
+  border-radius: var(--hr-radius-pill);
   overflow: hidden;
-  border: 1px solid rgba(148, 163, 184, 0.25);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  box-shadow: var(--hr-inner-shadow);
 }
 
 .hr-fuel-fill {
   width: 100%;
   height: 100%;
   transform-origin: left center;
-  background: var(--hr-green);
-  transition: background-color 0.2s;
+  background: linear-gradient(90deg, #16A34A 0%, #22C55E 65%, #86EFAC 100%);
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.55);
+  transition: background-color 0.2s ease;
 }
 
 .hr-fuel-fill[data-low="true"] {
-  background: var(--hr-red);
+  background: linear-gradient(90deg, #B91C1C 0%, #EF4444 65%, #FCA5A5 100%);
+  animation: hrFuelDangerPulse 0.75s infinite ease-in-out;
 }
 
 .hr-fuel-alert {
   font-size: 10.5px;
   font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: #FCA5A5;
+  text-shadow: 0 0 8px rgba(239, 68, 68, 0.7);
+}
+
+/* Optional Speed / RPM Mini Pill */
+.hr-speed-pill {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: var(--hr-radius-sm);
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--hr-border);
+  font-family: var(--hr-font-mono);
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--hr-cyan-bright);
+}
+
+.hr-speed-pill small {
+  font-size: 10px;
+  color: var(--hr-dim);
+  text-transform: uppercase;
 }
 
 .hr-hud-actions {
@@ -548,100 +1396,203 @@ input:focus-visible {
   gap: 8px;
 }
 
-/* PEDALS (Bottom left/right for mobile multitouch & clickable desktop testing) */
+/* Floating Stunt / Flip / Air Time Toast */
+.hr-stunt-toast {
+  position: fixed;
+  top: 22%;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 30;
+  padding: 8px 20px;
+  border-radius: var(--hr-radius-pill);
+  background: linear-gradient(135deg, rgba(250, 204, 21, 0.94) 0%, rgba(249, 115, 22, 0.96) 100%);
+  color: var(--hr-text-dark);
+  font-family: var(--hr-font-display);
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  box-shadow: 0 12px 30px rgba(249, 115, 22, 0.5);
+  animation: hrStuntPop 1.25s var(--hr-ease-out) forwards;
+}
+
+
+/* ==========================================================================
+   3D TACTILE GAS & BRAKE PEDALS (MULTITOUCH & DESKTOP)
+   ========================================================================== */
+
 .hr-pedals-row {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   gap: 16px;
+  padding-bottom: 4px;
+  animation: hrSlideUp 0.25s var(--hr-ease-out);
 }
 
 .hr-pedal-btn {
   pointer-events: auto;
-  width: 118px;
-  height: 82px;
-  border-radius: 14px;
+  position: relative;
+  width: 128px;
+  height: 88px;
+  border-radius: 16px;
   border: 2px solid rgba(255, 255, 255, 0.28);
-  background: rgba(15, 23, 42, 0.82);
-  color: var(--hr-text);
+  background: linear-gradient(180deg, rgba(26, 37, 62, 0.88) 0%, rgba(11, 17, 32, 0.95) 100%);
+  color: var(--hr-text-bright);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  font-family: 'Outfit', sans-serif;
-  font-size: 13px;
-  font-weight: 800;
+  gap: 5px;
+  font-family: var(--hr-font-display);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   cursor: pointer;
   touch-action: none;
-  transition: transform 0.08s, background 0.1s, border-color 0.1s;
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.55),
+    0 4px 0 rgba(7, 11, 20, 0.95),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  transition:
+    transform 0.07s var(--hr-ease-snappy),
+    background 0.1s ease,
+    border-color 0.1s ease,
+    box-shadow 0.07s ease;
+}
+
+/* Grip Ridges on Pedals */
+.hr-pedal-btn::before {
+  content: '';
+  width: 44px;
+  height: 4px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 7px 0 rgba(255, 255, 255, 0.14);
+  margin-bottom: 4px;
 }
 
 .hr-pedal-btn.gas {
-  border-color: rgba(34, 197, 94, 0.65);
+  border-color: rgba(74, 222, 128, 0.65);
 }
 
 .hr-pedal-btn.brake {
-  border-color: rgba(239, 68, 68, 0.65);
+  border-color: rgba(248, 113, 113, 0.65);
 }
 
 .hr-pedal-btn.pressed,
 .hr-pedal-btn:active {
-  transform: scale(0.94) translateY(3px);
+  transform: scale(0.95) translateY(4px);
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.6),
+    0 1px 0 rgba(7, 11, 20, 0.95),
+    inset 0 2px 6px rgba(0, 0, 0, 0.45);
 }
 
-.hr-pedal-btn.gas.pressed {
-  background: rgba(34, 197, 94, 0.34);
-  border-color: var(--hr-green);
+.hr-pedal-btn.gas.pressed,
+.hr-pedal-btn.gas:active {
+  background: linear-gradient(180deg, rgba(34, 197, 94, 0.45) 0%, rgba(21, 128, 61, 0.65) 100%);
+  border-color: var(--hr-green-bright);
+  box-shadow: 0 0 26px rgba(34, 197, 94, 0.48), inset 0 1px 0 rgba(187, 247, 208, 0.4);
 }
 
-.hr-pedal-btn.brake.pressed {
-  background: rgba(239, 68, 68, 0.34);
-  border-color: var(--hr-red);
+.hr-pedal-btn.brake.pressed,
+.hr-pedal-btn.brake:active {
+  background: linear-gradient(180deg, rgba(239, 68, 68, 0.45) 0%, rgba(185, 28, 28, 0.65) 100%);
+  border-color: var(--hr-red-bright);
+  box-shadow: 0 0 26px rgba(239, 68, 68, 0.48), inset 0 1px 0 rgba(254, 202, 202, 0.4);
 }
 
-/* STATUS MODALS (PAUSE / GAME OVER) */
+
+/* ==========================================================================
+   PAUSE, GAME OVER & VICTORY / UNLOCK MODALS
+   ========================================================================== */
+
 .hr-modal-card {
+  position: relative;
   width: 100%;
-  max-width: 440px;
-  background: var(--hr-panel);
-  border: 1px solid var(--hr-border);
-  border-radius: 16px;
-  padding: 26px;
+  max-width: 460px;
+  background: var(--hr-grad-panel);
+  border: 1px solid var(--hr-border-strong);
+  border-radius: var(--hr-radius-lg);
+  padding: 28px 26px;
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.72);
+  gap: 18px;
+  box-shadow: var(--hr-shadow-xl), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  animation: hrScalePop 0.25s var(--hr-ease-spring);
+}
+
+.hr-modal-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 22%;
+  right: 22%;
+  height: 3px;
+  border-radius: var(--hr-radius-pill);
+  background: var(--hr-grad-primary);
 }
 
 .hr-modal-card h2 {
   margin: 0;
-  font-family: 'Outfit', sans-serif;
-  font-size: 26px;
+  font-family: var(--hr-font-display);
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  color: var(--hr-text-bright);
 }
 
 .hr-modal-sub {
   margin: 0;
   font-size: 13.5px;
   color: var(--hr-muted);
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 .hr-go-stats {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 11px;
+}
+
+.hr-go-stat-box {
+  background: rgba(22, 33, 56, 0.85);
+  border: 1px solid var(--hr-border);
+  border-radius: var(--hr-radius-sm);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.hr-go-stat-box span {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--hr-dim);
+}
+
+.hr-go-stat-box strong {
+  font-family: var(--hr-font-mono);
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--hr-text-bright);
 }
 
 .hr-unlock-note {
-  padding: 10px 12px;
-  border-radius: 10px;
-  background: rgba(34, 197, 94, 0.16);
-  border: 1px solid rgba(34, 197, 94, 0.5);
-  color: #86EFAC;
+  padding: 11px 14px;
+  border-radius: var(--hr-radius-sm);
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(21, 128, 61, 0.28) 100%);
+  border: 1px solid rgba(74, 222, 128, 0.55);
+  color: #BBF7D0;
   font-weight: 700;
   font-size: 13px;
+  box-shadow: 0 6px 18px rgba(34, 197, 94, 0.2);
 }
 
 .hr-modal-actions {
@@ -654,31 +1605,1399 @@ input:focus-visible {
   flex: 1;
 }
 
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS (TABLET, MOBILE LANDSCAPE & PORTRAIT)
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .hr-submenu-panel {
+    max-width: 95vw;
+    padding: 20px;
+  }
+  .hr-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
+
 @media (max-width: 720px) {
   .hr-layer {
-    padding: 12px;
+    padding:
+      calc(12px + var(--safe-top))
+      calc(12px + var(--safe-right))
+      calc(12px + var(--safe-bottom))
+      calc(12px + var(--safe-left));
   }
+
+  .hr-title-center {
+    padding: 20px 18px;
+    gap: 13px;
+  }
+
+  .hr-btn.play-hero {
+    padding: 13px 32px;
+    font-size: 16px;
+  }
+
   .hr-hud-top {
     flex-wrap: wrap;
     gap: 8px;
   }
+
   .hr-hud-cluster {
-    padding: 6px 10px;
-    gap: 10px;
+    padding: 7px 11px;
+    gap: 11px;
   }
+
+  .hr-hud-metric + .hr-hud-metric {
+    padding-left: 11px;
+  }
+
   .hr-hud-val {
-    font-size: 16px;
+    font-size: 16.5px;
   }
+
   .hr-fuel-cluster {
-    min-width: 145px;
-    padding: 6px 10px;
+    min-width: 155px;
+    padding: 7px 11px;
   }
+
   .hr-pedal-btn {
-    width: 96px;
-    height: 70px;
-    font-size: 12px;
+    width: 102px;
+    height: 74px;
+    font-size: 12.5px;
   }
+
   .hr-submenu-panel {
     padding: 16px;
+    gap: 14px;
+  }
+
+  .hr-submenu-head h2 {
+    font-size: 21px;
   }
 }
+
+@media (max-height: 480px) and (orientation: landscape) {
+  .hr-title-center {
+    padding: 14px 22px;
+    gap: 10px;
+  }
+  .hr-title-emblem {
+    width: min(340px, 55vw);
+  }
+  .hr-pedal-btn {
+    width: 104px;
+    height: 68px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* ==========================================================================
+   EXTENDED TELEMETRY, BIOME THEMES & UTILITY CLASSES
+   ========================================================================== */
+
+
+.hr-theme-countryside {
+  --hr-accent: #22C55E;
+  --hr-accent-deep: #15803D;
+  --hr-accent-glow: rgba(34, 197, 94, 0.25);
+}
+.hr-badge-countryside {
+  background: rgba(34, 197, 94, 0.25);
+  border: 1px solid #22C55E;
+  color: #FFFFFF;
+  padding: 3px 10px;
+  border-radius: var(--hr-radius-pill);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+
+.hr-theme-desert {
+  --hr-accent: #F59E0B;
+  --hr-accent-deep: #B45309;
+  --hr-accent-glow: rgba(245, 158, 11, 0.25);
+}
+.hr-badge-desert {
+  background: rgba(245, 158, 11, 0.25);
+  border: 1px solid #F59E0B;
+  color: #FFFFFF;
+  padding: 3px 10px;
+  border-radius: var(--hr-radius-pill);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+
+.hr-theme-arctic {
+  --hr-accent: #38BDF8;
+  --hr-accent-deep: #0369A1;
+  --hr-accent-glow: rgba(56, 189, 248, 0.25);
+}
+.hr-badge-arctic {
+  background: rgba(56, 189, 248, 0.25);
+  border: 1px solid #38BDF8;
+  color: #FFFFFF;
+  padding: 3px 10px;
+  border-radius: var(--hr-radius-pill);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+
+.hr-theme-moon {
+  --hr-accent: #A855F7;
+  --hr-accent-deep: #6B21A8;
+  --hr-accent-glow: rgba(168, 85, 247, 0.25);
+}
+.hr-badge-moon {
+  background: rgba(168, 85, 247, 0.25);
+  border: 1px solid #A855F7;
+  color: #FFFFFF;
+  padding: 3px 10px;
+  border-radius: var(--hr-radius-pill);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+
+.hr-theme-volcano {
+  --hr-accent: #EF4444;
+  --hr-accent-deep: #991B1B;
+  --hr-accent-glow: rgba(239, 68, 68, 0.28);
+}
+.hr-badge-volcano {
+  background: rgba(239, 68, 68, 0.28);
+  border: 1px solid #EF4444;
+  color: #FFFFFF;
+  padding: 3px 10px;
+  border-radius: var(--hr-radius-pill);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+
+.hr-theme-highway {
+  --hr-accent: #3B82F6;
+  --hr-accent-deep: #1D4ED8;
+  --hr-accent-glow: rgba(59, 130, 246, 0.25);
+}
+.hr-badge-highway {
+  background: rgba(59, 130, 246, 0.25);
+  border: 1px solid #3B82F6;
+  color: #FFFFFF;
+  padding: 3px 10px;
+  border-radius: var(--hr-radius-pill);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+
+.hr-theme-cave {
+  --hr-accent: #14B8A6;
+  --hr-accent-deep: #0F766E;
+  --hr-accent-glow: rgba(20, 184, 166, 0.25);
+}
+.hr-badge-cave {
+  background: rgba(20, 184, 166, 0.25);
+  border: 1px solid #14B8A6;
+  color: #FFFFFF;
+  padding: 3px 10px;
+  border-radius: var(--hr-radius-pill);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+
+.hr-theme-neon {
+  --hr-accent: #EC4899;
+  --hr-accent-deep: #9D174D;
+  --hr-accent-glow: rgba(236, 72, 153, 0.28);
+}
+.hr-badge-neon {
+  background: rgba(236, 72, 153, 0.28);
+  border: 1px solid #EC4899;
+  color: #FFFFFF;
+  padding: 3px 10px;
+  border-radius: var(--hr-radius-pill);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.hr-p-0 { padding: 0px; }
+.hr-px-0 { padding-left: 0px; padding-right: 0px; }
+.hr-py-0 { padding-top: 0px; padding-bottom: 0px; }
+.hr-m-0 { margin: 0px; }
+.hr-mt-0 { margin-top: 0px; }
+.hr-mb-0 { margin-bottom: 0px; }
+.hr-gap-0 { gap: 0px; }
+.hr-p-2 { padding: 2px; }
+.hr-px-2 { padding-left: 2px; padding-right: 2px; }
+.hr-py-2 { padding-top: 2px; padding-bottom: 2px; }
+.hr-m-2 { margin: 2px; }
+.hr-mt-2 { margin-top: 2px; }
+.hr-mb-2 { margin-bottom: 2px; }
+.hr-gap-2 { gap: 2px; }
+.hr-p-4 { padding: 4px; }
+.hr-px-4 { padding-left: 4px; padding-right: 4px; }
+.hr-py-4 { padding-top: 4px; padding-bottom: 4px; }
+.hr-m-4 { margin: 4px; }
+.hr-mt-4 { margin-top: 4px; }
+.hr-mb-4 { margin-bottom: 4px; }
+.hr-gap-4 { gap: 4px; }
+.hr-p-6 { padding: 6px; }
+.hr-px-6 { padding-left: 6px; padding-right: 6px; }
+.hr-py-6 { padding-top: 6px; padding-bottom: 6px; }
+.hr-m-6 { margin: 6px; }
+.hr-mt-6 { margin-top: 6px; }
+.hr-mb-6 { margin-bottom: 6px; }
+.hr-gap-6 { gap: 6px; }
+.hr-p-8 { padding: 8px; }
+.hr-px-8 { padding-left: 8px; padding-right: 8px; }
+.hr-py-8 { padding-top: 8px; padding-bottom: 8px; }
+.hr-m-8 { margin: 8px; }
+.hr-mt-8 { margin-top: 8px; }
+.hr-mb-8 { margin-bottom: 8px; }
+.hr-gap-8 { gap: 8px; }
+.hr-p-10 { padding: 10px; }
+.hr-px-10 { padding-left: 10px; padding-right: 10px; }
+.hr-py-10 { padding-top: 10px; padding-bottom: 10px; }
+.hr-m-10 { margin: 10px; }
+.hr-mt-10 { margin-top: 10px; }
+.hr-mb-10 { margin-bottom: 10px; }
+.hr-gap-10 { gap: 10px; }
+.hr-p-12 { padding: 12px; }
+.hr-px-12 { padding-left: 12px; padding-right: 12px; }
+.hr-py-12 { padding-top: 12px; padding-bottom: 12px; }
+.hr-m-12 { margin: 12px; }
+.hr-mt-12 { margin-top: 12px; }
+.hr-mb-12 { margin-bottom: 12px; }
+.hr-gap-12 { gap: 12px; }
+.hr-p-14 { padding: 14px; }
+.hr-px-14 { padding-left: 14px; padding-right: 14px; }
+.hr-py-14 { padding-top: 14px; padding-bottom: 14px; }
+.hr-m-14 { margin: 14px; }
+.hr-mt-14 { margin-top: 14px; }
+.hr-mb-14 { margin-bottom: 14px; }
+.hr-gap-14 { gap: 14px; }
+.hr-p-16 { padding: 16px; }
+.hr-px-16 { padding-left: 16px; padding-right: 16px; }
+.hr-py-16 { padding-top: 16px; padding-bottom: 16px; }
+.hr-m-16 { margin: 16px; }
+.hr-mt-16 { margin-top: 16px; }
+.hr-mb-16 { margin-bottom: 16px; }
+.hr-gap-16 { gap: 16px; }
+.hr-p-18 { padding: 18px; }
+.hr-px-18 { padding-left: 18px; padding-right: 18px; }
+.hr-py-18 { padding-top: 18px; padding-bottom: 18px; }
+.hr-m-18 { margin: 18px; }
+.hr-mt-18 { margin-top: 18px; }
+.hr-mb-18 { margin-bottom: 18px; }
+.hr-gap-18 { gap: 18px; }
+.hr-p-20 { padding: 20px; }
+.hr-px-20 { padding-left: 20px; padding-right: 20px; }
+.hr-py-20 { padding-top: 20px; padding-bottom: 20px; }
+.hr-m-20 { margin: 20px; }
+.hr-mt-20 { margin-top: 20px; }
+.hr-mb-20 { margin-bottom: 20px; }
+.hr-gap-20 { gap: 20px; }
+.hr-p-24 { padding: 24px; }
+.hr-px-24 { padding-left: 24px; padding-right: 24px; }
+.hr-py-24 { padding-top: 24px; padding-bottom: 24px; }
+.hr-m-24 { margin: 24px; }
+.hr-mt-24 { margin-top: 24px; }
+.hr-mb-24 { margin-bottom: 24px; }
+.hr-gap-24 { gap: 24px; }
+.hr-p-28 { padding: 28px; }
+.hr-px-28 { padding-left: 28px; padding-right: 28px; }
+.hr-py-28 { padding-top: 28px; padding-bottom: 28px; }
+.hr-m-28 { margin: 28px; }
+.hr-mt-28 { margin-top: 28px; }
+.hr-mb-28 { margin-bottom: 28px; }
+.hr-gap-28 { gap: 28px; }
+.hr-p-32 { padding: 32px; }
+.hr-px-32 { padding-left: 32px; padding-right: 32px; }
+.hr-py-32 { padding-top: 32px; padding-bottom: 32px; }
+.hr-m-32 { margin: 32px; }
+.hr-mt-32 { margin-top: 32px; }
+.hr-mb-32 { margin-bottom: 32px; }
+.hr-gap-32 { gap: 32px; }
+.hr-p-36 { padding: 36px; }
+.hr-px-36 { padding-left: 36px; padding-right: 36px; }
+.hr-py-36 { padding-top: 36px; padding-bottom: 36px; }
+.hr-m-36 { margin: 36px; }
+.hr-mt-36 { margin-top: 36px; }
+.hr-mb-36 { margin-bottom: 36px; }
+.hr-gap-36 { gap: 36px; }
+.hr-p-40 { padding: 40px; }
+.hr-px-40 { padding-left: 40px; padding-right: 40px; }
+.hr-py-40 { padding-top: 40px; padding-bottom: 40px; }
+.hr-m-40 { margin: 40px; }
+.hr-mt-40 { margin-top: 40px; }
+.hr-mb-40 { margin-bottom: 40px; }
+.hr-gap-40 { gap: 40px; }
+.hr-p-48 { padding: 48px; }
+.hr-px-48 { padding-left: 48px; padding-right: 48px; }
+.hr-py-48 { padding-top: 48px; padding-bottom: 48px; }
+.hr-m-48 { margin: 48px; }
+.hr-mt-48 { margin-top: 48px; }
+.hr-mb-48 { margin-bottom: 48px; }
+.hr-gap-48 { gap: 48px; }
+.hr-w-pct-0 { width: 0%; }
+.hr-w-pct-1 { width: 1%; }
+.hr-w-pct-2 { width: 2%; }
+.hr-w-pct-3 { width: 3%; }
+.hr-w-pct-4 { width: 4%; }
+.hr-w-pct-5 { width: 5%; }
+.hr-w-pct-6 { width: 6%; }
+.hr-w-pct-7 { width: 7%; }
+.hr-w-pct-8 { width: 8%; }
+.hr-w-pct-9 { width: 9%; }
+.hr-w-pct-10 { width: 10%; }
+.hr-w-pct-11 { width: 11%; }
+.hr-w-pct-12 { width: 12%; }
+.hr-w-pct-13 { width: 13%; }
+.hr-w-pct-14 { width: 14%; }
+.hr-w-pct-15 { width: 15%; }
+.hr-w-pct-16 { width: 16%; }
+.hr-w-pct-17 { width: 17%; }
+.hr-w-pct-18 { width: 18%; }
+.hr-w-pct-19 { width: 19%; }
+.hr-w-pct-20 { width: 20%; }
+.hr-w-pct-21 { width: 21%; }
+.hr-w-pct-22 { width: 22%; }
+.hr-w-pct-23 { width: 23%; }
+.hr-w-pct-24 { width: 24%; }
+.hr-w-pct-25 { width: 25%; }
+.hr-w-pct-26 { width: 26%; }
+.hr-w-pct-27 { width: 27%; }
+.hr-w-pct-28 { width: 28%; }
+.hr-w-pct-29 { width: 29%; }
+.hr-w-pct-30 { width: 30%; }
+.hr-w-pct-31 { width: 31%; }
+.hr-w-pct-32 { width: 32%; }
+.hr-w-pct-33 { width: 33%; }
+.hr-w-pct-34 { width: 34%; }
+.hr-w-pct-35 { width: 35%; }
+.hr-w-pct-36 { width: 36%; }
+.hr-w-pct-37 { width: 37%; }
+.hr-w-pct-38 { width: 38%; }
+.hr-w-pct-39 { width: 39%; }
+.hr-w-pct-40 { width: 40%; }
+.hr-w-pct-41 { width: 41%; }
+.hr-w-pct-42 { width: 42%; }
+.hr-w-pct-43 { width: 43%; }
+.hr-w-pct-44 { width: 44%; }
+.hr-w-pct-45 { width: 45%; }
+.hr-w-pct-46 { width: 46%; }
+.hr-w-pct-47 { width: 47%; }
+.hr-w-pct-48 { width: 48%; }
+.hr-w-pct-49 { width: 49%; }
+.hr-w-pct-50 { width: 50%; }
+.hr-w-pct-51 { width: 51%; }
+.hr-w-pct-52 { width: 52%; }
+.hr-w-pct-53 { width: 53%; }
+.hr-w-pct-54 { width: 54%; }
+.hr-w-pct-55 { width: 55%; }
+.hr-w-pct-56 { width: 56%; }
+.hr-w-pct-57 { width: 57%; }
+.hr-w-pct-58 { width: 58%; }
+.hr-w-pct-59 { width: 59%; }
+.hr-w-pct-60 { width: 60%; }
+.hr-w-pct-61 { width: 61%; }
+.hr-w-pct-62 { width: 62%; }
+.hr-w-pct-63 { width: 63%; }
+.hr-w-pct-64 { width: 64%; }
+.hr-w-pct-65 { width: 65%; }
+.hr-w-pct-66 { width: 66%; }
+.hr-w-pct-67 { width: 67%; }
+.hr-w-pct-68 { width: 68%; }
+.hr-w-pct-69 { width: 69%; }
+.hr-w-pct-70 { width: 70%; }
+.hr-w-pct-71 { width: 71%; }
+.hr-w-pct-72 { width: 72%; }
+.hr-w-pct-73 { width: 73%; }
+.hr-w-pct-74 { width: 74%; }
+.hr-w-pct-75 { width: 75%; }
+.hr-w-pct-76 { width: 76%; }
+.hr-w-pct-77 { width: 77%; }
+.hr-w-pct-78 { width: 78%; }
+.hr-w-pct-79 { width: 79%; }
+.hr-w-pct-80 { width: 80%; }
+.hr-w-pct-81 { width: 81%; }
+.hr-w-pct-82 { width: 82%; }
+.hr-w-pct-83 { width: 83%; }
+.hr-w-pct-84 { width: 84%; }
+.hr-w-pct-85 { width: 85%; }
+.hr-w-pct-86 { width: 86%; }
+.hr-w-pct-87 { width: 87%; }
+.hr-w-pct-88 { width: 88%; }
+.hr-w-pct-89 { width: 89%; }
+.hr-w-pct-90 { width: 90%; }
+.hr-w-pct-91 { width: 91%; }
+.hr-w-pct-92 { width: 92%; }
+.hr-w-pct-93 { width: 93%; }
+.hr-w-pct-94 { width: 94%; }
+.hr-w-pct-95 { width: 95%; }
+.hr-w-pct-96 { width: 96%; }
+.hr-w-pct-97 { width: 97%; }
+.hr-w-pct-98 { width: 98%; }
+.hr-w-pct-99 { width: 99%; }
+.hr-w-pct-100 { width: 100%; }
+
+.hr-flex { display: flex; }
+.hr-inline-flex { display: inline-flex; }
+.hr-flex-col { flex-direction: column; }
+.hr-flex-row { flex-direction: row; }
+.hr-flex-wrap { flex-wrap: wrap; }
+.hr-items-center { align-items: center; }
+.hr-items-start { align-items: flex-start; }
+.hr-items-end { align-items: flex-end; }
+.hr-justify-center { justify-content: center; }
+.hr-justify-between { justify-content: space-between; }
+.hr-justify-end { justify-content: flex-end; }
+.hr-flex-1 { flex: 1 1 0%; }
+.hr-w-full { width: 100%; }
+.hr-h-full { height: 100%; }
+.hr-text-center { text-align: center; }
+.hr-text-left { text-align: left; }
+.hr-text-right { text-align: right; }
+.hr-text-gold { color: var(--hr-gold); }
+.hr-text-accent { color: var(--hr-accent-bright); }
+.hr-text-green { color: var(--hr-green-bright); }
+.hr-text-red { color: var(--hr-red-bright); }
+.hr-text-blue { color: var(--hr-blue-bright); }
+.hr-text-cyan { color: var(--hr-cyan-bright); }
+.hr-text-muted { color: var(--hr-muted); }
+.hr-text-dim { color: var(--hr-dim); }
+.hr-bg-glass { background: var(--hr-glass); backdrop-filter: blur(10px); }
+.hr-border-gold { border-color: var(--hr-gold) !important; }
+.hr-border-accent { border-color: var(--hr-accent) !important; }
+.hr-border-green { border-color: var(--hr-green) !important; }
+.hr-border-red { border-color: var(--hr-red) !important; }
+.hr-glow-gold { box-shadow: 0 0 22px var(--hr-gold-glow); }
+.hr-glow-accent { box-shadow: 0 0 22px var(--hr-accent-glow); }
+.hr-glow-green { box-shadow: 0 0 22px var(--hr-green-glow); }
+.hr-glow-red { box-shadow: 0 0 22px var(--hr-red-glow); }
+.hr-pointer-auto { pointer-events: auto; }
+.hr-pointer-none { pointer-events: none; }
+.hr-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* Fine-grained Gauge & Telemetry Transform Steps */
+.hr-gauge-step-0 { transform: scaleX(0.0); }
+.hr-gauge-step-1 { transform: scaleX(0.0011); }
+.hr-gauge-step-2 { transform: scaleX(0.0022); }
+.hr-gauge-step-3 { transform: scaleX(0.0034); }
+.hr-gauge-step-4 { transform: scaleX(0.0045); }
+.hr-gauge-step-5 { transform: scaleX(0.0056); }
+.hr-gauge-step-6 { transform: scaleX(0.0067); }
+.hr-gauge-step-7 { transform: scaleX(0.0078); }
+.hr-gauge-step-8 { transform: scaleX(0.0089); }
+.hr-gauge-step-9 { transform: scaleX(0.0101); }
+.hr-gauge-step-10 { transform: scaleX(0.0112); }
+.hr-gauge-step-11 { transform: scaleX(0.0123); }
+.hr-gauge-step-12 { transform: scaleX(0.0134); }
+.hr-gauge-step-13 { transform: scaleX(0.0145); }
+.hr-gauge-step-14 { transform: scaleX(0.0156); }
+.hr-gauge-step-15 { transform: scaleX(0.0168); }
+.hr-gauge-step-16 { transform: scaleX(0.0179); }
+.hr-gauge-step-17 { transform: scaleX(0.019); }
+.hr-gauge-step-18 { transform: scaleX(0.0201); }
+.hr-gauge-step-19 { transform: scaleX(0.0212); }
+.hr-gauge-step-20 { transform: scaleX(0.0223); }
+.hr-gauge-step-21 { transform: scaleX(0.0235); }
+.hr-gauge-step-22 { transform: scaleX(0.0246); }
+.hr-gauge-step-23 { transform: scaleX(0.0257); }
+.hr-gauge-step-24 { transform: scaleX(0.0268); }
+.hr-gauge-step-25 { transform: scaleX(0.0279); }
+.hr-gauge-step-26 { transform: scaleX(0.0291); }
+.hr-gauge-step-27 { transform: scaleX(0.0302); }
+.hr-gauge-step-28 { transform: scaleX(0.0313); }
+.hr-gauge-step-29 { transform: scaleX(0.0324); }
+.hr-gauge-step-30 { transform: scaleX(0.0335); }
+.hr-gauge-step-31 { transform: scaleX(0.0346); }
+.hr-gauge-step-32 { transform: scaleX(0.0358); }
+.hr-gauge-step-33 { transform: scaleX(0.0369); }
+.hr-gauge-step-34 { transform: scaleX(0.038); }
+.hr-gauge-step-35 { transform: scaleX(0.0391); }
+.hr-gauge-step-36 { transform: scaleX(0.0402); }
+.hr-gauge-step-37 { transform: scaleX(0.0413); }
+.hr-gauge-step-38 { transform: scaleX(0.0425); }
+.hr-gauge-step-39 { transform: scaleX(0.0436); }
+.hr-gauge-step-40 { transform: scaleX(0.0447); }
+.hr-gauge-step-41 { transform: scaleX(0.0458); }
+.hr-gauge-step-42 { transform: scaleX(0.0469); }
+.hr-gauge-step-43 { transform: scaleX(0.048); }
+.hr-gauge-step-44 { transform: scaleX(0.0492); }
+.hr-gauge-step-45 { transform: scaleX(0.0503); }
+.hr-gauge-step-46 { transform: scaleX(0.0514); }
+.hr-gauge-step-47 { transform: scaleX(0.0525); }
+.hr-gauge-step-48 { transform: scaleX(0.0536); }
+.hr-gauge-step-49 { transform: scaleX(0.0547); }
+.hr-gauge-step-50 { transform: scaleX(0.0559); }
+.hr-gauge-step-51 { transform: scaleX(0.057); }
+.hr-gauge-step-52 { transform: scaleX(0.0581); }
+.hr-gauge-step-53 { transform: scaleX(0.0592); }
+.hr-gauge-step-54 { transform: scaleX(0.0603); }
+.hr-gauge-step-55 { transform: scaleX(0.0615); }
+.hr-gauge-step-56 { transform: scaleX(0.0626); }
+.hr-gauge-step-57 { transform: scaleX(0.0637); }
+.hr-gauge-step-58 { transform: scaleX(0.0648); }
+.hr-gauge-step-59 { transform: scaleX(0.0659); }
+.hr-gauge-step-60 { transform: scaleX(0.067); }
+.hr-gauge-step-61 { transform: scaleX(0.0682); }
+.hr-gauge-step-62 { transform: scaleX(0.0693); }
+.hr-gauge-step-63 { transform: scaleX(0.0704); }
+.hr-gauge-step-64 { transform: scaleX(0.0715); }
+.hr-gauge-step-65 { transform: scaleX(0.0726); }
+.hr-gauge-step-66 { transform: scaleX(0.0737); }
+.hr-gauge-step-67 { transform: scaleX(0.0749); }
+.hr-gauge-step-68 { transform: scaleX(0.076); }
+.hr-gauge-step-69 { transform: scaleX(0.0771); }
+.hr-gauge-step-70 { transform: scaleX(0.0782); }
+.hr-gauge-step-71 { transform: scaleX(0.0793); }
+.hr-gauge-step-72 { transform: scaleX(0.0804); }
+.hr-gauge-step-73 { transform: scaleX(0.0816); }
+.hr-gauge-step-74 { transform: scaleX(0.0827); }
+.hr-gauge-step-75 { transform: scaleX(0.0838); }
+.hr-gauge-step-76 { transform: scaleX(0.0849); }
+.hr-gauge-step-77 { transform: scaleX(0.086); }
+.hr-gauge-step-78 { transform: scaleX(0.0872); }
+.hr-gauge-step-79 { transform: scaleX(0.0883); }
+.hr-gauge-step-80 { transform: scaleX(0.0894); }
+.hr-gauge-step-81 { transform: scaleX(0.0905); }
+.hr-gauge-step-82 { transform: scaleX(0.0916); }
+.hr-gauge-step-83 { transform: scaleX(0.0927); }
+.hr-gauge-step-84 { transform: scaleX(0.0939); }
+.hr-gauge-step-85 { transform: scaleX(0.095); }
+.hr-gauge-step-86 { transform: scaleX(0.0961); }
+.hr-gauge-step-87 { transform: scaleX(0.0972); }
+.hr-gauge-step-88 { transform: scaleX(0.0983); }
+.hr-gauge-step-89 { transform: scaleX(0.0994); }
+.hr-gauge-step-90 { transform: scaleX(0.1006); }
+.hr-gauge-step-91 { transform: scaleX(0.1017); }
+.hr-gauge-step-92 { transform: scaleX(0.1028); }
+.hr-gauge-step-93 { transform: scaleX(0.1039); }
+.hr-gauge-step-94 { transform: scaleX(0.105); }
+.hr-gauge-step-95 { transform: scaleX(0.1061); }
+.hr-gauge-step-96 { transform: scaleX(0.1073); }
+.hr-gauge-step-97 { transform: scaleX(0.1084); }
+.hr-gauge-step-98 { transform: scaleX(0.1095); }
+.hr-gauge-step-99 { transform: scaleX(0.1106); }
+.hr-gauge-step-100 { transform: scaleX(0.1117); }
+.hr-gauge-step-101 { transform: scaleX(0.1128); }
+.hr-gauge-step-102 { transform: scaleX(0.114); }
+.hr-gauge-step-103 { transform: scaleX(0.1151); }
+.hr-gauge-step-104 { transform: scaleX(0.1162); }
+.hr-gauge-step-105 { transform: scaleX(0.1173); }
+.hr-gauge-step-106 { transform: scaleX(0.1184); }
+.hr-gauge-step-107 { transform: scaleX(0.1196); }
+.hr-gauge-step-108 { transform: scaleX(0.1207); }
+.hr-gauge-step-109 { transform: scaleX(0.1218); }
+.hr-gauge-step-110 { transform: scaleX(0.1229); }
+.hr-gauge-step-111 { transform: scaleX(0.124); }
+.hr-gauge-step-112 { transform: scaleX(0.1251); }
+.hr-gauge-step-113 { transform: scaleX(0.1263); }
+.hr-gauge-step-114 { transform: scaleX(0.1274); }
+.hr-gauge-step-115 { transform: scaleX(0.1285); }
+.hr-gauge-step-116 { transform: scaleX(0.1296); }
+.hr-gauge-step-117 { transform: scaleX(0.1307); }
+.hr-gauge-step-118 { transform: scaleX(0.1318); }
+.hr-gauge-step-119 { transform: scaleX(0.133); }
+.hr-gauge-step-120 { transform: scaleX(0.1341); }
+.hr-gauge-step-121 { transform: scaleX(0.1352); }
+.hr-gauge-step-122 { transform: scaleX(0.1363); }
+.hr-gauge-step-123 { transform: scaleX(0.1374); }
+.hr-gauge-step-124 { transform: scaleX(0.1385); }
+.hr-gauge-step-125 { transform: scaleX(0.1397); }
+.hr-gauge-step-126 { transform: scaleX(0.1408); }
+.hr-gauge-step-127 { transform: scaleX(0.1419); }
+.hr-gauge-step-128 { transform: scaleX(0.143); }
+.hr-gauge-step-129 { transform: scaleX(0.1441); }
+.hr-gauge-step-130 { transform: scaleX(0.1453); }
+.hr-gauge-step-131 { transform: scaleX(0.1464); }
+.hr-gauge-step-132 { transform: scaleX(0.1475); }
+.hr-gauge-step-133 { transform: scaleX(0.1486); }
+.hr-gauge-step-134 { transform: scaleX(0.1497); }
+.hr-gauge-step-135 { transform: scaleX(0.1508); }
+.hr-gauge-step-136 { transform: scaleX(0.152); }
+.hr-gauge-step-137 { transform: scaleX(0.1531); }
+.hr-gauge-step-138 { transform: scaleX(0.1542); }
+.hr-gauge-step-139 { transform: scaleX(0.1553); }
+.hr-gauge-step-140 { transform: scaleX(0.1564); }
+.hr-gauge-step-141 { transform: scaleX(0.1575); }
+.hr-gauge-step-142 { transform: scaleX(0.1587); }
+.hr-gauge-step-143 { transform: scaleX(0.1598); }
+.hr-gauge-step-144 { transform: scaleX(0.1609); }
+.hr-gauge-step-145 { transform: scaleX(0.162); }
+.hr-gauge-step-146 { transform: scaleX(0.1631); }
+.hr-gauge-step-147 { transform: scaleX(0.1642); }
+.hr-gauge-step-148 { transform: scaleX(0.1654); }
+.hr-gauge-step-149 { transform: scaleX(0.1665); }
+.hr-gauge-step-150 { transform: scaleX(0.1676); }
+.hr-gauge-step-151 { transform: scaleX(0.1687); }
+.hr-gauge-step-152 { transform: scaleX(0.1698); }
+.hr-gauge-step-153 { transform: scaleX(0.1709); }
+.hr-gauge-step-154 { transform: scaleX(0.1721); }
+.hr-gauge-step-155 { transform: scaleX(0.1732); }
+.hr-gauge-step-156 { transform: scaleX(0.1743); }
+.hr-gauge-step-157 { transform: scaleX(0.1754); }
+.hr-gauge-step-158 { transform: scaleX(0.1765); }
+.hr-gauge-step-159 { transform: scaleX(0.1777); }
+.hr-gauge-step-160 { transform: scaleX(0.1788); }
+.hr-gauge-step-161 { transform: scaleX(0.1799); }
+.hr-gauge-step-162 { transform: scaleX(0.181); }
+.hr-gauge-step-163 { transform: scaleX(0.1821); }
+.hr-gauge-step-164 { transform: scaleX(0.1832); }
+.hr-gauge-step-165 { transform: scaleX(0.1844); }
+.hr-gauge-step-166 { transform: scaleX(0.1855); }
+.hr-gauge-step-167 { transform: scaleX(0.1866); }
+.hr-gauge-step-168 { transform: scaleX(0.1877); }
+.hr-gauge-step-169 { transform: scaleX(0.1888); }
+.hr-gauge-step-170 { transform: scaleX(0.1899); }
+.hr-gauge-step-171 { transform: scaleX(0.1911); }
+.hr-gauge-step-172 { transform: scaleX(0.1922); }
+.hr-gauge-step-173 { transform: scaleX(0.1933); }
+.hr-gauge-step-174 { transform: scaleX(0.1944); }
+.hr-gauge-step-175 { transform: scaleX(0.1955); }
+.hr-gauge-step-176 { transform: scaleX(0.1966); }
+.hr-gauge-step-177 { transform: scaleX(0.1978); }
+.hr-gauge-step-178 { transform: scaleX(0.1989); }
+.hr-gauge-step-179 { transform: scaleX(0.2); }
+.hr-gauge-step-180 { transform: scaleX(0.2011); }
+.hr-gauge-step-181 { transform: scaleX(0.2022); }
+.hr-gauge-step-182 { transform: scaleX(0.2034); }
+.hr-gauge-step-183 { transform: scaleX(0.2045); }
+.hr-gauge-step-184 { transform: scaleX(0.2056); }
+.hr-gauge-step-185 { transform: scaleX(0.2067); }
+.hr-gauge-step-186 { transform: scaleX(0.2078); }
+.hr-gauge-step-187 { transform: scaleX(0.2089); }
+.hr-gauge-step-188 { transform: scaleX(0.2101); }
+.hr-gauge-step-189 { transform: scaleX(0.2112); }
+.hr-gauge-step-190 { transform: scaleX(0.2123); }
+.hr-gauge-step-191 { transform: scaleX(0.2134); }
+.hr-gauge-step-192 { transform: scaleX(0.2145); }
+.hr-gauge-step-193 { transform: scaleX(0.2156); }
+.hr-gauge-step-194 { transform: scaleX(0.2168); }
+.hr-gauge-step-195 { transform: scaleX(0.2179); }
+.hr-gauge-step-196 { transform: scaleX(0.219); }
+.hr-gauge-step-197 { transform: scaleX(0.2201); }
+.hr-gauge-step-198 { transform: scaleX(0.2212); }
+.hr-gauge-step-199 { transform: scaleX(0.2223); }
+.hr-gauge-step-200 { transform: scaleX(0.2235); }
+.hr-gauge-step-201 { transform: scaleX(0.2246); }
+.hr-gauge-step-202 { transform: scaleX(0.2257); }
+.hr-gauge-step-203 { transform: scaleX(0.2268); }
+.hr-gauge-step-204 { transform: scaleX(0.2279); }
+.hr-gauge-step-205 { transform: scaleX(0.2291); }
+.hr-gauge-step-206 { transform: scaleX(0.2302); }
+.hr-gauge-step-207 { transform: scaleX(0.2313); }
+.hr-gauge-step-208 { transform: scaleX(0.2324); }
+.hr-gauge-step-209 { transform: scaleX(0.2335); }
+.hr-gauge-step-210 { transform: scaleX(0.2346); }
+.hr-gauge-step-211 { transform: scaleX(0.2358); }
+.hr-gauge-step-212 { transform: scaleX(0.2369); }
+.hr-gauge-step-213 { transform: scaleX(0.238); }
+.hr-gauge-step-214 { transform: scaleX(0.2391); }
+.hr-gauge-step-215 { transform: scaleX(0.2402); }
+.hr-gauge-step-216 { transform: scaleX(0.2413); }
+.hr-gauge-step-217 { transform: scaleX(0.2425); }
+.hr-gauge-step-218 { transform: scaleX(0.2436); }
+.hr-gauge-step-219 { transform: scaleX(0.2447); }
+.hr-gauge-step-220 { transform: scaleX(0.2458); }
+.hr-gauge-step-221 { transform: scaleX(0.2469); }
+.hr-gauge-step-222 { transform: scaleX(0.248); }
+.hr-gauge-step-223 { transform: scaleX(0.2492); }
+.hr-gauge-step-224 { transform: scaleX(0.2503); }
+.hr-gauge-step-225 { transform: scaleX(0.2514); }
+.hr-gauge-step-226 { transform: scaleX(0.2525); }
+.hr-gauge-step-227 { transform: scaleX(0.2536); }
+.hr-gauge-step-228 { transform: scaleX(0.2547); }
+.hr-gauge-step-229 { transform: scaleX(0.2559); }
+.hr-gauge-step-230 { transform: scaleX(0.257); }
+.hr-gauge-step-231 { transform: scaleX(0.2581); }
+.hr-gauge-step-232 { transform: scaleX(0.2592); }
+.hr-gauge-step-233 { transform: scaleX(0.2603); }
+.hr-gauge-step-234 { transform: scaleX(0.2615); }
+.hr-gauge-step-235 { transform: scaleX(0.2626); }
+.hr-gauge-step-236 { transform: scaleX(0.2637); }
+.hr-gauge-step-237 { transform: scaleX(0.2648); }
+.hr-gauge-step-238 { transform: scaleX(0.2659); }
+.hr-gauge-step-239 { transform: scaleX(0.267); }
+.hr-gauge-step-240 { transform: scaleX(0.2682); }
+.hr-gauge-step-241 { transform: scaleX(0.2693); }
+.hr-gauge-step-242 { transform: scaleX(0.2704); }
+.hr-gauge-step-243 { transform: scaleX(0.2715); }
+.hr-gauge-step-244 { transform: scaleX(0.2726); }
+.hr-gauge-step-245 { transform: scaleX(0.2737); }
+.hr-gauge-step-246 { transform: scaleX(0.2749); }
+.hr-gauge-step-247 { transform: scaleX(0.276); }
+.hr-gauge-step-248 { transform: scaleX(0.2771); }
+.hr-gauge-step-249 { transform: scaleX(0.2782); }
+.hr-gauge-step-250 { transform: scaleX(0.2793); }
+.hr-gauge-step-251 { transform: scaleX(0.2804); }
+.hr-gauge-step-252 { transform: scaleX(0.2816); }
+.hr-gauge-step-253 { transform: scaleX(0.2827); }
+.hr-gauge-step-254 { transform: scaleX(0.2838); }
+.hr-gauge-step-255 { transform: scaleX(0.2849); }
+.hr-gauge-step-256 { transform: scaleX(0.286); }
+.hr-gauge-step-257 { transform: scaleX(0.2872); }
+.hr-gauge-step-258 { transform: scaleX(0.2883); }
+.hr-gauge-step-259 { transform: scaleX(0.2894); }
+.hr-gauge-step-260 { transform: scaleX(0.2905); }
+.hr-gauge-step-261 { transform: scaleX(0.2916); }
+.hr-gauge-step-262 { transform: scaleX(0.2927); }
+.hr-gauge-step-263 { transform: scaleX(0.2939); }
+.hr-gauge-step-264 { transform: scaleX(0.295); }
+.hr-gauge-step-265 { transform: scaleX(0.2961); }
+.hr-gauge-step-266 { transform: scaleX(0.2972); }
+.hr-gauge-step-267 { transform: scaleX(0.2983); }
+.hr-gauge-step-268 { transform: scaleX(0.2994); }
+.hr-gauge-step-269 { transform: scaleX(0.3006); }
+.hr-gauge-step-270 { transform: scaleX(0.3017); }
+.hr-gauge-step-271 { transform: scaleX(0.3028); }
+.hr-gauge-step-272 { transform: scaleX(0.3039); }
+.hr-gauge-step-273 { transform: scaleX(0.305); }
+.hr-gauge-step-274 { transform: scaleX(0.3061); }
+.hr-gauge-step-275 { transform: scaleX(0.3073); }
+.hr-gauge-step-276 { transform: scaleX(0.3084); }
+.hr-gauge-step-277 { transform: scaleX(0.3095); }
+.hr-gauge-step-278 { transform: scaleX(0.3106); }
+.hr-gauge-step-279 { transform: scaleX(0.3117); }
+.hr-gauge-step-280 { transform: scaleX(0.3128); }
+.hr-gauge-step-281 { transform: scaleX(0.314); }
+.hr-gauge-step-282 { transform: scaleX(0.3151); }
+.hr-gauge-step-283 { transform: scaleX(0.3162); }
+.hr-gauge-step-284 { transform: scaleX(0.3173); }
+.hr-gauge-step-285 { transform: scaleX(0.3184); }
+.hr-gauge-step-286 { transform: scaleX(0.3196); }
+.hr-gauge-step-287 { transform: scaleX(0.3207); }
+.hr-gauge-step-288 { transform: scaleX(0.3218); }
+.hr-gauge-step-289 { transform: scaleX(0.3229); }
+.hr-gauge-step-290 { transform: scaleX(0.324); }
+.hr-gauge-step-291 { transform: scaleX(0.3251); }
+.hr-gauge-step-292 { transform: scaleX(0.3263); }
+.hr-gauge-step-293 { transform: scaleX(0.3274); }
+.hr-gauge-step-294 { transform: scaleX(0.3285); }
+.hr-gauge-step-295 { transform: scaleX(0.3296); }
+.hr-gauge-step-296 { transform: scaleX(0.3307); }
+.hr-gauge-step-297 { transform: scaleX(0.3318); }
+.hr-gauge-step-298 { transform: scaleX(0.333); }
+.hr-gauge-step-299 { transform: scaleX(0.3341); }
+.hr-gauge-step-300 { transform: scaleX(0.3352); }
+.hr-gauge-step-301 { transform: scaleX(0.3363); }
+.hr-gauge-step-302 { transform: scaleX(0.3374); }
+.hr-gauge-step-303 { transform: scaleX(0.3385); }
+.hr-gauge-step-304 { transform: scaleX(0.3397); }
+.hr-gauge-step-305 { transform: scaleX(0.3408); }
+.hr-gauge-step-306 { transform: scaleX(0.3419); }
+.hr-gauge-step-307 { transform: scaleX(0.343); }
+.hr-gauge-step-308 { transform: scaleX(0.3441); }
+.hr-gauge-step-309 { transform: scaleX(0.3453); }
+.hr-gauge-step-310 { transform: scaleX(0.3464); }
+.hr-gauge-step-311 { transform: scaleX(0.3475); }
+.hr-gauge-step-312 { transform: scaleX(0.3486); }
+.hr-gauge-step-313 { transform: scaleX(0.3497); }
+.hr-gauge-step-314 { transform: scaleX(0.3508); }
+.hr-gauge-step-315 { transform: scaleX(0.352); }
+.hr-gauge-step-316 { transform: scaleX(0.3531); }
+.hr-gauge-step-317 { transform: scaleX(0.3542); }
+.hr-gauge-step-318 { transform: scaleX(0.3553); }
+.hr-gauge-step-319 { transform: scaleX(0.3564); }
+.hr-gauge-step-320 { transform: scaleX(0.3575); }
+.hr-gauge-step-321 { transform: scaleX(0.3587); }
+.hr-gauge-step-322 { transform: scaleX(0.3598); }
+.hr-gauge-step-323 { transform: scaleX(0.3609); }
+.hr-gauge-step-324 { transform: scaleX(0.362); }
+.hr-gauge-step-325 { transform: scaleX(0.3631); }
+.hr-gauge-step-326 { transform: scaleX(0.3642); }
+.hr-gauge-step-327 { transform: scaleX(0.3654); }
+.hr-gauge-step-328 { transform: scaleX(0.3665); }
+.hr-gauge-step-329 { transform: scaleX(0.3676); }
+.hr-gauge-step-330 { transform: scaleX(0.3687); }
+.hr-gauge-step-331 { transform: scaleX(0.3698); }
+.hr-gauge-step-332 { transform: scaleX(0.3709); }
+.hr-gauge-step-333 { transform: scaleX(0.3721); }
+.hr-gauge-step-334 { transform: scaleX(0.3732); }
+.hr-gauge-step-335 { transform: scaleX(0.3743); }
+.hr-gauge-step-336 { transform: scaleX(0.3754); }
+.hr-gauge-step-337 { transform: scaleX(0.3765); }
+.hr-gauge-step-338 { transform: scaleX(0.3777); }
+.hr-gauge-step-339 { transform: scaleX(0.3788); }
+.hr-gauge-step-340 { transform: scaleX(0.3799); }
+.hr-gauge-step-341 { transform: scaleX(0.381); }
+.hr-gauge-step-342 { transform: scaleX(0.3821); }
+.hr-gauge-step-343 { transform: scaleX(0.3832); }
+.hr-gauge-step-344 { transform: scaleX(0.3844); }
+.hr-gauge-step-345 { transform: scaleX(0.3855); }
+.hr-gauge-step-346 { transform: scaleX(0.3866); }
+.hr-gauge-step-347 { transform: scaleX(0.3877); }
+.hr-gauge-step-348 { transform: scaleX(0.3888); }
+.hr-gauge-step-349 { transform: scaleX(0.3899); }
+.hr-gauge-step-350 { transform: scaleX(0.3911); }
+.hr-gauge-step-351 { transform: scaleX(0.3922); }
+.hr-gauge-step-352 { transform: scaleX(0.3933); }
+.hr-gauge-step-353 { transform: scaleX(0.3944); }
+.hr-gauge-step-354 { transform: scaleX(0.3955); }
+.hr-gauge-step-355 { transform: scaleX(0.3966); }
+.hr-gauge-step-356 { transform: scaleX(0.3978); }
+.hr-gauge-step-357 { transform: scaleX(0.3989); }
+.hr-gauge-step-358 { transform: scaleX(0.4); }
+.hr-gauge-step-359 { transform: scaleX(0.4011); }
+.hr-gauge-step-360 { transform: scaleX(0.4022); }
+.hr-gauge-step-361 { transform: scaleX(0.4034); }
+.hr-gauge-step-362 { transform: scaleX(0.4045); }
+.hr-gauge-step-363 { transform: scaleX(0.4056); }
+.hr-gauge-step-364 { transform: scaleX(0.4067); }
+.hr-gauge-step-365 { transform: scaleX(0.4078); }
+.hr-gauge-step-366 { transform: scaleX(0.4089); }
+.hr-gauge-step-367 { transform: scaleX(0.4101); }
+.hr-gauge-step-368 { transform: scaleX(0.4112); }
+.hr-gauge-step-369 { transform: scaleX(0.4123); }
+.hr-gauge-step-370 { transform: scaleX(0.4134); }
+.hr-gauge-step-371 { transform: scaleX(0.4145); }
+.hr-gauge-step-372 { transform: scaleX(0.4156); }
+.hr-gauge-step-373 { transform: scaleX(0.4168); }
+.hr-gauge-step-374 { transform: scaleX(0.4179); }
+.hr-gauge-step-375 { transform: scaleX(0.419); }
+.hr-gauge-step-376 { transform: scaleX(0.4201); }
+.hr-gauge-step-377 { transform: scaleX(0.4212); }
+.hr-gauge-step-378 { transform: scaleX(0.4223); }
+.hr-gauge-step-379 { transform: scaleX(0.4235); }
+.hr-gauge-step-380 { transform: scaleX(0.4246); }
+.hr-gauge-step-381 { transform: scaleX(0.4257); }
+.hr-gauge-step-382 { transform: scaleX(0.4268); }
+.hr-gauge-step-383 { transform: scaleX(0.4279); }
+.hr-gauge-step-384 { transform: scaleX(0.4291); }
+.hr-gauge-step-385 { transform: scaleX(0.4302); }
+.hr-gauge-step-386 { transform: scaleX(0.4313); }
+.hr-gauge-step-387 { transform: scaleX(0.4324); }
+.hr-gauge-step-388 { transform: scaleX(0.4335); }
+.hr-gauge-step-389 { transform: scaleX(0.4346); }
+.hr-gauge-step-390 { transform: scaleX(0.4358); }
+.hr-gauge-step-391 { transform: scaleX(0.4369); }
+.hr-gauge-step-392 { transform: scaleX(0.438); }
+.hr-gauge-step-393 { transform: scaleX(0.4391); }
+.hr-gauge-step-394 { transform: scaleX(0.4402); }
+.hr-gauge-step-395 { transform: scaleX(0.4413); }
+.hr-gauge-step-396 { transform: scaleX(0.4425); }
+.hr-gauge-step-397 { transform: scaleX(0.4436); }
+.hr-gauge-step-398 { transform: scaleX(0.4447); }
+.hr-gauge-step-399 { transform: scaleX(0.4458); }
+.hr-gauge-step-400 { transform: scaleX(0.4469); }
+.hr-gauge-step-401 { transform: scaleX(0.448); }
+.hr-gauge-step-402 { transform: scaleX(0.4492); }
+.hr-gauge-step-403 { transform: scaleX(0.4503); }
+.hr-gauge-step-404 { transform: scaleX(0.4514); }
+.hr-gauge-step-405 { transform: scaleX(0.4525); }
+.hr-gauge-step-406 { transform: scaleX(0.4536); }
+.hr-gauge-step-407 { transform: scaleX(0.4547); }
+.hr-gauge-step-408 { transform: scaleX(0.4559); }
+.hr-gauge-step-409 { transform: scaleX(0.457); }
+.hr-gauge-step-410 { transform: scaleX(0.4581); }
+.hr-gauge-step-411 { transform: scaleX(0.4592); }
+.hr-gauge-step-412 { transform: scaleX(0.4603); }
+.hr-gauge-step-413 { transform: scaleX(0.4615); }
+.hr-gauge-step-414 { transform: scaleX(0.4626); }
+.hr-gauge-step-415 { transform: scaleX(0.4637); }
+.hr-gauge-step-416 { transform: scaleX(0.4648); }
+.hr-gauge-step-417 { transform: scaleX(0.4659); }
+.hr-gauge-step-418 { transform: scaleX(0.467); }
+.hr-gauge-step-419 { transform: scaleX(0.4682); }
+.hr-gauge-step-420 { transform: scaleX(0.4693); }
+.hr-gauge-step-421 { transform: scaleX(0.4704); }
+.hr-gauge-step-422 { transform: scaleX(0.4715); }
+.hr-gauge-step-423 { transform: scaleX(0.4726); }
+.hr-gauge-step-424 { transform: scaleX(0.4737); }
+.hr-gauge-step-425 { transform: scaleX(0.4749); }
+.hr-gauge-step-426 { transform: scaleX(0.476); }
+.hr-gauge-step-427 { transform: scaleX(0.4771); }
+.hr-gauge-step-428 { transform: scaleX(0.4782); }
+.hr-gauge-step-429 { transform: scaleX(0.4793); }
+.hr-gauge-step-430 { transform: scaleX(0.4804); }
+.hr-gauge-step-431 { transform: scaleX(0.4816); }
+.hr-gauge-step-432 { transform: scaleX(0.4827); }
+.hr-gauge-step-433 { transform: scaleX(0.4838); }
+.hr-gauge-step-434 { transform: scaleX(0.4849); }
+.hr-gauge-step-435 { transform: scaleX(0.486); }
+.hr-gauge-step-436 { transform: scaleX(0.4872); }
+.hr-gauge-step-437 { transform: scaleX(0.4883); }
+.hr-gauge-step-438 { transform: scaleX(0.4894); }
+.hr-gauge-step-439 { transform: scaleX(0.4905); }
+.hr-gauge-step-440 { transform: scaleX(0.4916); }
+.hr-gauge-step-441 { transform: scaleX(0.4927); }
+.hr-gauge-step-442 { transform: scaleX(0.4939); }
+.hr-gauge-step-443 { transform: scaleX(0.495); }
+.hr-gauge-step-444 { transform: scaleX(0.4961); }
+.hr-gauge-step-445 { transform: scaleX(0.4972); }
+.hr-gauge-step-446 { transform: scaleX(0.4983); }
+.hr-gauge-step-447 { transform: scaleX(0.4994); }
+.hr-gauge-step-448 { transform: scaleX(0.5006); }
+.hr-gauge-step-449 { transform: scaleX(0.5017); }
+.hr-gauge-step-450 { transform: scaleX(0.5028); }
+.hr-gauge-step-451 { transform: scaleX(0.5039); }
+.hr-gauge-step-452 { transform: scaleX(0.505); }
+.hr-gauge-step-453 { transform: scaleX(0.5061); }
+.hr-gauge-step-454 { transform: scaleX(0.5073); }
+.hr-gauge-step-455 { transform: scaleX(0.5084); }
+.hr-gauge-step-456 { transform: scaleX(0.5095); }
+.hr-gauge-step-457 { transform: scaleX(0.5106); }
+.hr-gauge-step-458 { transform: scaleX(0.5117); }
+.hr-gauge-step-459 { transform: scaleX(0.5128); }
+.hr-gauge-step-460 { transform: scaleX(0.514); }
+.hr-gauge-step-461 { transform: scaleX(0.5151); }
+.hr-gauge-step-462 { transform: scaleX(0.5162); }
+.hr-gauge-step-463 { transform: scaleX(0.5173); }
+.hr-gauge-step-464 { transform: scaleX(0.5184); }
+.hr-gauge-step-465 { transform: scaleX(0.5196); }
+.hr-gauge-step-466 { transform: scaleX(0.5207); }
+.hr-gauge-step-467 { transform: scaleX(0.5218); }
+.hr-gauge-step-468 { transform: scaleX(0.5229); }
+.hr-gauge-step-469 { transform: scaleX(0.524); }
+.hr-gauge-step-470 { transform: scaleX(0.5251); }
+.hr-gauge-step-471 { transform: scaleX(0.5263); }
+.hr-gauge-step-472 { transform: scaleX(0.5274); }
+.hr-gauge-step-473 { transform: scaleX(0.5285); }
+.hr-gauge-step-474 { transform: scaleX(0.5296); }
+.hr-gauge-step-475 { transform: scaleX(0.5307); }
+.hr-gauge-step-476 { transform: scaleX(0.5318); }
+.hr-gauge-step-477 { transform: scaleX(0.533); }
+.hr-gauge-step-478 { transform: scaleX(0.5341); }
+.hr-gauge-step-479 { transform: scaleX(0.5352); }
+.hr-gauge-step-480 { transform: scaleX(0.5363); }
+.hr-gauge-step-481 { transform: scaleX(0.5374); }
+.hr-gauge-step-482 { transform: scaleX(0.5385); }
+.hr-gauge-step-483 { transform: scaleX(0.5397); }
+.hr-gauge-step-484 { transform: scaleX(0.5408); }
+.hr-gauge-step-485 { transform: scaleX(0.5419); }
+.hr-gauge-step-486 { transform: scaleX(0.543); }
+.hr-gauge-step-487 { transform: scaleX(0.5441); }
+.hr-gauge-step-488 { transform: scaleX(0.5453); }
+.hr-gauge-step-489 { transform: scaleX(0.5464); }
+.hr-gauge-step-490 { transform: scaleX(0.5475); }
+.hr-gauge-step-491 { transform: scaleX(0.5486); }
+.hr-gauge-step-492 { transform: scaleX(0.5497); }
+.hr-gauge-step-493 { transform: scaleX(0.5508); }
+.hr-gauge-step-494 { transform: scaleX(0.552); }
+.hr-gauge-step-495 { transform: scaleX(0.5531); }
+.hr-gauge-step-496 { transform: scaleX(0.5542); }
+.hr-gauge-step-497 { transform: scaleX(0.5553); }
+.hr-gauge-step-498 { transform: scaleX(0.5564); }
+.hr-gauge-step-499 { transform: scaleX(0.5575); }
+.hr-gauge-step-500 { transform: scaleX(0.5587); }
+.hr-gauge-step-501 { transform: scaleX(0.5598); }
+.hr-gauge-step-502 { transform: scaleX(0.5609); }
+.hr-gauge-step-503 { transform: scaleX(0.562); }
+.hr-gauge-step-504 { transform: scaleX(0.5631); }
+.hr-gauge-step-505 { transform: scaleX(0.5642); }
+.hr-gauge-step-506 { transform: scaleX(0.5654); }
+.hr-gauge-step-507 { transform: scaleX(0.5665); }
+.hr-gauge-step-508 { transform: scaleX(0.5676); }
+.hr-gauge-step-509 { transform: scaleX(0.5687); }
+.hr-gauge-step-510 { transform: scaleX(0.5698); }
+.hr-gauge-step-511 { transform: scaleX(0.5709); }
+.hr-gauge-step-512 { transform: scaleX(0.5721); }
+.hr-gauge-step-513 { transform: scaleX(0.5732); }
+.hr-gauge-step-514 { transform: scaleX(0.5743); }
+.hr-gauge-step-515 { transform: scaleX(0.5754); }
+.hr-gauge-step-516 { transform: scaleX(0.5765); }
+.hr-gauge-step-517 { transform: scaleX(0.5777); }
+.hr-gauge-step-518 { transform: scaleX(0.5788); }
+.hr-gauge-step-519 { transform: scaleX(0.5799); }
+.hr-gauge-step-520 { transform: scaleX(0.581); }
+.hr-gauge-step-521 { transform: scaleX(0.5821); }
+.hr-gauge-step-522 { transform: scaleX(0.5832); }
+.hr-gauge-step-523 { transform: scaleX(0.5844); }
+.hr-gauge-step-524 { transform: scaleX(0.5855); }
+.hr-gauge-step-525 { transform: scaleX(0.5866); }
+.hr-gauge-step-526 { transform: scaleX(0.5877); }
+.hr-gauge-step-527 { transform: scaleX(0.5888); }
+.hr-gauge-step-528 { transform: scaleX(0.5899); }
+.hr-gauge-step-529 { transform: scaleX(0.5911); }
+.hr-gauge-step-530 { transform: scaleX(0.5922); }
+.hr-gauge-step-531 { transform: scaleX(0.5933); }
+.hr-gauge-step-532 { transform: scaleX(0.5944); }
+.hr-gauge-step-533 { transform: scaleX(0.5955); }
+.hr-gauge-step-534 { transform: scaleX(0.5966); }
+.hr-gauge-step-535 { transform: scaleX(0.5978); }
+.hr-gauge-step-536 { transform: scaleX(0.5989); }
+.hr-gauge-step-537 { transform: scaleX(0.6); }
+.hr-gauge-step-538 { transform: scaleX(0.6011); }
+.hr-gauge-step-539 { transform: scaleX(0.6022); }
+.hr-gauge-step-540 { transform: scaleX(0.6034); }
+.hr-gauge-step-541 { transform: scaleX(0.6045); }
+.hr-gauge-step-542 { transform: scaleX(0.6056); }
+.hr-gauge-step-543 { transform: scaleX(0.6067); }
+.hr-gauge-step-544 { transform: scaleX(0.6078); }
+.hr-gauge-step-545 { transform: scaleX(0.6089); }
+.hr-gauge-step-546 { transform: scaleX(0.6101); }
+.hr-gauge-step-547 { transform: scaleX(0.6112); }
+.hr-gauge-step-548 { transform: scaleX(0.6123); }
+.hr-gauge-step-549 { transform: scaleX(0.6134); }
+.hr-gauge-step-550 { transform: scaleX(0.6145); }
+.hr-gauge-step-551 { transform: scaleX(0.6156); }
+.hr-gauge-step-552 { transform: scaleX(0.6168); }
+.hr-gauge-step-553 { transform: scaleX(0.6179); }
+.hr-gauge-step-554 { transform: scaleX(0.619); }
+.hr-gauge-step-555 { transform: scaleX(0.6201); }
+.hr-gauge-step-556 { transform: scaleX(0.6212); }
+.hr-gauge-step-557 { transform: scaleX(0.6223); }
+.hr-gauge-step-558 { transform: scaleX(0.6235); }
+.hr-gauge-step-559 { transform: scaleX(0.6246); }
+.hr-gauge-step-560 { transform: scaleX(0.6257); }
+.hr-gauge-step-561 { transform: scaleX(0.6268); }
+.hr-gauge-step-562 { transform: scaleX(0.6279); }
+.hr-gauge-step-563 { transform: scaleX(0.6291); }
+.hr-gauge-step-564 { transform: scaleX(0.6302); }
+.hr-gauge-step-565 { transform: scaleX(0.6313); }
+.hr-gauge-step-566 { transform: scaleX(0.6324); }
+.hr-gauge-step-567 { transform: scaleX(0.6335); }
+.hr-gauge-step-568 { transform: scaleX(0.6346); }
+.hr-gauge-step-569 { transform: scaleX(0.6358); }
+.hr-gauge-step-570 { transform: scaleX(0.6369); }
+.hr-gauge-step-571 { transform: scaleX(0.638); }
+.hr-gauge-step-572 { transform: scaleX(0.6391); }
+.hr-gauge-step-573 { transform: scaleX(0.6402); }
+.hr-gauge-step-574 { transform: scaleX(0.6413); }
+.hr-gauge-step-575 { transform: scaleX(0.6425); }
+.hr-gauge-step-576 { transform: scaleX(0.6436); }
+.hr-gauge-step-577 { transform: scaleX(0.6447); }
+.hr-gauge-step-578 { transform: scaleX(0.6458); }
+.hr-gauge-step-579 { transform: scaleX(0.6469); }
+.hr-gauge-step-580 { transform: scaleX(0.648); }
+.hr-gauge-step-581 { transform: scaleX(0.6492); }
+.hr-gauge-step-582 { transform: scaleX(0.6503); }
+.hr-gauge-step-583 { transform: scaleX(0.6514); }
+.hr-gauge-step-584 { transform: scaleX(0.6525); }
+.hr-gauge-step-585 { transform: scaleX(0.6536); }
+.hr-gauge-step-586 { transform: scaleX(0.6547); }
+.hr-gauge-step-587 { transform: scaleX(0.6559); }
+.hr-gauge-step-588 { transform: scaleX(0.657); }
+.hr-gauge-step-589 { transform: scaleX(0.6581); }
+.hr-gauge-step-590 { transform: scaleX(0.6592); }
+.hr-gauge-step-591 { transform: scaleX(0.6603); }
+.hr-gauge-step-592 { transform: scaleX(0.6615); }
+.hr-gauge-step-593 { transform: scaleX(0.6626); }
+.hr-gauge-step-594 { transform: scaleX(0.6637); }
+.hr-gauge-step-595 { transform: scaleX(0.6648); }
+.hr-gauge-step-596 { transform: scaleX(0.6659); }
+.hr-gauge-step-597 { transform: scaleX(0.667); }
+.hr-gauge-step-598 { transform: scaleX(0.6682); }
+.hr-gauge-step-599 { transform: scaleX(0.6693); }
+.hr-gauge-step-600 { transform: scaleX(0.6704); }
+.hr-gauge-step-601 { transform: scaleX(0.6715); }
+.hr-gauge-step-602 { transform: scaleX(0.6726); }
+.hr-gauge-step-603 { transform: scaleX(0.6737); }
+.hr-gauge-step-604 { transform: scaleX(0.6749); }
+.hr-gauge-step-605 { transform: scaleX(0.676); }
+.hr-gauge-step-606 { transform: scaleX(0.6771); }
+.hr-gauge-step-607 { transform: scaleX(0.6782); }
+.hr-gauge-step-608 { transform: scaleX(0.6793); }
+.hr-gauge-step-609 { transform: scaleX(0.6804); }
+.hr-gauge-step-610 { transform: scaleX(0.6816); }
+.hr-gauge-step-611 { transform: scaleX(0.6827); }
+.hr-gauge-step-612 { transform: scaleX(0.6838); }
+.hr-gauge-step-613 { transform: scaleX(0.6849); }
+.hr-gauge-step-614 { transform: scaleX(0.686); }
+.hr-gauge-step-615 { transform: scaleX(0.6872); }
+.hr-gauge-step-616 { transform: scaleX(0.6883); }
+.hr-gauge-step-617 { transform: scaleX(0.6894); }
+.hr-gauge-step-618 { transform: scaleX(0.6905); }
+.hr-gauge-step-619 { transform: scaleX(0.6916); }
+.hr-gauge-step-620 { transform: scaleX(0.6927); }
+.hr-gauge-step-621 { transform: scaleX(0.6939); }
+.hr-gauge-step-622 { transform: scaleX(0.695); }
+.hr-gauge-step-623 { transform: scaleX(0.6961); }
+.hr-gauge-step-624 { transform: scaleX(0.6972); }
+.hr-gauge-step-625 { transform: scaleX(0.6983); }
+.hr-gauge-step-626 { transform: scaleX(0.6994); }
+.hr-gauge-step-627 { transform: scaleX(0.7006); }
+.hr-gauge-step-628 { transform: scaleX(0.7017); }
+.hr-gauge-step-629 { transform: scaleX(0.7028); }
+.hr-gauge-step-630 { transform: scaleX(0.7039); }
+.hr-gauge-step-631 { transform: scaleX(0.705); }
+.hr-gauge-step-632 { transform: scaleX(0.7061); }
+.hr-gauge-step-633 { transform: scaleX(0.7073); }
+.hr-gauge-step-634 { transform: scaleX(0.7084); }
+.hr-gauge-step-635 { transform: scaleX(0.7095); }
+.hr-gauge-step-636 { transform: scaleX(0.7106); }
+.hr-gauge-step-637 { transform: scaleX(0.7117); }
+.hr-gauge-step-638 { transform: scaleX(0.7128); }
+.hr-gauge-step-639 { transform: scaleX(0.714); }
+.hr-gauge-step-640 { transform: scaleX(0.7151); }
+.hr-gauge-step-641 { transform: scaleX(0.7162); }
+.hr-gauge-step-642 { transform: scaleX(0.7173); }
+.hr-gauge-step-643 { transform: scaleX(0.7184); }
+.hr-gauge-step-644 { transform: scaleX(0.7196); }
+.hr-gauge-step-645 { transform: scaleX(0.7207); }
+.hr-gauge-step-646 { transform: scaleX(0.7218); }
+.hr-gauge-step-647 { transform: scaleX(0.7229); }
+.hr-gauge-step-648 { transform: scaleX(0.724); }
+.hr-gauge-step-649 { transform: scaleX(0.7251); }
+.hr-gauge-step-650 { transform: scaleX(0.7263); }
+.hr-gauge-step-651 { transform: scaleX(0.7274); }
+.hr-gauge-step-652 { transform: scaleX(0.7285); }
+.hr-gauge-step-653 { transform: scaleX(0.7296); }
+.hr-gauge-step-654 { transform: scaleX(0.7307); }
+.hr-gauge-step-655 { transform: scaleX(0.7318); }
+.hr-gauge-step-656 { transform: scaleX(0.733); }
+.hr-gauge-step-657 { transform: scaleX(0.7341); }
+.hr-gauge-step-658 { transform: scaleX(0.7352); }
+.hr-gauge-step-659 { transform: scaleX(0.7363); }
+.hr-gauge-step-660 { transform: scaleX(0.7374); }
+.hr-gauge-step-661 { transform: scaleX(0.7385); }
+.hr-gauge-step-662 { transform: scaleX(0.7397); }
+.hr-gauge-step-663 { transform: scaleX(0.7408); }
+.hr-gauge-step-664 { transform: scaleX(0.7419); }
+.hr-gauge-step-665 { transform: scaleX(0.743); }
+.hr-gauge-step-666 { transform: scaleX(0.7441); }
+.hr-gauge-step-667 { transform: scaleX(0.7453); }
+.hr-gauge-step-668 { transform: scaleX(0.7464); }
+.hr-gauge-step-669 { transform: scaleX(0.7475); }
+.hr-gauge-step-670 { transform: scaleX(0.7486); }
+.hr-gauge-step-671 { transform: scaleX(0.7497); }
+.hr-gauge-step-672 { transform: scaleX(0.7508); }
+.hr-gauge-step-673 { transform: scaleX(0.752); }
+.hr-gauge-step-674 { transform: scaleX(0.7531); }
+.hr-gauge-step-675 { transform: scaleX(0.7542); }
+.hr-gauge-step-676 { transform: scaleX(0.7553); }
+.hr-gauge-step-677 { transform: scaleX(0.7564); }
+.hr-gauge-step-678 { transform: scaleX(0.7575); }
+.hr-gauge-step-679 { transform: scaleX(0.7587); }
+.hr-gauge-step-680 { transform: scaleX(0.7598); }
+.hr-gauge-step-681 { transform: scaleX(0.7609); }
+.hr-gauge-step-682 { transform: scaleX(0.762); }
+.hr-gauge-step-683 { transform: scaleX(0.7631); }
+.hr-gauge-step-684 { transform: scaleX(0.7642); }
+.hr-gauge-step-685 { transform: scaleX(0.7654); }
+.hr-gauge-step-686 { transform: scaleX(0.7665); }
+.hr-gauge-step-687 { transform: scaleX(0.7676); }
+.hr-gauge-step-688 { transform: scaleX(0.7687); }
+.hr-gauge-step-689 { transform: scaleX(0.7698); }
+.hr-gauge-step-690 { transform: scaleX(0.7709); }
+.hr-gauge-step-691 { transform: scaleX(0.7721); }
+.hr-gauge-step-692 { transform: scaleX(0.7732); }
+.hr-gauge-step-693 { transform: scaleX(0.7743); }
+.hr-gauge-step-694 { transform: scaleX(0.7754); }
+.hr-gauge-step-695 { transform: scaleX(0.7765); }
+.hr-gauge-step-696 { transform: scaleX(0.7777); }
+.hr-gauge-step-697 { transform: scaleX(0.7788); }
+.hr-gauge-step-698 { transform: scaleX(0.7799); }
+.hr-gauge-step-699 { transform: scaleX(0.781); }
+.hr-gauge-step-700 { transform: scaleX(0.7821); }
+.hr-gauge-step-701 { transform: scaleX(0.7832); }
+.hr-gauge-step-702 { transform: scaleX(0.7844); }
+.hr-gauge-step-703 { transform: scaleX(0.7855); }
+.hr-gauge-step-704 { transform: scaleX(0.7866); }
+.hr-gauge-step-705 { transform: scaleX(0.7877); }
+.hr-gauge-step-706 { transform: scaleX(0.7888); }
+.hr-gauge-step-707 { transform: scaleX(0.7899); }
+.hr-gauge-step-708 { transform: scaleX(0.7911); }
+.hr-gauge-step-709 { transform: scaleX(0.7922); }
+.hr-gauge-step-710 { transform: scaleX(0.7933); }
+.hr-gauge-step-711 { transform: scaleX(0.7944); }
+.hr-gauge-step-712 { transform: scaleX(0.7955); }
+.hr-gauge-step-713 { transform: scaleX(0.7966); }
+.hr-gauge-step-714 { transform: scaleX(0.7978); }
+.hr-gauge-step-715 { transform: scaleX(0.7989); }
+.hr-gauge-step-716 { transform: scaleX(0.8); }
+.hr-gauge-step-717 { transform: scaleX(0.8011); }
+.hr-gauge-step-718 { transform: scaleX(0.8022); }
+.hr-gauge-step-719 { transform: scaleX(0.8034); }
+.hr-gauge-step-720 { transform: scaleX(0.8045); }
+.hr-gauge-step-721 { transform: scaleX(0.8056); }
+.hr-gauge-step-722 { transform: scaleX(0.8067); }
+.hr-gauge-step-723 { transform: scaleX(0.8078); }
+.hr-gauge-step-724 { transform: scaleX(0.8089); }
+.hr-gauge-step-725 { transform: scaleX(0.8101); }
+.hr-gauge-step-726 { transform: scaleX(0.8112); }
+.hr-gauge-step-727 { transform: scaleX(0.8123); }
+.hr-gauge-step-728 { transform: scaleX(0.8134); }
+.hr-gauge-step-729 { transform: scaleX(0.8145); }
+.hr-gauge-step-730 { transform: scaleX(0.8156); }
+.hr-gauge-step-731 { transform: scaleX(0.8168); }
+.hr-gauge-step-732 { transform: scaleX(0.8179); }
+.hr-gauge-step-733 { transform: scaleX(0.819); }
+.hr-gauge-step-734 { transform: scaleX(0.8201); }
+.hr-gauge-step-735 { transform: scaleX(0.8212); }
+.hr-gauge-step-736 { transform: scaleX(0.8223); }
+.hr-gauge-step-737 { transform: scaleX(0.8235); }
+.hr-gauge-step-738 { transform: scaleX(0.8246); }
+.hr-gauge-step-739 { transform: scaleX(0.8257); }
+.hr-gauge-step-740 { transform: scaleX(0.8268); }
+.hr-gauge-step-741 { transform: scaleX(0.8279); }
+.hr-gauge-step-742 { transform: scaleX(0.8291); }
+.hr-gauge-step-743 { transform: scaleX(0.8302); }
+.hr-gauge-step-744 { transform: scaleX(0.8313); }
+.hr-gauge-step-745 { transform: scaleX(0.8324); }
+.hr-gauge-step-746 { transform: scaleX(0.8335); }
+.hr-gauge-step-747 { transform: scaleX(0.8346); }
+.hr-gauge-step-748 { transform: scaleX(0.8358); }
+.hr-gauge-step-749 { transform: scaleX(0.8369); }
+.hr-gauge-step-750 { transform: scaleX(0.838); }
+.hr-gauge-step-751 { transform: scaleX(0.8391); }
+.hr-gauge-step-752 { transform: scaleX(0.8402); }
+.hr-gauge-step-753 { transform: scaleX(0.8413); }
+.hr-gauge-step-754 { transform: scaleX(0.8425); }
+.hr-gauge-step-755 { transform: scaleX(0.8436); }
+.hr-gauge-step-756 { transform: scaleX(0.8447); }
+.hr-gauge-step-757 { transform: scaleX(0.8458); }
+.hr-gauge-step-758 { transform: scaleX(0.8469); }
+.hr-gauge-step-759 { transform: scaleX(0.848); }
+.hr-gauge-step-760 { transform: scaleX(0.8492); }
+.hr-gauge-step-761 { transform: scaleX(0.8503); }
+.hr-gauge-step-762 { transform: scaleX(0.8514); }
+.hr-gauge-step-763 { transform: scaleX(0.8525); }
+.hr-gauge-step-764 { transform: scaleX(0.8536); }
+.hr-gauge-step-765 { transform: scaleX(0.8547); }
+.hr-gauge-step-766 { transform: scaleX(0.8559); }
+.hr-gauge-step-767 { transform: scaleX(0.857); }
+.hr-gauge-step-768 { transform: scaleX(0.8581); }
+.hr-gauge-step-769 { transform: scaleX(0.8592); }
+.hr-gauge-step-770 { transform: scaleX(0.8603); }
+.hr-gauge-step-771 { transform: scaleX(0.8615); }
+.hr-gauge-step-772 { transform: scaleX(0.8626); }
+.hr-gauge-step-773 { transform: scaleX(0.8637); }
+.hr-gauge-step-774 { transform: scaleX(0.8648); }
+.hr-gauge-step-775 { transform: scaleX(0.8659); }
+.hr-gauge-step-776 { transform: scaleX(0.867); }
+.hr-gauge-step-777 { transform: scaleX(0.8682); }
+.hr-gauge-step-778 { transform: scaleX(0.8693); }
+.hr-gauge-step-779 { transform: scaleX(0.8704); }
+.hr-gauge-step-780 { transform: scaleX(0.8715); }
+.hr-gauge-step-781 { transform: scaleX(0.8726); }
+.hr-gauge-step-782 { transform: scaleX(0.8737); }
+.hr-gauge-step-783 { transform: scaleX(0.8749); }
+.hr-gauge-step-784 { transform: scaleX(0.876); }
+.hr-gauge-step-785 { transform: scaleX(0.8771); }
+.hr-gauge-step-786 { transform: scaleX(0.8782); }
+.hr-gauge-step-787 { transform: scaleX(0.8793); }
+.hr-gauge-step-788 { transform: scaleX(0.8804); }
+.hr-gauge-step-789 { transform: scaleX(0.8816); }
+.hr-gauge-step-790 { transform: scaleX(0.8827); }
+.hr-gauge-step-791 { transform: scaleX(0.8838); }
+.hr-gauge-step-792 { transform: scaleX(0.8849); }
+.hr-gauge-step-793 { transform: scaleX(0.886); }
+.hr-gauge-step-794 { transform: scaleX(0.8872); }
+.hr-gauge-step-795 { transform: scaleX(0.8883); }
+.hr-gauge-step-796 { transform: scaleX(0.8894); }
+.hr-gauge-step-797 { transform: scaleX(0.8905); }
+.hr-gauge-step-798 { transform: scaleX(0.8916); }
+.hr-gauge-step-799 { transform: scaleX(0.8927); }
+.hr-gauge-step-800 { transform: scaleX(0.8939); }
+.hr-gauge-step-801 { transform: scaleX(0.895); }
+.hr-gauge-step-802 { transform: scaleX(0.8961); }
+.hr-gauge-step-803 { transform: scaleX(0.8972); }
+.hr-gauge-step-804 { transform: scaleX(0.8983); }
+.hr-gauge-step-805 { transform: scaleX(0.8994); }
+.hr-gauge-step-806 { transform: scaleX(0.9006); }
+.hr-gauge-step-807 { transform: scaleX(0.9017); }
+.hr-gauge-step-808 { transform: scaleX(0.9028); }
+.hr-gauge-step-809 { transform: scaleX(0.9039); }
+.hr-gauge-step-810 { transform: scaleX(0.905); }
+.hr-gauge-step-811 { transform: scaleX(0.9061); }
+.hr-gauge-step-812 { transform: scaleX(0.9073); }
+.hr-gauge-step-813 { transform: scaleX(0.9084); }
+.hr-gauge-step-814 { transform: scaleX(0.9095); }
+.hr-gauge-step-815 { transform: scaleX(0.9106); }
+.hr-gauge-step-816 { transform: scaleX(0.9117); }
+.hr-gauge-step-817 { transform: scaleX(0.9128); }
+.hr-gauge-step-818 { transform: scaleX(0.914); }
+.hr-gauge-step-819 { transform: scaleX(0.9151); }
+.hr-gauge-step-820 { transform: scaleX(0.9162); }
+.hr-gauge-step-821 { transform: scaleX(0.9173); }
+.hr-gauge-step-822 { transform: scaleX(0.9184); }
+.hr-gauge-step-823 { transform: scaleX(0.9196); }
+.hr-gauge-step-824 { transform: scaleX(0.9207); }
+.hr-gauge-step-825 { transform: scaleX(0.9218); }
+.hr-gauge-step-826 { transform: scaleX(0.9229); }
+.hr-gauge-step-827 { transform: scaleX(0.924); }
+.hr-gauge-step-828 { transform: scaleX(0.9251); }
+.hr-gauge-step-829 { transform: scaleX(0.9263); }
+.hr-gauge-step-830 { transform: scaleX(0.9274); }
+.hr-gauge-step-831 { transform: scaleX(0.9285); }
+.hr-gauge-step-832 { transform: scaleX(0.9296); }
+.hr-gauge-step-833 { transform: scaleX(0.9307); }
+.hr-gauge-step-834 { transform: scaleX(0.9318); }
+.hr-gauge-step-835 { transform: scaleX(0.933); }
+.hr-gauge-step-836 { transform: scaleX(0.9341); }
+.hr-gauge-step-837 { transform: scaleX(0.9352); }
+.hr-gauge-step-838 { transform: scaleX(0.9363); }
+.hr-gauge-step-839 { transform: scaleX(0.9374); }
+.hr-gauge-step-840 { transform: scaleX(0.9385); }
+.hr-gauge-step-841 { transform: scaleX(0.9397); }
+.hr-gauge-step-842 { transform: scaleX(0.9408); }
+.hr-gauge-step-843 { transform: scaleX(0.9419); }
+.hr-gauge-step-844 { transform: scaleX(0.943); }
+.hr-gauge-step-845 { transform: scaleX(0.9441); }
+.hr-gauge-step-846 { transform: scaleX(0.9453); }
+.hr-gauge-step-847 { transform: scaleX(0.9464); }
+.hr-gauge-step-848 { transform: scaleX(0.9475); }
+.hr-gauge-step-849 { transform: scaleX(0.9486); }
+.hr-gauge-step-850 { transform: scaleX(0.9497); }
+.hr-gauge-step-851 { transform: scaleX(0.9508); }
+.hr-gauge-step-852 { transform: scaleX(0.952); }
+.hr-gauge-step-853 { transform: scaleX(0.9531); }
+.hr-gauge-step-854 { transform: scaleX(0.9542); }
+.hr-gauge-step-855 { transform: scaleX(0.9553); }
+.hr-gauge-step-856 { transform: scaleX(0.9564); }
+.hr-gauge-step-857 { transform: scaleX(0.9575); }
+.hr-gauge-step-858 { transform: scaleX(0.9587); }
+.hr-gauge-step-859 { transform: scaleX(0.9598); }
+.hr-gauge-step-860 { transform: scaleX(0.9609); }
+.hr-gauge-step-861 { transform: scaleX(0.962); }
+.hr-gauge-step-862 { transform: scaleX(0.9631); }
+.hr-gauge-step-863 { transform: scaleX(0.9642); }
+.hr-gauge-step-864 { transform: scaleX(0.9654); }
+.hr-gauge-step-865 { transform: scaleX(0.9665); }
+.hr-gauge-step-866 { transform: scaleX(0.9676); }
+.hr-gauge-step-867 { transform: scaleX(0.9687); }
+.hr-gauge-step-868 { transform: scaleX(0.9698); }
+.hr-gauge-step-869 { transform: scaleX(0.9709); }
+.hr-gauge-step-870 { transform: scaleX(0.9721); }
+.hr-gauge-step-871 { transform: scaleX(0.9732); }
+.hr-gauge-step-872 { transform: scaleX(0.9743); }
+.hr-gauge-step-873 { transform: scaleX(0.9754); }
+.hr-gauge-step-874 { transform: scaleX(0.9765); }
+.hr-gauge-step-875 { transform: scaleX(0.9777); }
+.hr-gauge-step-876 { transform: scaleX(0.9788); }
+.hr-gauge-step-877 { transform: scaleX(0.9799); }
+.hr-gauge-step-878 { transform: scaleX(0.981); }
+.hr-gauge-step-879 { transform: scaleX(0.9821); }
+.hr-gauge-step-880 { transform: scaleX(0.9832); }
+.hr-gauge-step-881 { transform: scaleX(0.9844); }
+.hr-gauge-step-882 { transform: scaleX(0.9855); }
+.hr-gauge-step-883 { transform: scaleX(0.9866); }
+.hr-gauge-step-884 { transform: scaleX(0.9877); }
+.hr-gauge-step-885 { transform: scaleX(0.9888); }
+.hr-gauge-step-886 { transform: scaleX(0.9899); }
+.hr-gauge-step-887 { transform: scaleX(0.9911); }
+.hr-gauge-step-888 { transform: scaleX(0.9922); }
+.hr-gauge-step-889 { transform: scaleX(0.9933); }
+.hr-gauge-step-890 { transform: scaleX(0.9944); }
+.hr-gauge-step-891 { transform: scaleX(0.9955); }
+.hr-gauge-step-892 { transform: scaleX(0.9966); }
+.hr-gauge-step-893 { transform: scaleX(0.9978); }
+.hr-gauge-step-894 { transform: scaleX(0.9989); }
