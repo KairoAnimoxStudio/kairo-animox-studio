@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#17191E">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
   <title>KAIRO ANIMOX | KaiApps</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -62,7 +66,8 @@
 
       <div class="button-row">
         <a class="btn primary" href="kairo-art-studio.html">Launch KAIRO ART STUDIO</a>
-        <a class="btn" href="#apps">Explore Workspaces</a>
+        <a class="btn" href="/api/download/windows-zip" download="Kairo-Art-Studio-Windows-Portable.zip">Download Windows App (.zip)</a>
+        <button type="button" class="btn" id="kaiapps-install-btn">Install Desktop App</button>
       </div>
     </div>
 
@@ -115,6 +120,8 @@
 
           <div class="game-actions">
             <a class="btn primary" href="kairo-art-studio.html?autostart=1">Launch Studio</a>
+            <a class="btn" href="/api/download/windows-zip" download="Kairo-Art-Studio-Windows-Portable.zip">Windows Software (.zip)</a>
+            <a class="btn" href="/api/download/standalone-html" download="Kairo-Art-Studio-Offline.html">Offline App (.html)</a>
             <a class="btn" href="kairo-art-studio.html?workspace=animation">2D Animation Mode</a>
             <a class="btn" href="kairo-art-studio.html?workspace=comic">Comic Workspace</a>
           </div>
@@ -130,5 +137,39 @@
   <p>© 2026 KAIRO ANIMOX</p>
 </footer>
 
+<script>
+(() => {
+  if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(() => {});
+  }
+  let deferredPrompt = null;
+  const installBtn = document.getElementById('kaiapps-install-btn');
+  const isStandalone =
+    window.matchMedia('(display-mode: standalone)').matches ||
+    window.navigator.standalone === true;
+  if (isStandalone && installBtn) {
+    installBtn.hidden = true;
+  }
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (installBtn) installBtn.textContent = 'Install Desktop App';
+  });
+  if (installBtn) {
+    installBtn.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        await deferredPrompt.prompt();
+        const choice = await deferredPrompt.userChoice;
+        if (choice.outcome === 'accepted') {
+          deferredPrompt = null;
+          installBtn.hidden = true;
+        }
+      } else {
+        window.location.href = 'kairo-art-studio.html?autostart=1&install=1';
+      }
+    });
+  }
+})();
+</script>
 </body>
 </html>
