@@ -2,7 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#070B14">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="KairoNews">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
   <title>KAIRO ANIMOX | News</title>
+  <meta name="description" content="Follow KAIRO ANIMOX updates across Comics, KaiToon, KaiPlay, and KaiApps.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -65,10 +76,8 @@
       </div>
     </div>
 
-    <div class="news-panel">
-      <h3>Next Release</h3>
-      <p>INDRA'S FRAGMENT Comic and new KaiToon updates will appear here.</p>
-      <span class="badge">Coming Soon</span>
+    <div class="spotlight-poster news-spotlight-poster">
+      <img src="/assets/aistudio/news02_2af61cb9.jpg" alt="KAIRO ANIMOX News & Updates Showcase">
     </div>
   </section>
 
@@ -79,6 +88,12 @@
     </div>
 
     <div class="news-list">
+      <article class="news-card">
+        <span class="badge">Coming Soon</span>
+        <h3>Next Release</h3>
+        <p>INDRA'S FRAGMENT Comic and new KaiToon updates will appear here.</p>
+      </article>
+
       <article class="news-card">
         <span class="badge">Website</span>
         <h3>KAIRO ANIMOX website is live</h3>
@@ -99,5 +114,6 @@
   <p>© 2026 KAIRO ANIMOX</p>
 </footer>
 
+<script src="shared/platform-install.js"></script>
 </body>
 </html>
