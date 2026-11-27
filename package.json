@@ -1,0 +1,22 @@
+{
+  "name": "kairo-animox-studio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run build && node server.js",
+    "start": "node server.js",
+    "build": "esbuild src/studio/main.ts --bundle --format=iife --minify --outfile=public/studio/kairo-art-studio.js && esbuild src/studio/windowsPackage.ts --bundle --platform=node --format=esm --outfile=dist/windowsPackage.mjs && esbuild src/games/tictactoe/main.ts --bundle --format=iife --minify --outfile=public/games/tic-tac-toe.js && esbuild src/games/hill-rider/main.ts --bundle --format=iife --minify --outfile=public/games/hill-rider.js",
+    "lint": "tsc --noEmit && node --check server.js",
+    "test": "tsx --test src/studio/*.test.ts src/games/**/*.test.ts"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "esbuild": "^0.28.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}

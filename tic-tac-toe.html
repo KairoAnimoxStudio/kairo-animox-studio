@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TIK-TAK-TOE | KaiPlay</title>
+  <meta name="description" content="Play TIK-TAK-TOE in KaiPlay with Unbeatable Minimax AI or 2-Player mode on 3x3 and 4x4 grids.">
+  <link rel="stylesheet" href="tic-tac-toe.css">
+</head>
+<body data-state="title">
+
+<main class="ttt-shell">
+
+  <!-- TITLE SCREEN -->
+  <section id="ttt-title-screen" class="ttt-title-card" aria-labelledby="ttt-game-title">
+    <div class="ttt-emblem-row">
+      <div class="ttt-emblem-wrap">
+        <svg class="ttt-emblem-svg" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <rect x="3" y="3" width="42" height="42" rx="10" fill="#0B1120" stroke="#38BDF8" stroke-width="2.2"/>
+          <path d="M12 12L21 21M21 12L12 21" stroke="#38BDF8" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="31.5" cy="31.5" r="5" stroke="#F59E0B" stroke-width="3"/>
+        </svg>
+        <div>
+          <h1 id="ttt-game-title">TIK-TAK-TOE</h1>
+          <p class="ttt-subtitle">Classic Strategy Grid · KaiPlay</p>
+        </div>
+      </div>
+      <a class="ttt-btn sm" href="kaiplay.html">Back to KaiPlay</a>
+    </div>
+
+    <div class="ttt-config-group">
+      <span class="ttt-config-label">Game Mode</span>
+      <div class="ttt-seg-row" role="group" aria-label="Game Mode">
+        <button type="button" class="ttt-seg-btn active" data-ttt-mode="ai">Vs Smart AI</button>
+        <button type="button" class="ttt-seg-btn" data-ttt-mode="pvp">2 Players</button>
+      </div>
+    </div>
+
+    <div id="ttt-difficulty-group" class="ttt-config-group">
+      <span class="ttt-config-label">AI Difficulty</span>
+      <div class="ttt-seg-row" role="group" aria-label="AI Difficulty">
+        <button type="button" class="ttt-seg-btn" data-ttt-diff="easy">Easy</button>
+        <button type="button" class="ttt-seg-btn active" data-ttt-diff="medium">Medium</button>
+        <button type="button" class="ttt-seg-btn" data-ttt-diff="unbeatable">Unbeatable</button>
+      </div>
+    </div>
+
+    <div class="ttt-config-group">
+      <span class="ttt-config-label">Board &amp; Starting Mark</span>
+      <div class="ttt-seg-row" role="group" aria-label="Board Size">
+        <button type="button" class="ttt-seg-btn active" data-ttt-size="3">3 × 3 Classic</button>
+        <button type="button" class="ttt-seg-btn" data-ttt-size="4">4 × 4 Extended</button>
+      </div>
+      <div class="ttt-seg-row" role="group" aria-label="Your Mark">
+        <button type="button" class="ttt-seg-btn active" data-ttt-mark="X">Play as X (First)</button>
+        <button type="button" class="ttt-seg-btn" data-ttt-mark="O">Play as O (Second)</button>
+      </div>
+    </div>
+
+    <button type="button" id="ttt-start-btn" class="ttt-btn primary" data-start="true">Start Match</button>
+    <p class="ttt-hint-line">Keys 1–9 Place Mark · R Restart · Enter Start</p>
+  </section>
+
+  <!-- ACTIVE PLAY SCREEN -->
+  <section id="ttt-play-screen" class="ttt-play-wrap" hidden aria-label="Tic-Tac-Toe Arena">
+    <div class="ttt-hud-bar">
+      <a class="ttt-btn sm" href="kaiplay.html">KaiPlay</a>
+      <div class="ttt-hud-actions">
+        <button type="button" id="ttt-mute-btn" class="ttt-btn sm" aria-pressed="false">Sound: On</button>
+        <button type="button" id="ttt-menu-btn" class="ttt-btn sm">Menu</button>
+      </div>
+    </div>
+
+    <div class="ttt-scoreboard" aria-label="Match Scores">
+      <div class="ttt-score-tile">
+        <span class="ttt-score-label">Player X</span>
+        <span id="score-x" class="ttt-score-value ttt-score-x tabular-nums">0</span>
+      </div>
+      <div class="ttt-score-tile">
+        <span class="ttt-score-label">Draws</span>
+        <span id="score-draws" class="ttt-score-value tabular-nums">0</span>
+      </div>
+      <div class="ttt-score-tile">
+        <span class="ttt-score-label">Player O</span>
+        <span id="score-o" class="ttt-score-value ttt-score-o tabular-nums">0</span>
+      </div>
+    </div>
+
+    <div id="ttt-turn-label" class="ttt-turn-banner" aria-live="polite">Your Turn (X)</div>
+
+    <div class="ttt-board-stage">
+      <div id="ttt-board" class="ttt-board" data-testid="ttt-board" role="grid" aria-label="Tic-Tac-Toe Board"></div>
+      <svg id="ttt-win-svg" class="ttt-win-svg" aria-hidden="true"></svg>
+    </div>
+
+    <div class="ttt-footer-controls">
+      <button type="button" id="ttt-reset-scores-btn" class="ttt-btn sm">Reset Scores</button>
+      <button type="button" id="ttt-restart-btn" class="ttt-btn primary sm">Restart Round</button>
+    </div>
+  </section>
+
+</main>
+
+<!-- RESULT MODAL -->
+<div id="ttt-result-modal" class="ttt-modal-backdrop" hidden>
+  <div class="ttt-modal-card" role="dialog" aria-labelledby="ttt-result-title">
+    <h2 id="ttt-result-title">Victory</h2>
+    <p id="ttt-result-sub">Round complete.</p>
+    <div class="ttt-modal-actions">
+      <button type="button" id="ttt-over-menu-btn" class="ttt-btn">Menu</button>
+      <button type="button" id="ttt-play-again-btn" class="ttt-btn primary" data-start="true">Play Again</button>
+    </div>
+  </div>
+</div>
+
+<script src="games/tic-tac-toe.js"></script>
+</body>
+</html>
