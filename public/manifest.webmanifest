@@ -1,0 +1,33 @@
+{
+  "id": "/kairo-art-studio.html",
+  "name": "KAIRO ART STUDIO",
+  "short_name": "KairoStudio",
+  "description": "Digital painting, manga & comic creation, and frame-by-frame 2D animation desktop studio.",
+  "start_url": "/kairo-art-studio.html?autostart=1",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#17191E",
+  "background_color": "#17191E",
+  "categories": ["graphics", "productivity", "entertainment"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
